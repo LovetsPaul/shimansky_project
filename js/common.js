@@ -8,23 +8,31 @@ $(function() {
 	};
 
 	//E-mail Ajax Send
-	$("form").submit(function() { //Change
+	$("form").submit(function() {
 
 		var th = $(this);
 
 		$.ajax({
 			type: "POST",
-			url: "mail.php", //Change
+			url: "mail.php",
 			data: th.serialize()
 		}).done(function() {
+
 			$(".form_submit").fadeIn('200');
+
 			setTimeout(function() {
 				
-			$(".form_submit").fadeOut('500');
-				th.trigger("reset");
-			}, 1700);
+				$(".form_submit").fadeOut('500');
+					th.trigger("reset");
+
+				$("body, html").animate({
+					scrollTop: $("body").offset().top
+				}, 1200);
+
+			}, 2000);
 
 		});
+
 		return false;
 
 	});
@@ -70,6 +78,7 @@ $(function() {
 		}
 	}
 	});
+
 //Clients Slidder
 	$('.owl_clients').owlCarousel({
 		loop:true,
@@ -94,6 +103,7 @@ $(function() {
 			}
 		}
 	})
+
 //Home Reviews Slider
 	$('.owl_reviews').owlCarousel({
 		loop:true,
@@ -112,18 +122,13 @@ $(function() {
 		}
 	})
 
-
-
-
 });// ---- end $(function(){}) ---- //
 
 $(document).ready(function() {
 
-
 	// Clone menu items from main menu
 	var cont = $(".nav_container").children().clone();
 		cont.appendTo( $('#mobile_menu') );
-
 
 	//init mobile menu script
 	  $("#mobile_menu").mmenu({
@@ -141,7 +146,6 @@ $(document).ready(function() {
 		 counters: true,
 		 columns: true
 	  });
-
 
 	 var API = $("#mobile_menu").data( "mmenu" );
 	 var opened = false;
@@ -168,11 +172,11 @@ $(document).ready(function() {
 	});
 
 	 $('ul.sf-menu').superfish({
-		delay:       300,                            // задержка в миллисекунду
-		animation:   {opacity:'show',height:'show'},  // fade-in и slide-down анимация
-		speed:       'fast',                          // увеличение скорости анимации
-		autoArrows:  false,                           // отключает стрелку подменю
-		dropShadows: true                            // отключает тень
+		delay:       300,                    
+		animation:   {opacity:'show',height:'show'},
+		speed:       'fast',                       
+		autoArrows:  false,                     
+		dropShadows: true           
 	 });
 	
 ///Start Back To Top
@@ -186,11 +190,7 @@ $(document).ready(function() {
 
 	 });
 
-
-
 /// End Back To Top
-
-
 
 var top_pos = $("nav.header_nav").offset().top;
 
@@ -235,17 +235,9 @@ var top_pos = $("nav.header_nav").offset().top;
 			itemSelector: '.grid-item',
 			percentPosition: true
 		});
-		// change size of item by toggling gigante class
-		// $grid.on( 'click', '.grid-item', function() {
-		//   $(this).toggleClass('gigante');
-		//   // trigger layout after item size changes
-		//   $grid.masonry('layout');
-		// });
 
 	});
 
-
-	//$('.grid-item img').magnificPopup({type:'image'})
 	$('.magnific').magnificPopup({
 	  type: 'image',
 	  gallery:{
