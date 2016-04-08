@@ -14,12 +14,12 @@
 
 								<div class="col-md-5 input_item">
 								<label for="coffe_name">Ваше имя:</label>
-									<input type="text" name="Имя" required maxLength="30" placeholder="Введите ваше имя..." id="coffe_name">
+									<input type="text" name="Имя" pattern="[A-Za-zА-Яа-я0-9]+" required maxLength="30" placeholder="Введите ваше имя..." id="coffe_name">
 								</div>
 
 								<div class="col-md-5 input_item">
 									<label for="coffe_phone">Ваш телефон:</label>
-									<input type="text" name="Телефон" required maxLength="19" id="coffe_phone" placeholder="+375-(**)-***-**-**">
+									<input type="text" name="Телефон" pattern="[()0-9+-]+" title="" required aria-required="true" maxLength="19" id="coffe_phone" placeholder="+375-(**)-***-**-**">
 								</div>
 								<input type="hidden" name="admin_email" value="{EMAIL}">
 								<input type="hidden" name="project_name" value="Записаться на чашечку кофе">

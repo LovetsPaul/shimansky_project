@@ -45,7 +45,7 @@
 						<form action="#" method="POST" id="add_message" name="add_message">
 							<div class="col-md-6 col-sm-12">
 								<label for="your_name">Ваше имя:</label>
-								<input type="text" name="Имя" id="your_name" placeholder="Введите ваше имя..." required>
+								<input type="text" name="Имя" id="your_name" pattern="[A-Za-zА-Яа-я0-9]+" placeholder="Введите ваше имя..." required>
 							</div>
 							<div class="col-md-6 col-sm-12">
 								<label for="your_email">Ваше e-mail:</label>

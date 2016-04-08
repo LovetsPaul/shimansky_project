@@ -86,6 +86,7 @@
 								<div class="logo_name">Павел Шиманский</div>
 								<div class="logo_descr">шоумен / ведущий</div>
 							</div>
+							<a href="/" class="logo_home_link"></a>
 						</div>
 					</div>
 

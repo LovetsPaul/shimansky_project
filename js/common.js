@@ -1,7 +1,7 @@
 $(function() {
 
 	//SVG Fallback
-	if(!Modernizr.svg) {
+	if(!Modernizr.svg || !Modernizr.smil) {
 		$("img[src*='svg']").attr("src", function() {
 			return $(this).attr("src").replace(".svg", ".png");
 		});
@@ -22,7 +22,7 @@ $(function() {
 
 			setTimeout(function() {
 				
-				$(".form_submit").fadeOut('500');
+				$(".form_submit").slideUp();
 					th.trigger("reset");
 
 				$("body, html").animate({
@@ -194,7 +194,7 @@ $(document).ready(function() {
 
 /// End Back To Top
 
-var top_pos = $("nav.header_nav").offset().top;
+	var top_pos = $("nav.header_nav").offset().top;
 
 	$(window).scroll(function(){
 
