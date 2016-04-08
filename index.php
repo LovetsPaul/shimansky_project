@@ -30,8 +30,8 @@ include(PATH_INCLUDES . 'social_object.php');
 
     }
 
-    $marker      = array( '{GET_HEADER}', '{PATH_CSS}', '{GET_FOOTER}','{PATH_IMG}', '{PATH_JS}', '{PAGE_TITLE}', '{PAGE_KEYWORDS}', '{PAGE_DESCRIPTION}', '{PAGE_NAME}', '{SLIDER}', '{PAGE_CONTENT}', '{POSTS}', '{ONE_POST}', '{REVIEWS}', '{PHONE}', '{EMAIL}', '{VKONTAKTE}', '{FACEBOOK}', '{INSTAGRAMM}', '{PHOTOS}', '{VIDEOS}', '{PHOTO_GALLERY_CONTAINER}' );
-    $marker_info = array(  get_header() , PATH_CSS , get_footer(), PATH_IMG,  PATH_JS,  get_page_title($url), get_page_keywords($url), get_page_description($url), get_page_name($url), get_slider(), get_page_content($url), get_posts(), get_one_post( $id), get_reviews(), $contacts->phone, $contacts->email, $contacts->vkontakte, $contacts->facebook, $contacts->instagramm, get_portfolio_photos(), get_portfolio_videos(), get_photo_gallery() );
+    $marker      = array( '{GET_HEADER}', '{IS_HOME_CLASS}', '{PATH_CSS}', '{GET_FOOTER}','{PATH_IMG}', '{PATH_JS}', '{PAGE_TITLE}', '{PAGE_KEYWORDS}', '{PAGE_DESCRIPTION}', '{PAGE_NAME}', '{SLIDER}', '{PAGE_CONTENT}', '{POSTS}', '{ONE_POST}', '{REVIEWS}', '{PHONE}', '{EMAIL}', '{VKONTAKTE}', '{FACEBOOK}', '{INSTAGRAMM}', '{PHOTOS}', '{VIDEOS}', '{PHOTO_GALLERY_CONTAINER}', );
+    $marker_info = array(  get_header(), set_is_home_class(), PATH_CSS , get_footer(), PATH_IMG,  PATH_JS,  get_page_title($url), get_page_keywords($url), get_page_description($url), get_page_name($url), get_slider(), get_page_content($url), get_posts(), get_one_post( $id), get_reviews(), $contacts->phone, $contacts->email, $contacts->vkontakte, $contacts->facebook, $contacts->instagramm, get_portfolio_photos(), get_portfolio_videos(), get_photo_gallery() );
 
 
     if($Page == "index"){

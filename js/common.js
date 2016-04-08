@@ -126,6 +126,8 @@ $(function() {
 
 $(document).ready(function() {
 
+		$(".is_home .preloader").fadeOut(400);
+
 	// Clone menu items from main menu
 	var cont = $(".nav_container").children().clone();
 		cont.appendTo( $('#mobile_menu') );

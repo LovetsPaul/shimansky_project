@@ -13,6 +13,14 @@
 		return $header;
 	}
 
+	function set_is_home_class(){
+
+		if( $_SERVER[ REQUEST_URI ] == '/' or $_SERVER[ REQUEST_URI ] == '/portfolio/video' ){
+			return "is_home";
+		}
+
+	}
+
 	function get_footer(){
 
 		$footer = file_get_contents( PATH_TEMPLATE . 'footer.tpl' );
