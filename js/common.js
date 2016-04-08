@@ -9,7 +9,9 @@ $(function() {
 
 	//E-mail Ajax Send
 	$("form").submit(function() { //Change
+
 		var th = $(this);
+
 		$.ajax({
 			type: "POST",
 			url: "mail.php", //Change
@@ -24,17 +26,8 @@ $(function() {
 
 		});
 		return false;
+
 	});
-
-//Chrome Smooth Scroll
-	try {
-		$.browserSelector();
-		if($("html").hasClass("chrome")) {
-			$.smoothScroll();
-		}
-	} catch(err) {
-
-	};
 
 	$("img, a").on("dragstart", function(event) { event.preventDefault(); });
 
