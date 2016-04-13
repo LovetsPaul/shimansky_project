@@ -71,7 +71,7 @@
 		</div>
 	</div>
 	<div class="s_copyright">
-		<div class="copy text-center"><a href="#">shimansky.by</a>&nbsp;&nbsp;&copy;&nbsp;&nbsp;2016г.</div>
+		<div class="copy text-center"><a href="/">shimansky.by</a>&nbsp;&nbsp;&copy;&nbsp;&nbsp;2016г.</div>
 	</div>
 </footer>
 <div id="back_to_top"></div>

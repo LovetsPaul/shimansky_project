@@ -55,11 +55,7 @@ $message = "<table cellspacing='0' cellpadding='0' style='width: 100%;'>" . $mes
 function adopt($text) {
 
 	return "=?utf-8?B?" .base64_encode($text).'?=';
-	// if( !empty($_GET['form_subject'] ||  !empty($_POST['form_subject']) ){
-	// 	return "=?utf-8?B?" .base64_encode($text).'?=';
-	// }else{
-	// 	return "=?utf-8?B?" .base64_encode('Запись на чашечку кофе') .'?=';
-	// }
+	
 }
 
 $headers = "MIME-Version: 1.0" . PHP_EOL .
