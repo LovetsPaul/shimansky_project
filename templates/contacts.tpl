@@ -42,7 +42,7 @@
 				<div class="col-md-10 col-md-push-1">
 					<h3>Обратная связь:</h3>
 					<div class="add_message">
-						<form action="#" method="POST" id="add_message" name="add_message">
+						<form action="mail.php" method="POST" id="add_message" name="add_message">
 							<div class="col-md-6 col-sm-12">
 								<label for="your_name">Ваше имя:</label>
 								<input type="text" name="Имя" id="your_name" pattern="[A-Za-zА-Яа-я0-9]+" placeholder="Введите ваше имя..." required>
@@ -53,7 +53,7 @@
 							</div>
 							<div class="col-md-12">
 								<label for="your_text">Текст сообщения:</label>
-								<textarea name="Сообщение" id="your_text" width="100%" max-length="300" rows="10" placeholder="Введите текст сообщения..." required></textarea>
+								<textarea name="Сообщение" id="your_text" width="100%" max-length="2000" rows="10" placeholder="Введите текст сообщения..." required></textarea>
 							</div>
 							<div class="col-md-12 text-left button_wrapp">
 								<input type="hidden" value="{EMAIL}" name="admin_email">
@@ -64,8 +64,8 @@
 									<i class="fa fa-angle-right"></i>
 								</button>
 							</div>
-							
 						</form>
+
 					</div>
 				</div>
 

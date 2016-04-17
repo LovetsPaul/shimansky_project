@@ -15,7 +15,7 @@
 	<meta property="og:image" content="https://website.com/image250X250.png"/> 
 	<meta property="og:url" content="http://www.shimansky.by"/> 
 	<meta property="og:site_name" content="Ведущий праздничных мероприятий Павел Шиманский"/> 
-	<meta property="og:see_also" content="http://www.website.com"/> 
+	<meta property="og:see_also" content="http://www.shimansky.by"/> 
 	<meta property="fb:admins" content="Facebook_ID"/>
 
 
@@ -105,7 +105,7 @@
 	<nav class="header_nav hidden-xs hidden-sm">
 		<div class="nav_container">
 			<ul class="text-center sf-menu">
-				<li class="active"><a href="/">Главная</a></li>
+				<li><a href="/">Главная</a></li>
 				<li><a href="/about">Кто я такой...</a></li>
 				<li>
 					<a href="#">Портфолио</a>
@@ -119,7 +119,7 @@
 					<ul class="text-left">
 						<li><a href="/svadba">Свадьба</a></li>
 						<li><a href="/korporativ">Корпоративный праздник</a></li>
-						<li><a href="vipusknoi">Выпускной</a></li>
+						<li><a href="/vipusknoi">Выпускной</a></li>
 					</ul>
 				</li>
 				<li><a href="/blog">Блог</a></li>

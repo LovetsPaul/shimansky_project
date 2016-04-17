@@ -76,21 +76,24 @@
 </footer>
 <div id="back_to_top"></div>
 </div> <!--End Wrapp Page For Mobile Menu-->
-<div >
-	<div class="form_submit">
-		<div class="submit_form_modal">
-			Спасибо!<br><span>Ваше сообщение отправлено!</span>
-		</div>
+
+<div class="form_submit">
+	<div class="submit_form_modal">
+		Спасибо!<br><span>Ваше сообщение отправлено!</span>
 	</div>
 </div>
+<div class="reviews_modal">
+	<div class="submit_form_modal">
+		Спасибо за Ваш отзыв!<br><span>Отзыв появится на сайте после проверки!</span>
+	</div>
+</div>
+
 <div class="preloader"></div>
-	<!--<div class="hidden"></div>-->
 
 		<!--[if lt IE 9]>
 		<script src="libs/html5shiv/es5-shim.min.js"></script>
 		<script src="libs/html5shiv/html5shiv.min.js"></script>
 		<script src="libs/html5shiv/html5shiv-printshiv.min.js"></script>
-		<script src="libs/respond/respond.min.js"></script>
 		<![endif]-->
 
 		<!-- Load Scripts Start -->

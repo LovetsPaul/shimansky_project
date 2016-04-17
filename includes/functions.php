@@ -1,4 +1,13 @@
 <?php
+	function my_string($str1){
+
+		$str = $str1;
+		$str = trim($str);
+		$str = stripslashes($str);
+		$str = htmlspecialchars($str, ENT_QUOTES);
+		$str = nl2br($str);
+		return $str;
+	}
 
 	function replace($marker_array, $marker_info, $shablon){
 
@@ -29,7 +38,7 @@
 
 	function get_page_title($url){
 
-		$sql = "SELECT pages.`page_title` FROM pages WHERE pages.`link` = '$url' and visible = 1";
+		$sql = "SELECT pages.`page_title` FROM pages INNER JOIN menu ON pages.`id_menu` = menu.`id` WHERE menu.`link` = '$url' and pages.`visible` = 1";
 		$data = mysql_query($sql);
 		$inf = mysql_fetch_array($data);
 		$str = $inf[0];
@@ -40,7 +49,7 @@
 
 	function get_page_keywords($url){
 
-		$sql = "SELECT pages.`keywords` FROM pages WHERE pages.`link` = '$url' and visible = 1";
+		$sql = "SELECT pages.`keywords` FROM pages  INNER JOIN menu  ON pages.`id_menu` = menu.`id` WHERE menu.`link` = '$url' and pages.`visible` = 1";
 		$data = mysql_query($sql);
 		$inf = mysql_fetch_array($data);
 		$str = $inf[0];
@@ -51,7 +60,7 @@
 
 	function get_page_description($url){
 
-		$sql = "SELECT pages.`description` FROM pages WHERE pages.`link` = '$url' and visible = 1";
+		$sql = "SELECT pages.`description` FROM pages  INNER JOIN menu ON pages.`id_menu` = menu.`id` WHERE menu.`link` = '$url' and pages.`visible` = 1";
 		$data = mysql_query($sql);
 		$inf = mysql_fetch_array($data);
 		$str = $inf[0];
@@ -62,7 +71,7 @@
 
 	function get_page_name($url){
 
-		$sql = "SELECT `page_name_menu` FROM pages WHERE `link` = '$url' and visible = 1";
+		$sql = "SELECT `menu_name` FROM menu WHERE menu.`link` = '$url' ";
 		$data = mysql_query($sql);
 		$inf = mysql_fetch_array($data);
 		$str = $inf[0];
@@ -97,8 +106,7 @@
 
 	function get_page_content($url){
 
-
-		$sql = "SELECT pages.`page_content` FROM pages WHERE pages.`link` = '$url' and visible = 1";
+		$sql = "SELECT pages.`page_content` FROM pages INNER JOIN  menu ON pages.`id_menu` = menu.`id`  WHERE menu.`link` = '$url' and pages.`visible` = 1";
 		$data = mysql_query($sql);
 		$inf = mysql_fetch_array($data);
 		$str = $inf[0];
@@ -259,6 +267,14 @@
 		}
 
 		return $str;
+
+	}
+
+	function add_reviews(){
+
+		
+
+
 
 	}
 

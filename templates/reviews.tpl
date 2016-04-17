@@ -23,10 +23,10 @@
 				<div class="col-md-10 col-md-push-1">
 					<h3>Оставить отзыв о моей работе:</h3>
 					<div class="add_review_form_wrapp">
-						<form action="#" method="POST" id="add_reviews_form" name="add_reviews_form" enctype="multipart/form-data">
+						<form method="POST" id="add_reviews_form" name="add_reviews_form" enctype="multipart/form-data">
 							<div class="col-md-6 col-sm-12">
 								<label for="your_name">Ваше имя:</label>
-								<input type="text" name="your_name" id="your_name" placeholder="Введите ваше имя..." required>
+								<input type="text" name="your_name" id="your_name" pattern="[A-Za-zА-Яа-я0-9]+" placeholder="Введите ваше имя..." required>
 							</div>
 							<div class="col-md-6 col-sm-12">
 								<label for="your_email">Ваше e-mail:</label>
@@ -38,7 +38,7 @@
 							</div>
 							<div class="col-md-12">
 								<label for="add_img">Загрузить изображение</label>
-								<input type="file" name="add_img" id="add_img" value="fff">
+								<input type="file" name="add_img" id="add_img">
 							</div>
 							<div class="col-md-12 text-left button_wrapp">
 								<button class="button_dark">
