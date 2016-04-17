@@ -100,7 +100,7 @@
 
 		}
 
-	return	str_replace( '{SLIDER_IMG}', $str, $shablon );
+	return  str_replace( '{SLIDER_IMG}', $str, $shablon );
 
 	}
 
@@ -138,16 +138,16 @@
 			$marker_info = array( $posts_array[0], $posts_array[1], $posts_array[2], $posts_array[3], $posts_array[4]);
 			
 			if( $posts_array[0] !== ''){
-				$str.= 	str_replace( $marker, $marker_info, $post_tpl );
+				$str.=  str_replace( $marker, $marker_info, $post_tpl );
 			}else{
-				$str.= 	str_replace( $marker, $marker_info, $post_without_img_tpl );
+				$str.=  str_replace( $marker, $marker_info, $post_without_img_tpl );
 			}
 
 			
 
 		}
 
-		return	$str;
+		return  $str;
 	}
 
 	function get_one_post($id){
@@ -190,10 +190,10 @@
 			$marker = array( '{REVIEW_IMG}', '{REVIEWER_NAME}', '{REVIEW_TEXT}' );
 			$marker_info = array( $posts_array[0], $posts_array[1], $posts_array[2]);
 			
-			if( $posts_array[0] !== ''){
-				$str.= 	str_replace( $marker, $marker_info, $review_tpl );
+			if( $posts_array[0] !== '' && strlen($posts_array[0] ) > 33 ){
+				$str.=  str_replace( $marker, $marker_info, $review_tpl );
 			}else{
-				$str.= 	str_replace( $marker, $marker_info, $review_without_img_tpl );
+				$str.=  str_replace( $marker, $marker_info, $review_without_img_tpl );
 			}
 
 		}
@@ -271,31 +271,31 @@
 	}
 
 
-
-
-
-// функция для получения пропорций
 function getProportions($width, $height, $max_w, $max_h) {
 
-   // получаем соотношение
    $ratio = $width / $height;
+
+   if($max_w>$width || $max_h>$height){
+		$max_w = $width;
+		$max_h = $height;
+   }
  
-  if ( $ratio == 1 ) { // если стороны равны
-    if ( $height > $max_h ) {
-      $height = $width = min($max_w, $max_h);
-    }
-    else {
-      $width = $max_w;
-      $height = $max_h;
-    }
+  if ( $ratio == 1 ) {
+	if ( $height > $max_h ) {
+	  $height = $width = min($max_w, $max_h);
+	}
+	else {
+	  $width = $max_w;
+	  $height = $max_h;
+	}
    }
   else if ( $ratio > 1 ) { // если ширина больше высоты
-    $height = ( $height * $max_w ) / $width;
-    $width = $max_w;
+	$height = ( $height * $max_w ) / $width;
+	$width = $max_w;
   }
   else if ( $ratio < 1 ) { // если больше высота
-    $width = ( $width * $max_h ) / $height;
-    $height = $max_h;
+	$width = ( $width * $max_h ) / $height;
+	$height = $max_h;
   }
  
   return array('width' => $width, 'height' => $height);
@@ -318,74 +318,80 @@ function getProportions($width, $height, $max_w, $max_h) {
 **/
 function cwUpload($field_name = '', $target_folder = '', $file_name = '', $thumb = FALSE, $thumb_folder = '', $thumb_width = '', $thumb_height = ''){
 
-    //folder path setup
-    $target_path = $target_folder;
-    $thumb_path = $thumb_folder;
-    
-    //file name setup
-    $filename_err = explode(".",$_FILES[$field_name]['name']);
-    $filename_err_count = count($filename_err);
-    $file_ext = $filename_err[$filename_err_count-1];
-    if($file_name != ''){
-        $fileName = $file_name.'.'.$file_ext;
-    }else{
-        $fileName = $_FILES[$field_name]['name'];
-    }
-    
-    //upload image path
-    $upload_image = $target_path.basename($fileName);
-    
-    //upload image
-    if(move_uploaded_file($_FILES[$field_name]['tmp_name'],$upload_image))
-    {
-        //thumbnail creation
-        if($thumb == TRUE)
-        {
-            $thumbnail = $thumb_path.$fileName;
-            list($width,$height) = getimagesize($upload_image);
-            $thumb_create = imagecreatetruecolor($thumb_width,$thumb_height);
-            switch($file_ext){
-                case 'jpg':
-                    $source = imagecreatefromjpeg($upload_image);
-                    break;
-                case 'jpeg':
-                    $source = imagecreatefromjpeg($upload_image);
-                    break;
 
-                case 'png':
-                    $source = imagecreatefrompng($upload_image);
-                    break;
-                case 'gif':
-                    $source = imagecreatefromgif($upload_image);
-                    break;
-                default:
-                    $source = imagecreatefromjpeg($upload_image);
-            }
 
-            imagecopyresized($thumb_create,$source,0,0,0,0,$thumb_width,$thumb_height,$width,$height);
-            switch($file_ext){
-                case 'jpg' || 'jpeg':
-                    imagejpeg($thumb_create,$thumbnail,100);
-                    break;
-                case 'png':
-                    imagepng($thumb_create,$thumbnail,100);
-                    break;
+	//folder path setup
+	$target_path = $target_folder;
+	$thumb_path = $thumb_folder;
+	
+	//file name setup
+	$filename_err = explode(".",$_FILES[$field_name]['name']);
+	$filename_err_count = count($filename_err);
+	$file_ext = $filename_err[$filename_err_count-1];
+	if($file_name != ''){
+		$fileName = $file_name;
+	}else{
+		$fileName = $_FILES[$field_name]['name'];
+	}
+	
+	//upload image path
+	$upload_image = $target_path.basename($fileName);
+	
+	//upload image
+	if(move_uploaded_file($_FILES[$field_name]['tmp_name'], $upload_image))
+	{
+		//thumbnail creation
+		if($thumb == TRUE)
+		{
+			$thumbnail = $thumb_path.$fileName;
+			list($width,$height) = getimagesize($upload_image);
 
-                case 'gif':
-                    imagegif($thumb_create,$thumbnail,100);
-                    break;
-                default:
-                    imagejpeg($thumb_create,$thumbnail,100);
-            }
+			$image_size_prop = getProportions($width, $height, $thumb_width, $thumb_height);
 
-        }
 
-        return $fileName;
-    }
-    else
-    {
-        return false;
-    }
+			$thumb_create = imagecreatetruecolor($image_size_prop['width'], $image_size_prop['height']);
+			switch($file_ext){
+				case 'jpg':
+					$source = imagecreatefromjpeg($upload_image);
+					break;
+				case 'jpeg':
+					$source = imagecreatefromjpeg($upload_image);
+					break;
+
+				case 'png':
+					$source = imagecreatefrompng($upload_image);
+					break;
+				case 'gif':
+					$source = imagecreatefromgif($upload_image);
+					break;
+				default:
+					$source = imagecreatefromjpeg($upload_image);
+			}
+
+			imagecopyresized($thumb_create,$source,0,0,0,0,$image_size_prop['width'], $image_size_prop['height'], $width,$height);
+			switch($file_ext){
+				case 'jpg' || 'jpeg':
+					imagejpeg($thumb_create,$thumbnail,100);
+					break;
+				case 'png':
+					imagepng($thumb_create,$thumbnail,100);
+					break;
+
+				case 'gif':
+					imagegif($thumb_create,$thumbnail,100);
+					break;
+				default:
+					imagejpeg($thumb_create,$thumbnail,100);
+			}
+
+		}
+
+		return $fileName;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 

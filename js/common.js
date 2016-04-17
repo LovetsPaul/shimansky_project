@@ -37,42 +37,106 @@ $(function() {
     });
 
 
-    $("#add_reviews_form").submit(function(e) {
 
-        var th = $(this),
-            formData = new FormData($(this)[0]);
 
-        e.preventDefault();
+    $.validator.addMethod('filesize', function(value, element, param) {
+        return this.optional(element) || (element.files[0].size <= param)
+    }, 'Размер изображения должен быть не более {0}');
 
-        $.ajax({
-            type: "POST",
-            url: "add_reviews.php",
-            data: formData,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false
-        }).done(function() {
 
-            $(".reviews_modal").fadeIn('200');
+    $('#add_img').change(function() {
+        var f = this.files[0],
+            size = f.size || f.fileSize,
+            type = ((f.type).substr(6)).toString(),
+            ext = ['jpg', 'jpeg', 'png', 'gif'];
+        found = false;
+        if (size > 2000000) {
 
-            setTimeout(function() {
+            $(this).val('');
+            $(this).remove();
+            alert("Размер файла превышает 2Мб!");
+            $("#add_reviews_form").append('<input type="file" name="add_img" id="add_img">');
+        }
 
-                $(".reviews_modal").slideUp();
-                th.trigger("reset");
-
-                $("body, html").animate({
-                    scrollTop: $("body").offset().top
-                }, 1200);
-
-            }, 3000);
-
+        ext.forEach(function(extention) {
+            if (type == extention) found = true;
         });
 
-        return false;
+        if (!found) {
+            $(this).val('');
+            $(this).remove();
+            alert("Недопустимый формат изображения!\n\n Доступные форматы для загрузки:  jpg, jpeg, png, gif");
+
+            $("#add_reviews_form").append('<input type="file" name="add_img" id="add_img">');
+        }
+    });
+
+    $("#add_reviews_form").validate({
+        rules: {
+            your_name: "required",
+            your_email: {
+                required: true,
+                email: true
+            },
+            your_text: "required",
+            add_img: {
+                required: true,
+                extension: "jpg,jpeg",
+                filesize: 5
+            }
+        },
+        messages: {
+            required: "Это поле обязательное для заполнения!",
+            your_name: "Пожалуйста, введите ваше имя!",
+            your_email: {
+                required: "Введите ваш E-mail адрес!",
+                email: "Ваш E-mail адрес должен быть в формате name@domain.com"
+            },
+            your_text: "Это поле обязательное для заполнения!"
+        },
+        submitHandler: function() { reviews_form_submit() }
 
     });
 
+    function reviews_form_submit() {
+
+        $("#add_reviews_form").submit(function(e) {
+
+            var th = $(this),
+                formData = new FormData($(this)[0]);
+
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                url: "add_reviews.php",
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function() {
+
+                $(".reviews_modal").fadeIn('200');
+
+                setTimeout(function() {
+
+                    $(".reviews_modal").slideUp();
+                    th.trigger("reset");
+
+                    $("body, html").animate({
+                        scrollTop: $("body").offset().top
+                    }, 1200);
+
+                }, 3000);
+
+            });
+
+            return false;
+
+        });
+
+    }
     $("img, a").on("dragstart", function(event) { event.preventDefault(); });
 
 

@@ -32,12 +32,13 @@
 								<label for="your_email">Ваше e-mail:</label>
 								<input type="email" name="your_email" id="your_email" placeholder="Введите e-mail..." required>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-12 col-sm-12">
 								<label for="your_text">Текст отзыва:</label>
 								<textarea name="your_text" id="your_text" width="100%" max-length="300" rows="10" placeholder="Напишите текст отзыва..." required></textarea>
 							</div>
 							<div class="col-md-12">
 								<label for="add_img">Загрузить изображение</label>
+								<!-- <input type="hidden" name="MAX_FILE_SIZE" value="2097152"> -->
 								<input type="file" name="add_img" id="add_img">
 							</div>
 							<div class="col-md-12 text-left button_wrapp">
