@@ -35,21 +35,5 @@ if( isset($_POST['your_name']) or isset($_POST['your_email']) or isset($_POST['y
 	
 	cwUpload("add_img" , PATH_UPLOADS, $img_full_name, true, PATH_THUMB, 690, 420);
 
-		// if($_FILES['add_img']['size'] > 1024*1000)
-	 //   {
-		// 	echo ("Размер файла превышает один мегабайт");
-		// 	exit;
-	 //   }
-	   
-	 //   if(is_uploaded_file($_FILES['add_img']['tmp_name']))
-	 //   {
-		// 	move_uploaded_file($_FILES['add_img']['tmp_name'], PATH_UPLOADS . $_FILES['add_img']['name']);
-			
-		 
-	 //   }		   
-		   
-		// if($query){
-		// 	echo " Ваша новость успешно добавлена!";
-		// }
 
 ?>

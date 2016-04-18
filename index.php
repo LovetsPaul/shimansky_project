@@ -58,8 +58,6 @@ include(PATH_INCLUDES . 'social_object.php');
 
 	    echo $pages;
 
-	    // if($Module == "add_reviews"){ add_reviews();}
-
 	}else if($Page == "portfolio" && $Module == "photo"){
 
 	    $pages = file_get_contents(PATH_TEMPLATE . 'portfolio_photo.tpl');
