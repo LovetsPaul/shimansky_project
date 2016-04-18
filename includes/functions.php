@@ -80,6 +80,66 @@
 
 	}
 
+
+	function get_child_menu($parent_id){
+
+		$sql = "SELECT `menu_name`, `link`, `is_parent`, `parent_id`, `id` FROM menu WHERE parent_id != 0 ORDER BY `position` ASC";
+		$data = mysql_query( $sql );
+		$count = mysql_affected_rows();
+
+		$shablon = file_get_contents(PATH_TEMPLATE . 'inner_menu_item.tpl');
+		$shablon_child = file_get_contents(PATH_TEMPLATE . 'menu.tpl');
+		$str = '';
+
+		for( $i=0; $i<$count; $i++ ){
+
+			$inf = mysql_fetch_array( $data );
+			if($parent_id == $inf[3]){
+				$marker = array( '{MENU_NAME}', '{MENU_LINK}' );
+				$marker_info = array( $inf[0], $inf[1]);
+				$str .= str_replace($marker, $marker_info, $shablon_child);
+			}
+			
+		}
+
+		return  $str;
+
+	}
+
+	function get_menu(){
+
+		$sql = "SELECT `menu_name`, `link`, `is_parent`, `parent_id`, `id` FROM menu WHERE parent_id = 0 ORDER BY `position` ASC";
+		$data = mysql_query( $sql );
+		$count = mysql_affected_rows();
+
+		$shablon = file_get_contents(PATH_TEMPLATE . 'menu.tpl');
+		$shablon_child = file_get_contents(PATH_TEMPLATE . 'inner_menu_item.tpl');
+		$str = '';
+
+		for( $i=0; $i<$count; $i++ ){
+
+			$inf = mysql_fetch_array( $data );
+
+			$marker = array( '{MENU_NAME}', '{MENU_LINK}' );
+			$marker_info = array( $inf[0], $inf[1] );
+
+			$marker_child = array( '{PARENT_MENU_NAME}', '{CHILD_MENU_ITEM}' );
+			$marker_child_info = array( $inf[0], get_child_menu($inf[4]));
+			
+			if($inf[2] == 1){//если родитель
+				$str .= str_replace( $marker_child, $marker_child_info, $shablon_child );
+			
+			}else{
+				$str .= str_replace( $marker, $marker_info, $shablon );	
+			}
+			
+
+		}
+
+		return  $str;
+
+	}
+
 	function get_slider(){
 
 		$sql = "SELECT `slider_img_src`, `slider_img_alt` FROM slider WHERE visible = 1 ";

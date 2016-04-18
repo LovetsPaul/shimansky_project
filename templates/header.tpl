@@ -105,26 +105,7 @@
 	<nav class="header_nav hidden-xs hidden-sm">
 		<div class="nav_container">
 			<ul class="text-center sf-menu">
-				<li><a href="/">Главная</a></li>
-				<li><a href="/about">Кто я такой...</a></li>
-				<li>
-					<a href="#">Портфолио</a>
-					<ul class="text-left">
-						<li><a href="/portfolio/photo">Фотографии</a></li>
-						<li><a href="/portfolio/video">Видео</a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="#">Праздники</a>
-					<ul class="text-left">
-						<li><a href="/svadba">Свадьба</a></li>
-						<li><a href="/korporativ">Корпоративный праздник</a></li>
-						<li><a href="/vipusknoi">Выпускной</a></li>
-					</ul>
-				</li>
-				<li><a href="/blog">Блог</a></li>
-				<li><a href="/reviews">Отзывы</a></li>
-				<li><a href="/contacts">Контакты</a></li>
+				{MENU}
 			</ul>
 		</div>
 	</nav>
