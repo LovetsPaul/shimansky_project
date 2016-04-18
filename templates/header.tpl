@@ -5,7 +5,8 @@
 	<title>{PAGE_TITLE}</title>
 
 	<meta name="keywords" content="{PAGE_KEYWORDS}" />
-	<meta name="description" content="{PAGE_DESCRIPTION}">
+	<meta name="description" content="{PAGE_DESCRIPTION}" />
+	<meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
 	<meta property="og:type" content="profile"/> 
 	<meta property="profile:first_name" content="Павел"/> 
 	<meta property="profile:last_name" content="Шиманский"/> 

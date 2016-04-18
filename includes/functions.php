@@ -414,17 +414,17 @@
 				imagecopyresized($thumb_create,$source,0,0,0,0,$image_size_prop['width'], $image_size_prop['height'], $width,$height);
 				switch($file_ext){
 					case 'jpg' || 'jpeg':
-						imagejpeg($thumb_create,$thumbnail,100);
+						imagejpeg($thumb_create,$thumbnail,80);
 						break;
 					case 'png':
-						imagepng($thumb_create,$thumbnail,100);
+						imagepng($thumb_create,$thumbnail,80);
 						break;
 
 					case 'gif':
-						imagegif($thumb_create,$thumbnail,100);
+						imagegif($thumb_create,$thumbnail,80);
 						break;
 					default:
-						imagejpeg($thumb_create,$thumbnail,100);
+						imagejpeg($thumb_create,$thumbnail,80);
 				}
 
 			}
