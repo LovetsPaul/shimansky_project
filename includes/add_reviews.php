@@ -1,5 +1,5 @@
 <?php
-include('config.php');
+include('../config.php');
 include(PATH_INCLUDES . 'connect.php');
 include(PATH_INCLUDES . 'functions.php');
 

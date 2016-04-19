@@ -88,7 +88,13 @@ include(PATH_INCLUDES . 'social_object.php');
 	    $pages = str_replace($marker, $marker_info, $pages);
 
 	    echo $pages;
-	}else{
+	}else if($Page == "anketa"){
+
+        $pages = file_get_contents(PATH_TEMPLATE . 'anketa.tpl');
+        $pages = str_replace($marker, $marker_info, $pages);
+
+        echo $pages;
+    }else{
 		echo '404';
 	}
 

@@ -63,7 +63,7 @@
 					<div class="col-md-12">
 						<div class="phone footer_link"><i class="fa fa-phone"></i><span class="span_wrapp">{PHONE}</span></div>
 						<div class="mail footer_link"><i class="fa fa-envelope"></i><span class="span_wrapp"><a href="mailto:shimanskiy@gmail.com">{EMAIL}</a></span></div>
-						<div class="edit_anket footer_link"><i class="fa fa-edit"></i><span class="span_wrapp"><a href="#">Заполнить анкету</a></span></div>
+						<div class="edit_anket footer_link"><i class="fa fa-edit"></i><span class="span_wrapp"><a href="/anketa">Заполнить анкету</a></span></div>
 					</div>
 				</div>
 
@@ -85,6 +85,11 @@
 <div class="reviews_modal">
 	<div class="submit_form_modal">
 		Спасибо за Ваш отзыв!<br><span>Отзыв появится на сайте после проверки!</span>
+	</div>
+</div>
+<div class="anketa_modal">
+	<div class="submit_form_modal">
+		Спасибо!<br><span>Ваша анкета отправлена!</span>
 	</div>
 </div>
 

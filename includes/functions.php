@@ -108,7 +108,7 @@
 
 	function get_menu($url){
 
-		$sql = "SELECT `menu_name`, `link`, `is_parent`, `parent_id`, `id` FROM menu WHERE parent_id = 0 ORDER BY `position` ASC";
+		$sql = "SELECT `menu_name`, `link`, `is_parent`, `parent_id`, `id` FROM menu WHERE parent_id = 0 AND `visible` = 1 ORDER BY `position` ASC";
 		$data = mysql_query( $sql );
 		$count = mysql_affected_rows();
 

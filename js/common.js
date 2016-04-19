@@ -7,9 +7,17 @@ $(document).ready(function() {
 		});
 	};
 
+	//Menu active link
 	var url = document.location.href,
 		modul = url.substr(19),
+		link = "li a[href="+"'"+modul+"'"+"]",
+		lngth = modul.substr(16).length;
+
+	if(modul.substr(0, 15) == "/blog/full_post" ){
+		modul = modul.substr(0, 5);
 		link = "li a[href="+"'"+modul+"'"+"]";
+		$(link).parent().addClass("active");
+	}
 
 	$(link).parent().parent().parent().addClass("active");
 
@@ -42,7 +50,33 @@ $(document).ready(function() {
 
 	});
 
+	$("#anketa_form").submit(function() {
 
+		var th = $(this);
+		$.ajax({
+			type: "POST",
+			url: "mail.php",
+			data: th.serialize()
+		}).done(function() {
+
+			$(".anketa_modal").fadeIn('200');
+
+			setTimeout(function() {
+
+				$(".anketa_modal").slideUp();
+				th.trigger("reset");
+
+				$("body, html").animate({
+					scrollTop: $("body").offset().top
+				}, 1200);
+
+			}, 2000);
+
+		});
+
+		return false;
+
+	});
 
 
 	$.validator.addMethod('filesize', function(value, element, param) {
@@ -115,7 +149,7 @@ $(document).ready(function() {
 
 			$.ajax({
 				type: "POST",
-				url: "add_reviews.php",
+				url: "/includes/add_reviews.php",
 				data: formData,
 				async: false,
 				cache: false,
@@ -304,14 +338,8 @@ $(document).ready(function() {
 
 		if (top_scroll > top_pos) {
 			$("header nav.header_nav").addClass('fixed_menu');
-			$(".header_main").css({
-				"margin-top": "53px"
-			});
 		} else {
 			$("header nav.header_nav").removeClass('fixed_menu');
-			$(".header_main").css({
-				"margin-top": "0"
-			});
 		}
 
 	});

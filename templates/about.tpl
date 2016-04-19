@@ -1,6 +1,6 @@
 {GET_HEADER}
 
-<section class="s_inner_page">
+<section class="s_inner_page s_about">
 	<div class="container s_page_title">
 		<div class="row">
 			<div class="page_title col-sm-12">
