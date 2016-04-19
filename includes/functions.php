@@ -106,7 +106,7 @@
 
 	}
 
-	function get_menu(){
+	function get_menu($url){
 
 		$sql = "SELECT `menu_name`, `link`, `is_parent`, `parent_id`, `id` FROM menu WHERE parent_id = 0 ORDER BY `position` ASC";
 		$data = mysql_query( $sql );
@@ -115,24 +115,30 @@
 		$shablon = file_get_contents(PATH_TEMPLATE . 'menu.tpl');
 		$shablon_child = file_get_contents(PATH_TEMPLATE . 'inner_menu_item.tpl');
 		$str = '';
-
 		for( $i=0; $i<$count; $i++ ){
 
-			$inf = mysql_fetch_array( $data );
+			$inf = mysql_fetch_array( $data );		
 
-			$marker = array( '{MENU_NAME}', '{MENU_LINK}' );
-			$marker_info = array( $inf[0], $inf[1] );
+			$marker = array( '{MENU_NAME}', '{MENU_LINK}', '{CLASS_ACTIVE}' );
+			$marker_child = array( '{PARENT_MENU_NAME}', '{CHILD_MENU_ITEM}', '{CLASS_ACTIVE}', '{CLASS_ACTIVE_PARENT}' );
 
-			$marker_child = array( '{PARENT_MENU_NAME}', '{CHILD_MENU_ITEM}' );
-			$marker_child_info = array( $inf[0], get_child_menu($inf[4]));
-			
-			if($inf[2] == 1){//если родитель
+			if( $url == $inf[1] ){
+				
+				$marker_info = array( $inf[0], $inf[1], 'active' );
+
+				$marker_child_info = array( $inf[0], get_child_menu($inf[4]), 'active', '' );
+				
+			}else{
+				$marker_info = array( $inf[0], $inf[1], '' );
+				$marker_child_info = array( $inf[0], get_child_menu($inf[4]), '', '');
+			}
+
+			if($inf[2] == 1){//if parent
 				$str .= str_replace( $marker_child, $marker_child_info, $shablon_child );
 			
 			}else{
 				$str .= str_replace( $marker, $marker_info, $shablon );	
 			}
-			
 
 		}
 
@@ -202,8 +208,6 @@
 			}else{
 				$str.=  str_replace( $marker, $marker_info, $post_without_img_tpl );
 			}
-
-			
 
 		}
 

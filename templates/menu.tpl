@@ -1,1 +1,1 @@
-<li><a href="{MENU_LINK}">{MENU_NAME}</a></li>
+<li class="{CLASS_ACTIVE}"><a href="{MENU_LINK}">{MENU_NAME}</a></li>

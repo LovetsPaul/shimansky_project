@@ -12,7 +12,7 @@
 						<h1>Павел Шиманский</h1>
 						<div class="short_descr">популярный ведущий в Минске частных, корпоративных и городских мероприятий...</div>
 						<div class="button_wrapp">
-							<a href="" class="button_dark">Подробнее
+							<a href="/about" class="button_dark">Подробнее
 								<i class="fa fa-angle-right"></i>
 							</a>
 						</div>
