@@ -24,11 +24,11 @@
 						<form method="POST" name="anketa_form" id="anketa_form">
 							<div class="col-md-12">
 								<label for="event_date">Дата меропрриятия (ДД.ММ.ГГГГ):</label>
-								<input type="text" name="Дата меропрриятия" id="event_date" pattern="[0-9\.]+" title="Дата в формате 12.12.2017" placeholder="Дата мероприятия..." required>
+								<input type="text" name="Дата меропрриятия" id="event_date" pattern="[0-9\.]+" title="Дата в формате 12.12.2017" maxlength="10" placeholder="Дата мероприятия..." required>
 							</div>
 							<div class="col-md-12">
 								<label for="cafe_name">Название и адрес ресторана/столовой/кафе:</label>
-								<textarea name="Название и адрес ресторана" id="cafe_name" maxlength="50" rows="3" placeholder="Название и адрес ресторана/столовой/кафе..." title="Не более 50 символов!" required></textarea>
+								<textarea name="Название и адрес ресторана" id="cafe_name" maxlength="60" rows="3" placeholder="Название и адрес ресторана/столовой/кафе..." title="Не более 60 символов!" required></textarea>
 							</div>
 							<div class="col-md-12">
 								<label for="event_time">Время проведения мероприятия:</label>
@@ -37,19 +37,19 @@
 							<div class="col-md-12">
 								<h4 class="title_input_group">Фамилия Имя Отчество:</h4>
 								<label for="gen_name">Жениха:</label>
-								<input type="text" name="ФИО жениха" id="gen_name" maxlength="40"  title="Не более 40 символов!" placeholder="ФИО жениха..." required>
+								<input type="text" name="ФИО жениха" id="gen_name" maxlength="50"  title="Не более 50 символов!" placeholder="ФИО жениха..." required>
 							</div>
 							<div class="col-md-12">
 								<label for="nev_name">Невесты (девичья/новая):</label>
-								<input type="text" name="ФИО невесты" id="nev_name"  maxlength="40"  title="Не более 40 символов!" placeholder="ФИО невесты (девичья/новая)..." required>
+								<input type="text" name="ФИО невесты" id="nev_name"  maxlength="50"  title="Не более 50 символов!" placeholder="ФИО невесты (девичья/новая)..." required>
 							</div>
 							<div class="col-md-12">
 								<label for="svid_m_name">Свидетеля:</label>
-								<input type="text" name="ФИО свидетеля" id="svid_m_name"  maxlength="40"  title="Не более 40 символов!" placeholder="ФИО Свидетеля...">
+								<input type="text" name="ФИО свидетеля" id="svid_m_name"  maxlength="50"  title="Не более 50 символов!" placeholder="ФИО Свидетеля...">
 							</div>
 							<div class="col-md-12">
 								<label for="svid_w_name">Свидетельницы:</label>
-								<input type="text" name="ФИО свидетельеицы" id="svid_w_name"  maxlength="40"  title="Не более 40 символов!" placeholder="ФИО Свидетельницы...">
+								<input type="text" name="ФИО свидетельеицы" id="svid_w_name"  maxlength="50"  title="Не более 50 символов!" placeholder="ФИО Свидетельницы...">
 							</div>
 							 <div class="col-md-12">
 								<label for="parent_m_name">Родителей жениха:</label>
