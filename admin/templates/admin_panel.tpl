@@ -10,7 +10,7 @@
 
 <div class="top_line">
     <div class="page_name text-left"><a href="/admin/"><span>А</span>дминпанель</a></div>
-    <div class="exit text-right"><a href="/admin/includes/exit.php">Выход</a></div>
+    <div class="exit text-right">{INFO_MESSAGE}<a href="/admin/includes/exit.php">Выход</a></div>
 </div>
 
 <div id="container">
@@ -64,8 +64,8 @@
     </div>
     
     <div class="right">
-        <table >
-            <form method="post" action="/admin/action/edit_admin_form.php" enctype="multipart/form-data">
+        <table id="edit_form">
+            <form method="post" action="/admin/action/edit_home.php" enctype="multipart/form-data">
                 {INFO}
             </form>
         </table>
@@ -75,6 +75,7 @@
 <script src="{PATH_JS}jquery.min.js"></script>
 
 <script src="{PATH_JS}ckeditor/ckeditor.js"></script>
+<script>CKEDITOR.dtd.$removeEmpty['span'] = false;</script>
 <script src="{PATH_JS}common.js"></script>
 </body>
 </html>

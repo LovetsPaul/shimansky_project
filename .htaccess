@@ -1,6 +1,5 @@
 AddDefaultCharset UTF-8
 
-
 RewriteEngine On
 RewriteBase /
 DirectoryIndex index.php
@@ -10,8 +9,6 @@ RewriteCond   %{REQUEST_FILENAME}       !-f
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteRule   ^(.*) index.php?%{QUERY_STRING}
-
-
 
 <ifModule mod_expires.c>
 

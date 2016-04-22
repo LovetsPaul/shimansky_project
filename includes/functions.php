@@ -89,13 +89,13 @@
 
 		$shablon = file_get_contents(PATH_TEMPLATE . 'inner_menu_item.tpl');
 		$shablon_child = file_get_contents(PATH_TEMPLATE . 'menu.tpl');
+		$marker = array( '{MENU_NAME}', '{MENU_LINK}' );
 		$str = '';
 
 		for( $i=0; $i<$count; $i++ ){
 
 			$inf = mysql_fetch_array( $data );
 			if($parent_id == $inf[3]){
-				$marker = array( '{MENU_NAME}', '{MENU_LINK}' );
 				$marker_info = array( $inf[0], $inf[1]);
 				$str .= str_replace($marker, $marker_info, $shablon_child);
 			}
@@ -114,13 +114,14 @@
 
 		$shablon = file_get_contents(PATH_TEMPLATE . 'menu.tpl');
 		$shablon_child = file_get_contents(PATH_TEMPLATE . 'inner_menu_item.tpl');
+		$marker = array( '{MENU_NAME}', '{MENU_LINK}', '{CLASS_ACTIVE}' );
+		$marker_child = array( '{PARENT_MENU_NAME}', '{CHILD_MENU_ITEM}', '{CLASS_ACTIVE}', '{CLASS_ACTIVE_PARENT}' );
+
 		$str = '';
+
 		for( $i=0; $i<$count; $i++ ){
 
 			$inf = mysql_fetch_array( $data );		
-
-			$marker = array( '{MENU_NAME}', '{MENU_LINK}', '{CLASS_ACTIVE}' );
-			$marker_child = array( '{PARENT_MENU_NAME}', '{CHILD_MENU_ITEM}', '{CLASS_ACTIVE}', '{CLASS_ACTIVE_PARENT}' );
 
 			if( $url == $inf[1] ){
 				
@@ -154,13 +155,12 @@
 
 		$shablon = file_get_contents(PATH_TEMPLATE . 'slider.tpl');
 		$shablon_item = file_get_contents(PATH_TEMPLATE . 'slider_img.tpl');
+		$marker = array( '{SLIDER_IMG_SRC}', '{SLIDER_IMG_ALT}' );
 		$str = '';
 
 		for( $i=0; $i<$count; $i++ ){
 
 			$inf = mysql_fetch_array( $data );
-
-			$marker = array( '{SLIDER_IMG_SRC}', '{SLIDER_IMG_ALT}' );
 			$marker_info = array( $inf[0], $inf[1] );
 			$str .= str_replace( $marker, $marker_info, $shablon_item );
 
@@ -194,13 +194,12 @@
 
 		$post_tpl = file_get_contents(PATH_TEMPLATE . 'post.tpl');
 		$post_without_img_tpl = file_get_contents(PATH_TEMPLATE . 'post_without_img.tpl');
-
+		$marker = array( '{POST_IMG_PREVIEW}', '{POST_TITLE}', '{POST_DESCR}', '{POST_DATE}', '{POST_ID}' );
 		$str = '';
 
 		for( $i=0; $i < $count; $i++){
 
 			$posts_array = mysql_fetch_array( $data );
-			$marker = array( '{POST_IMG_PREVIEW}', '{POST_TITLE}', '{POST_DESCR}', '{POST_DATE}', '{POST_ID}' );
 			$marker_info = array( $posts_array[0], $posts_array[1], $posts_array[2], $posts_array[3], $posts_array[4]);
 			
 			if( $posts_array[0] !== ''){
@@ -245,13 +244,12 @@
 
 		$review_tpl = file_get_contents(PATH_TEMPLATE . 'review_with_img.tpl');
 		$review_without_img_tpl = file_get_contents(PATH_TEMPLATE . 'review_without_img.tpl');
-
+		$marker = array( '{REVIEW_IMG}', '{REVIEWER_NAME}', '{REVIEW_TEXT}' );
 		$str = '';
 
 		for( $i=0; $i < $count; $i++){
 
 			$posts_array = mysql_fetch_array( $data );
-			$marker = array( '{REVIEW_IMG}', '{REVIEWER_NAME}', '{REVIEW_TEXT}' );
 			$marker_info = array( $posts_array[0], $posts_array[1], $posts_array[2]);
 			
 			if( $posts_array[0] !== '' && strlen($posts_array[0] ) > 33 ){
@@ -272,13 +270,12 @@
 		$count = mysql_affected_rows();
 
 		$shablon = file_get_contents(PATH_TEMPLATE . 'portfolio_photo_item.tpl');
+		$marker = array( '{PORTFOLIO_PHOTO}', '{PORTFOLIO_PHOTO_ALT}' );
 		$str = '';
 
 		for( $i=0; $i<$count; $i++ ){
 
 			$inf = mysql_fetch_array( $data );
-
-			$marker = array( '{PORTFOLIO_PHOTO}', '{PORTFOLIO_PHOTO_ALT}' );
 			$marker_info = array( $inf[0], $inf[1] );
 			$str .= str_replace( $marker, $marker_info, $shablon );
 
@@ -295,13 +292,13 @@
 		$count = mysql_affected_rows();
 
 		$shablon = file_get_contents(PATH_TEMPLATE . 'gallery_photo_item.tpl');
+		$marker = array( '{GALLERY_PHOTO_SRC}', '{GALLERY_PHOTO_ALT}' );
 		$str = '';
 
 		for( $i=0; $i<$count; $i++ ){
 
 			$inf = mysql_fetch_array( $data );
 
-			$marker = array( '{GALLERY_PHOTO_SRC}', '{GALLERY_PHOTO_ALT}' );
 			$marker_info = array( $inf[0], $inf[1] );
 			$str .= str_replace( $marker, $marker_info, $shablon );
 
@@ -318,13 +315,13 @@
 		$count = mysql_affected_rows();
 
 		$shablon = file_get_contents(PATH_TEMPLATE . 'portfolio_video_item.tpl');
+		$marker = array( '{PORTFOLIO_VIDEO_ITEM}' );
 		$str = '';
 
 		for( $i=0; $i<$count; $i++ ){
 
 			$inf = mysql_fetch_array( $data );
 
-			$marker = array( '{PORTFOLIO_VIDEO_ITEM}' );
 			$marker_info = array( $inf[0] );
 			$str .= str_replace( $marker, $marker_info, $shablon );
 

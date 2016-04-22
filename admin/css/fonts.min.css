@@ -1,1 +1,34 @@
-@font-face{font-family:"RobotoCondensedLight";font-style:normal;font-weight:normal;src:url("http://shimansky.by/fonts/RobotoCondensedLight/robotocondensedlight.woff") format("woff"),url("http://shimansky.by/fonts/RobotoCondensedLight/robotocondensedlight.ttf") format("truetype")}@font-face{font-family:"RobotoCondensedBold";font-style:normal;font-weight:normal;src:url("http://shimansky.by/fonts/RobotoCondensedBold/robotocondensedbold.woff") format("woff"),url("http://shimansky.by/fonts/RobotoCondensedBold/robotocondensedbold.ttf") format("truetype")}@font-face{font-family:"RobotoCondensedLightItalic";font-style:normal;font-weight:normal;src:url("http://shimansky.by/fonts/RobotoCondensedLightItalic/robotocondensedlightitalic.woff") format("woff"),url("http://shimansky.by/fonts/RobotoCondensedLightItalic/robotocondensedlightitalic.ttf") format("truetype")}@font-face{font-family:"RobotoCondensedRegular";font-style:normal;font-weight:normal;src:url("http://shimansky.by/fonts/RobotoCondensedRegular/robotocondensed.woff") format("woff"),url("http://shimansky.by/fonts/RobotoCondensedRegular/robotocondensed.ttf") format("truetype")}@font-face{font-family:"MarkerFeltWide";font-style:normal;font-weight:normal}
+@font-face {
+    font-family: "robotocondensedlight";
+    font-style: normal;
+    font-weight: normal;
+    src: url("http://shimansky.by/fonts/RobotoCondensedLight/robotocondensedlight.woff") format("woff"), url("http://shimansky.by/fonts/RobotoCondensedLight/robotocondensedlight.ttf") format("truetype")
+}
+
+@font-face {
+    font-family: "robotocondensedbold";
+    font-style: normal;
+    font-weight: normal;
+    src: url("http://shimansky.by/fonts/RobotoCondensedBold/robotocondensedbold.woff") format("woff"), url("http://shimansky.by/fonts/RobotoCondensedBold/robotocondensedbold.ttf") format("truetype")
+}
+
+@font-face {
+    font-family: "robotocondensedlightitalic";
+    font-style: normal;
+    font-weight: normal;
+    src: url("http://shimansky.by/fonts/RobotoCondensedLightItalic/robotocondensedlightitalic.woff") format("woff"), url("http://shimansky.by/fonts/RobotoCondensedLightItalic/robotocondensedlightitalic.ttf") format("truetype")
+}
+
+@font-face {
+    font-family: "robotocondensedregular";
+    font-style: normal;
+    font-weight: normal;
+    src: url("http://shimansky.by/fonts/RobotoCondensedRegular/robotocondensed.woff") format("woff"), url("http://shimansky.by/fonts/RobotoCondensedRegular/robotocondensed.ttf") format("truetype")
+}
+
+@font-face {
+    font-family: "robotoregular";
+    font-style: normal;
+    font-weight: normal;
+    src: url("http://shimansky.by/fonts/RobotoRegular/robotocondensed.woff") format("woff"), url("http://shimansky.by/fonts/RobotoRegular/robotocondensed.ttf") format("truetype")
+}
