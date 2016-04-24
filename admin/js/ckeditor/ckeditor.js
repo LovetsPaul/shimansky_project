@@ -11844,10 +11844,10 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
         })
     })();
     CKEDITOR.config.font_names = "RobotoCondensedRegular/RobotoCondensedRegular, sans-serif; RobotoRegular/RobotoRegular, sans-serif; RobotoCondensedLight/robotocondensedlight, sans-serif;  RobotoCondensedLightItalic/robotocondensedlightItalic, sans-serif; RobotoCondensedBold/RobotoCondensedBold, sans-serif; --------------------/RobotoCondensedRegular, sans-serif; Arial/Arial, Helvetica, sans-serif;Comic Sans MS/Comic Sans MS, cursive;Courier New/Courier New, Courier, monospace;Georgia/Georgia, serif;Lucida Sans Unicode/Lucida Sans Unicode, Lucida Grande, sans-serif;Tahoma/Tahoma, Geneva, sans-serif;Times New Roman/Times New Roman, Times, serif;Trebuchet MS/Trebuchet MS, Helvetica, sans-serif;Verdana/Verdana, Geneva, sans-serif";
-    CKEDITOR.config.font_defaultLabel = "";
+    CKEDITOR.config.font_defaultLabel = "RobotoCondenseRegular";
     CKEDITOR.config.font_style = { element: "span", styles: { "font-family": "#(family)" }, overrides: [{ element: "font", attributes: { face: null } }] };
     CKEDITOR.config.fontSize_sizes = "16/16px;18/18px;20/20px;22/22px;24/24px;26/26px;28/28px;36/36px;48/48px;72/72px";
-    CKEDITOR.config.fontSize_defaultLabel = "";
+    CKEDITOR.config.fontSize_defaultLabel = "20px/20px";
     CKEDITOR.config.fontSize_style = { element: "span", styles: { "font-size": "#(size)" }, overrides: [{ element: "font", attributes: { size: null } }] };
     CKEDITOR.plugins.add("forms", {
         requires: "dialog,fakeobjects",

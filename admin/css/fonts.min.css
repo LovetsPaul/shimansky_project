@@ -32,3 +32,15 @@
     font-weight: normal;
     src: url("http://shimansky.by/fonts/RobotoRegular/robotocondensed.woff") format("woff"), url("http://shimansky.by/fonts/RobotoRegular/robotocondensed.ttf") format("truetype")
 }
+
+body{
+    font-family: "RobotoCondensedRegular";
+    font-size: 20px;
+    color: #1a1a1a;
+}
+h3{
+    font-size: 42px;
+}
+h5{
+    font-size: 20px;
+}

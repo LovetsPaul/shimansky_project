@@ -1,14 +1,17 @@
 <?php
-include('config.php');
+include('../config.php');
 include(PATH_INCLUDES . 'connect.php');
 include(PATH_INCLUDES . 'functions.php');
-session_start();
+
+edit_about_content();
+
 $page = file_get_contents(PATH_TEMPLATE . 'admin_panel.tpl');
 $marker = array('{INFO}', '{PATH_CSS}', '{PATH_JS}', '{INFO_MESSAGE}');
-$marker_info = array('Выберите действие...', PATH_CSS, PATH_JS, '<a href="/" target="_blank">Перейти на сайт</a>&nbsp;&nbsp;/&nbsp;&nbsp;' );
+$marker_info = array(get_about_edit_form(), PATH_CSS, PATH_JS, get_info_message($_GET['type_message']) );
 $page = str_replace($marker, $marker_info, $page);
 
 echo $page;
+
 
 
 ?>

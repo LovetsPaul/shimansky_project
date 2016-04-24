@@ -16,10 +16,9 @@ CKEDITOR.editorConfig = function( config ) {
 	config.filebrowserImageUploadUrl = 'http://shimansky.by/admin/js/kcfinder/upload.php?opener=ckeditor&type=images';
 	config.filebrowserFlashUploadUrl = 'http://shimansky.by/admin/js/kcfinder/upload.php?opener=ckeditor&type=flash';
 
-	
-
 	// Brazil colors only.
 
 
-config.colorButton_colors = 'FontColor1/FF9900,FontColor2/0066CC,FontColor3/F00';
+config.colorButton_colors = '1a1a1a,008979,1b5b55,3d3d3d,fff,f00';
+
 };

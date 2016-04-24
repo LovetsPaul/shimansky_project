@@ -1,40 +1,23 @@
 <?php
-	function MyString($str1){
-
-		$str = $str1;
-		$str = trim($str);
-		$str = stripslashes($str);
-		// $str = htmlspecialchars($str, ENT_QUOTES);
-		$str = nl2br($str);
-		return $str;
-	}
-
-	function replace($marker_array, $marker_info, $shablon){
-
-		$page = file_get_contents(PATH_TEMPLATE . $shablon);
-		$page = str_replace($marker_array, $marker_info, $page);
-		return $page;
-	}
-
 	function get_info_message($par){
 		
 		$par = (int)$par;
+		$message_tpl = '';
 
 		if( isset($_GET['type_message']) ){
-			$message_tpl = '';
 
 			if( $par ==	1 ){
 				$message_tpl = file_get_contents(PATH_TEMPLATE . "message_ok.tpl");
+				return $message_tpl;
 			}else if( $par == 2 ){
 				$message_tpl = file_get_contents(PATH_TEMPLATE . "message_error.tpl");
+				return $message_tpl;
 			}else{
-				$message_tpl =  '';
-			}
 
-			return $message_tpl;
+			return '<a href="/" target="_blank">Перейти на сайт</a>&nbsp;&nbsp;/&nbsp;&nbsp;';			}
 
 		}else{
-			return '';
+			return '<a href="/" target="_blank">Перейти на сайт</a>&nbsp;&nbsp;/&nbsp;&nbsp;';
 		}
 			
 	}
@@ -43,14 +26,14 @@
 
 		$sql = "SELECT `pages`.`page_title`, `pages`.`page_content`, `pages`.`keywords`, `pages`.`description` 
 		FROM `pages` WHERE pages.`id_page` = 1";
-		$marker = array('{TITLE_VALUE}', '{TEXT_VALUE}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}');
-		$data = mysql_query($sql) or die(mysql_error());
-		$inf = mysql_fetch_array($data);
-		$shablon = file_get_contents('../templates/home_edit_form.tpl');
-		
 
-			$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] );
-			$str = str_replace( $marker, $marker_info, $shablon );
+		$marker      = array('{TITLE_VALUE}', '{TEXT_VALUE}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}');
+		$data        = mysql_query($sql) or die(mysql_error());
+		$inf         = mysql_fetch_array($data);
+		$shablon     = file_get_contents(PATH_TEMPLATE . 'home_edit_form.tpl');
+		$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] );
+
+		$str = str_replace( $marker, $marker_info, $shablon );
 
 		return $str;
 	}
@@ -60,14 +43,15 @@
 	function edit_home_content(){
 
 		if( isset($_POST['enter']) ){
-			$title = isset($_POST['home_title']) ? $_POST['home_title'] : '' ;
-			$descr =  isset($_POST['home_descr']) ? $_POST['home_descr'] :  '' ;
-			$text = isset($_POST['home_edit_text']) ? $_POST['home_edit_text'] :  '' ;
+
+			$title    = isset($_POST['home_title']) ? $_POST['home_title'] : '' ;
+			$descr    = isset($_POST['home_descr']) ? $_POST['home_descr'] :  '' ;
+			$text     = isset($_POST['home_edit_text']) ? $_POST['home_edit_text'] :  '' ;
 			$keywords = isset($_POST['home_keywords']) ? $_POST['home_keywords'] :  '' ;
 
-			$title = mysql_escape_string($title);
-			$descr = mysql_escape_string($descr);
-			$text = mysql_escape_string($text);
+			$title    = mysql_escape_string($title);
+			$descr    = mysql_escape_string($descr);
+			$text     = mysql_escape_string($text);
 			$keywords = mysql_escape_string($keywords);
 
 			if(strlen($text)>0 && strlen($title)>0){
@@ -82,7 +66,240 @@
 				$_GET['type_message'] = 2;
 			}
 		}
+	}
+
+	function get_about_edit_form(){
+
+		$sql = "SELECT `pages`.`page_title`, `pages`.`page_content`, `pages`.`keywords`, `pages`.`description` 
+		FROM `pages` WHERE pages.`id_page` = 2";
+
+		$marker      = array('{TITLE_VALUE}', '{TEXT_VALUE}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}');
+		$data        = mysql_query($sql) or die(mysql_error());
+		$inf         = mysql_fetch_array($data);
+		$shablon     = file_get_contents(PATH_TEMPLATE . 'about_edit_form.tpl');
+		$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] );
+		$str         = str_replace( $marker, $marker_info, $shablon );
+
+		return $str;
+	}
+
+	function edit_about_content(){
+
+		if( isset($_POST['enter_about']) ){
+
+			$title 	  = isset($_POST['about_title']) ? $_POST['about_title'] : '' ;
+			$descr    = isset($_POST['about_descr']) ? $_POST['about_descr'] :  '' ;
+			$text     = isset($_POST['about_edit_text']) ? $_POST['about_edit_text'] :  '' ;
+			$keywords = isset($_POST['about_keywords']) ? $_POST['about_keywords'] :  '' ;
+
+			$title    = mysql_escape_string($title);
+			$descr    = mysql_escape_string($descr);
+			$text     = mysql_escape_string($text);
+			$keywords = mysql_escape_string($keywords);
+
+			if(strlen($text)>0 && strlen($title)>0){
+
+				$sql = "UPDATE  `bd_shimansky`.`pages` SET `page_title`='$title', `description`='$descr', `page_content`='$text', `keywords`='$keywords'
+				WHERE  `pages`.`id_page` = 2";
+				mysql_query($sql);
+
+				$_GET['type_message'] = 1;
+
+
+			}else{
+				$_GET['type_message'] = 2;
+			}
+		}
 
 		
+	}
+
+	function get_wedding_edit_form(){
+
+		$sql = "SELECT `pages`.`page_title`, `pages`.`page_content`, `pages`.`keywords`, `pages`.`description` 
+		FROM `pages` WHERE pages.`id_page` = 7";
+
+		$marker      = array('{TITLE_VALUE}', '{TEXT_VALUE}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}');
+		$data        = mysql_query($sql) or die(mysql_error());
+		$inf         = mysql_fetch_array($data);
+		$shablon     = file_get_contents(PATH_TEMPLATE . 'wedding_edit_form.tpl');
+		$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] );
+		$str         = str_replace( $marker, $marker_info, $shablon );
+
+		return $str;
+	}
+
+	function edit_wedding_content(){
+		
+		if( isset($_POST['enter_wedding']) ){
+
+			$title 	  = isset($_POST['wedding_title']) ? $_POST['wedding_title'] : '' ;
+			$descr    = isset($_POST['wedding_descr']) ? $_POST['wedding_descr'] :  '' ;
+			$text     = isset($_POST['wedding_edit_text']) ? $_POST['wedding_edit_text'] :  '' ;
+			$keywords = isset($_POST['wedding_keywords']) ? $_POST['wedding_keywords'] :  '' ;
+
+			$title    = mysql_escape_string($title);
+			$descr    = mysql_escape_string($descr);
+			$text     = mysql_escape_string($text);
+			$keywords = mysql_escape_string($keywords);
+
+			if(strlen($text)>0 && strlen($title)>0){
+
+				$sql = "UPDATE  `bd_shimansky`.`pages` SET `page_title`='$title', `description`='$descr', `page_content`='$text', `keywords`='$keywords'
+				WHERE  `pages`.`id_page` = 7";
+				mysql_query($sql);
+
+				$_GET['type_message'] = 1;
+
+
+			}else{
+				$_GET['type_message'] = 2;
+			}
+		}
+
+		
+	}
+
+	function get_corporate_edit_form(){
+
+		$sql = "SELECT `pages`.`page_title`, `pages`.`page_content`, `pages`.`keywords`, `pages`.`description` 
+		FROM `pages` WHERE pages.`id_page` = 8";
+
+		$marker      = array('{TITLE_VALUE}', '{TEXT_VALUE}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}');
+		$data        = mysql_query($sql) or die(mysql_error());
+		$inf         = mysql_fetch_array($data);
+		$shablon     = file_get_contents(PATH_TEMPLATE . 'corporate_edit_form.tpl');
+		$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] );
+		$str         = str_replace( $marker, $marker_info, $shablon );
+
+		return $str;
+	}
+
+	function edit_corporate_content(){
+		
+		if( isset($_POST['enter_corporate']) ){
+
+			$title 	  = isset($_POST['corporate_title']) ? $_POST['corporate_title'] : '' ;
+			$descr    = isset($_POST['corporate_descr']) ? $_POST['corporate_descr'] :  '' ;
+			$text     = isset($_POST['corporate_edit_text']) ? $_POST['corporate_edit_text'] :  '' ;
+			$keywords = isset($_POST['corporate_keywords']) ? $_POST['corporate_keywords'] :  '' ;
+
+			$title    = mysql_escape_string($title);
+			$descr    = mysql_escape_string($descr);
+			$text     = mysql_escape_string($text);
+			$keywords = mysql_escape_string($keywords);
+
+			if(strlen($text)>0 && strlen($title)>0){
+
+				$sql = "UPDATE  `bd_shimansky`.`pages` SET `page_title`='$title', `description`='$descr', `page_content`='$text', `keywords`='$keywords'
+				WHERE  `pages`.`id_page` = 8";
+				mysql_query($sql);
+
+				$_GET['type_message'] = 1;
+
+
+			}else{
+				$_GET['type_message'] = 2;
+			}
+		}
+
+		
+	}
+
+	function get_vipusknoi_edit_form(){
+
+		$sql = "SELECT `pages`.`page_title`, `pages`.`page_content`, `pages`.`keywords`, `pages`.`description` 
+		FROM `pages` WHERE pages.`id_page` = 9";
+
+		$marker      = array('{TITLE_VALUE}', '{TEXT_VALUE}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}');
+		$data        = mysql_query($sql) or die(mysql_error());
+		$inf         = mysql_fetch_array($data);
+		$shablon     = file_get_contents(PATH_TEMPLATE . 'vipusknoi_edit_form.tpl');
+		$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] );
+		$str         = str_replace( $marker, $marker_info, $shablon );
+
+		return $str;
+	}
+
+	function edit_vipusknoi_content(){
+		
+		if( isset($_POST['enter_vipusknoi']) ){
+
+			$title 	  = isset($_POST['vipusknoi_title']) ? $_POST['vipusknoi_title'] : '' ;
+			$descr    = isset($_POST['vipusknoi_descr']) ? $_POST['vipusknoi_descr'] :  '' ;
+			$text     = isset($_POST['vipusknoi_edit_text']) ? $_POST['vipusknoi_edit_text'] :  '' ;
+			$keywords = isset($_POST['vipusknoi_keywords']) ? $_POST['vipusknoi_keywords'] :  '' ;
+
+			$title    = mysql_escape_string($title);
+			$descr    = mysql_escape_string($descr);
+			$text     = mysql_escape_string($text);
+			$keywords = mysql_escape_string($keywords);
+
+			if(strlen($text)>0 && strlen($title)>0){
+
+				$sql = "UPDATE  `bd_shimansky`.`pages` SET `page_title`='$title', `description`='$descr', `page_content`='$text', `keywords`='$keywords'
+				WHERE  `pages`.`id_page` = 9";
+				mysql_query($sql);
+
+				$_GET['type_message'] = 1;
+
+
+			}else{
+				$_GET['type_message'] = 2;
+			}
+		}
+
+	}
+
+	function edit_contacts(){
+
+		if( isset($_POST['enter_contacts']) ){
+
+			$title    = isset($_POST['contacts_title']) ? $_POST['contacts_title'] : '' ;
+			$phone    = isset($_POST['contacts_phone']) ? $_POST['contacts_phone'] :  '' ;
+			$email    = isset($_POST['contacts_email']) ? $_POST['contacts_email'] :  '' ;
+			$vk       = isset($_POST['contacts_vkontakte']) ? $_POST['contacts_vkontakte'] :  '' ;
+			$inst     = isset($_POST['contacts_instagram']) ? $_POST['contacts_instagram'] :  '' ;
+			$fb       = isset($_POST['contacts_facebook']) ? $_POST['contacts_facebook'] :  '' ;
+			$keywords = isset($_POST['contacts_keywords']) ? $_POST['contacts_keywords'] :  '' ;
+			$descr    = isset($_POST['contacts_descr']) ? $_POST['contacts_descr'] :  '' ;
+
+			$title    = mysql_escape_string($title);
+			$phone    = mysql_escape_string($phone);
+			$email    = mysql_escape_string($email);
+			$vk       = mysql_escape_string($vk);
+			$inst     = mysql_escape_string($inst);
+			$fb       = mysql_escape_string($fb);
+			$keywords = mysql_escape_string($keywords);
+			$descr    = mysql_escape_string($descr);
+
+			if(strlen($title)>0 && strlen($email)>0 && strlen($phone)>0){
+
+				$sql = "UPDATE  `bd_shimansky`.`social`, `bd_shimansky`.`pages` SET `pages`.`page_title`='$title', `pages`.`description`='$descr', `pages`.`keywords`='$keywords', 
+				`social`.`e-mail`='$email', `social`.`phone`='$phone', `social`.`vkontakte`='$vk', `social`.`facebook`='$fb', `social`.`instagramm`='$inst' 
+				WHERE  `pages`.`id_page` = 6";
+				mysql_query($sql);
+
+				$_GET['type_message'] = 1;
+
+			}else{
+				$_GET['type_message'] = 2;
+			}
+		}
+	}
+
+	function get_contacts_form(){
+
+		$sql = "SELECT `pages`.`page_title`, `social`.`phone`, `social`.`e-mail`, `social`.`vkontakte`, `social`.`facebook`, `social`.`instagramm`, `pages`.`keywords`, `pages`.`description` 
+		FROM `social`, `pages` WHERE `pages`.`id_page` = 6";
+
+		$marker      = array('{TITLE_VALUE}', '{PHONE}', '{EMAIL}', '{VKONTAKTE}', '{FACEBOOK}', '{INSTAGRAM}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}');
+		$data        = mysql_query($sql);
+		$inf         = mysql_fetch_array($data);
+		$shablon     = file_get_contents(PATH_TEMPLATE . 'contacts_edit_form.tpl');
+		$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] , $inf[4] , $inf[5] , $inf[6], $inf[7] );
+		$str         = str_replace( $marker, $marker_info, $shablon );
+
+		return $str;
 	}
 ?>

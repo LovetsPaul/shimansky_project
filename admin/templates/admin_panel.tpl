@@ -35,15 +35,15 @@
         </dl>
         <dl>
             <dt>Свадьба</dt>
-            <dd><a href="/admin/action/edit_wedding.php">Редактировать</a></dd>
+            <dd><a href="/admin/action/edit_event_wedding.php">Редактировать</a></dd>
         </dl>
         <dl>
             <dt>Корпоративный праздник</dt>
-            <dd><a href="/admin/action/edit_corporate.php">Редактировать</a></dd>
+            <dd><a href="/admin/action/edit_event_corporate.php">Редактировать</a></dd>
         </dl>
         <dl>
-            <dt>Ввыпускной</dt>
-            <dd><a href="/admin/action/edit_vipusknoi.php">Редактировать</a></dd>
+            <dt>Выпускной</dt>
+            <dd><a href="/admin/action/edit_event_vipusknoi.php">Редактировать</a></dd>
         </dl>
         <dl>
             <dt>Блог</dt>
@@ -65,7 +65,7 @@
     
     <div class="right">
         <table id="edit_form">
-            <form method="post" action="/admin/action/edit_home.php" enctype="multipart/form-data">
+            <form method="post" action="" enctype="multipart/form-data">
                 {INFO}
             </form>
         </table>

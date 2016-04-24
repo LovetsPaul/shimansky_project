@@ -78,17 +78,31 @@ CKEDITOR.stylesSet.add( 'default', [
 	{ name: 'Language: LTR',	element: 'span', attributes: { 'dir': 'ltr' } },
 
 	/* Object Styles */
+	{
+		name: 'Изображение (резиновое)',
+		element: 'img',
+		attributes: { 'class': 'img-responsive' },
+		styles: {
+			"height": "auto"
+		}
+	},
 
 	{
 		name: 'Styled image (left)',
 		element: 'img',
-		attributes: { 'class': 'left' }
+		attributes: { 'class': 'left img-responsive' }
 	},
 
 	{
 		name: 'Styled image (right)',
 		element: 'img',
-		attributes: { 'class': 'right' }
+		attributes: { 'class': 'right img-responsive' }
+	},
+
+	{
+		name: 'ul_green_marker',
+		element: 'ul',
+		attributes: { 'class': 'green_marker' }
 	},
 
 	{
