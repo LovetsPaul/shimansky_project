@@ -302,4 +302,36 @@
 
 		return $str;
 	}
+
+
+function add_video(){
+
+		if( isset($_POST['enter_video']) ){
+
+			$url      = isset($_POST['video_url']) ? $_POST['video_url'] :  '' ;
+			$v_descr  = isset($_POST['v_descr']) ? $_POST['v_descr'] :  '' ;
+
+			$url      = mysql_escape_string($url);
+			$v_descr  = mysql_escape_string($v_descr);
+
+			if(strlen($url)>0 && strlen($v_descr)>0){
+
+				$sql = "INSERT INTO `bd_shimansky`.`video` (`video`.`id`, `video`.`video_src`, `video`.`description`) VALUES (NULL, '$url', '$v_descr')";
+				mysql_query($sql) or die(mysql_error());
+
+				$_GET['type_message'] = 1;
+
+			}else{
+				$_GET['type_message'] = 2;
+			}
+		}
+	}
+
+	function get_add_video_form(){
+
+		$shablon = file_get_contents(PATH_TEMPLATE . 'add_video_form.tpl');
+
+		return $shablon;
+	}
+
 ?>
