@@ -194,13 +194,13 @@
 
 		$post_tpl = file_get_contents(PATH_TEMPLATE . 'post.tpl');
 		$post_without_img_tpl = file_get_contents(PATH_TEMPLATE . 'post_without_img.tpl');
-		$marker = array( '{POST_IMG_PREVIEW}', '{POST_TITLE}', '{POST_DESCR}', '{POST_DATE}', '{POST_ID}' );
+		$marker = array( '{PATH_UPLOAD}', '{POST_IMG_PREVIEW}', '{POST_TITLE}', '{POST_DESCR}', '{POST_DATE}', '{POST_ID}' );
 		$str = '';
 
 		for( $i=0; $i < $count; $i++){
 
 			$posts_array = mysql_fetch_array( $data );
-			$marker_info = array( $posts_array[0], $posts_array[1], $posts_array[2], $posts_array[3], $posts_array[4]);
+			$marker_info = array( PATH_UPLOADS_IMG, $posts_array[0], $posts_array[1], $posts_array[2], $posts_array[3], $posts_array[4]);
 			
 			if( $posts_array[0] !== ''){
 				$str.=  str_replace( $marker, $marker_info, $post_tpl );
@@ -270,13 +270,13 @@
 		$count = mysql_affected_rows();
 
 		$shablon = file_get_contents(PATH_TEMPLATE . 'portfolio_photo_item.tpl');
-		$marker = array( '{PORTFOLIO_PHOTO}', '{PORTFOLIO_PHOTO_ALT}' );
+		$marker = array( '{PATH_UPLOAD}','{PORTFOLIO_PHOTO}', '{PORTFOLIO_PHOTO_ALT}' );
 		$str = '';
 
 		for( $i=0; $i<$count; $i++ ){
 
 			$inf = mysql_fetch_array( $data );
-			$marker_info = array( $inf[0], $inf[1] );
+			$marker_info = array( PATH_UPLOADS_IMG, $inf[0], $inf[1] );
 			$str .= str_replace( $marker, $marker_info, $shablon );
 
 		}

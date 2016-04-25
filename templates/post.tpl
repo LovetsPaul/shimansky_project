@@ -1,5 +1,5 @@
 <div class="blog_item_have_img blog_item bg_white">
-	<div class="blog_img_cont text-center"><img src="{POST_IMG_PREVIEW}" class="img-responsive" alt="blog_img"></div>
+	<div class="blog_img_cont text-center"><img src="{PATH_UPLOAD}{POST_IMG_PREVIEW}" class="img-responsive" alt="blog_img"></div>
 	<div class="col-md-12">
 		<div class="blog_text">
 			<h3>{POST_TITLE}</h3>
