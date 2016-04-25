@@ -6,7 +6,7 @@
         <input type="checkbox" name="video_chbx[]" id="video_id_{ID_VIDEO}" value="{ID_VIDEO}">
     </td>
     <td>
-        <label for="video_id_{ID_VIDEO}"><span> <-</span> Выбрать для удаления</label>
+        <label for="video_id_{ID_VIDEO}"><span> &lt;-</span> Выбрать для удаления</label>
     </td>
     <td class="v_link"><a href="/admin/action/video_preview.php?id_del_video={ID_VIDEO}" target="_blank">Просмотреть -></a></td>
 </tr>

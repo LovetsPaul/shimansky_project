@@ -155,8 +155,21 @@ button:hover{
     border-bottom: 1px solid #000;
     padding-bottom: 5px;
 }
-#video_del_form{
+#video_del_form,
+#photo_del_form{
     background-color: #cecece;
+}
+#photo_del_form td{
+    vertical-align: middle;
+}
+#photo_del_form td.chbx{
+    padding: 0 20px;
+}
+#photo_del_form .img_for_del{
+    width: 190px;
+}
+#photo_del_form tr:nth-child(odd){
+    background-color: #C4C4C4;
 }
 .video_name{
     padding-left: 20px;

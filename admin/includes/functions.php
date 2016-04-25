@@ -416,4 +416,60 @@
 		return $video_url;
 	}
 
+	function del_photo(){
+
+		if( isset($_POST['enter_del_photo']) && isset($_POST['photo_chbx']) ){
+
+			$id_array = array();
+
+			$list = $_POST['photo_chbx'];
+
+			foreach($list as $id){
+
+				if( (int)$id ){
+					$id_array[] = $id;
+				}
+
+			}
+
+			$results = implode(',', $id_array);
+
+			$sql = "DELETE FROM `bd_shimansky`.`photo` WHERE `id` IN (" . $results .")";
+
+			if(mysql_query($sql)){
+				$_GET['type_message'] = 1; //it`s OK//
+			}
+
+		}else if(isset($_POST['enter_del_photo']) && !isset($_POST['photo_chbx']) && !isset($_GET['id_del_photo']) ){
+			$_GET['type_message'] = 3; //empty data//
+		}
+
+	}
+
+	function get_del_photo_form(){
+
+		$sql = "SELECT `id`, `photo_img` FROM `bd_shimansky`.`photo` ORDER BY `photo_add_time` DESC";
+		$data = mysql_query( $sql );
+		$count = mysql_affected_rows();
+
+		$shablon = file_get_contents(PATH_TEMPLATE . 'del_photo_form.tpl');
+		$shablon_child = file_get_contents(PATH_TEMPLATE . 'del_photo_item_form.tpl');
+		$marker = array('{PHOTO_ITEM_FOR_DELETE}');
+		$marker_child = array( '{PATH_UPLOADS_IMG}', '{ID_PHOTO}', '{PHOTO_SRC}' );
+		$str = '';
+		if($count == 0){
+			$_GET['type_message'] = 4;
+		}
+		for( $i=0; $i<$count; $i++ ){
+
+			$inf = mysql_fetch_array( $data );
+			$marker_info = array( PATH_UPLOADS_IMG, $inf[0], $inf[1]);
+			$str .= str_replace($marker_child, $marker_info, $shablon_child);
+			
+		}
+
+		$str = str_replace($marker, $str, $shablon);
+		return  $str;
+	}
+
 ?>
