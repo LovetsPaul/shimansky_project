@@ -168,7 +168,21 @@ button:hover{
     position: relative; 
     color: #156D63;
 }
-
+#video_preview{
+    padding-top: 5%;
+}
+#video_preview iframe{
+    margin: auto;
+    display: block; 
+}
+.preview_tpl{
+    background-color: #cecece;
+}
+.preview_tpl button[name="enter_del_video"]{
+    display: block;
+    margin: auto;
+    margin-top: 50px;   
+}
 .v_title{
     position: absolute;
     display: inline-block; 

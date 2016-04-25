@@ -4,6 +4,7 @@ define(PATH_IMG , 'http://shimansky.by/admin/img/');
 define(PATH_JS , 'http://shimansky.by/admin/js/');
 define(PATH_CSS , 'http://shimansky.by/admin/css/');
 define(PATH_INCLUDES, '/home/shimansky.by/www/admin/includes/');
+define(PATH_ACTION, '/home/shimansky.by/www/admin/action/');
 define(PATH_UPLOADS, '/home/shimansky.by/www/admin/img/uploads/');
 define(PATH_THUMB, '/home/shimansky.by/www/admin/img/uploads/thumb/');
 

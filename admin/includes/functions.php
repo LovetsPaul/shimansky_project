@@ -342,7 +342,7 @@
 
 	function del_video(){
 
-		if( isset($_POST['enter_del_video']) && isset($_POST['video_chbx'])){
+		if( isset($_POST['enter_del_video']) && isset($_POST['video_chbx'])  && !isset($_GET['id_del_video']) ){
 
 			$id_array = array();
 
@@ -359,13 +359,22 @@
 			$results = implode(',', $id_array);
 
 			$sql = "DELETE FROM `bd_shimansky`.`video` WHERE `id` IN (" . $results .")";
-			
+
 			if(mysql_query($sql)){
 				$_GET['type_message'] = 1;
 			}
 
-		}else if(isset($_POST['enter_del_video']) && !isset($_POST['video_chbx'])){
+		}else if(isset($_POST['enter_del_video']) && !isset($_POST['video_chbx']) && !isset($_GET['id_del_video']) ){
 			$_GET['type_message'] = 3;
+		}else if(isset($_POST['enter_del_video']) && !empty($_GET['id_del_video'])){
+
+			$id = (int) $_GET['id_del_video'];
+			$sql = "DELETE FROM `bd_shimansky`.`video` WHERE `id` = '$id'";
+
+			if(mysql_query($sql)){
+				$_GET['type_message'] = 1;
+				header("Location: /admin/action/del_video.php?type_message=1");
+			}
 		}
 	}
 
@@ -389,11 +398,22 @@
 			$marker_info = array( $inf[0], $inf[1], $inf[2]);
 			$str .= str_replace($marker_child, $marker_info, $shablon_child);
 			
-			
 		}
 
 		$str = str_replace($marker, $str, $shablon);
 		return  $str;
+	}
+
+	function video_preview(){
+
+		$id = $_GET['id_del_video'];
+
+		$sql = "SELECT `video_src` FROM `bd_shimansky`.`video` WHERE `id` = '$id'";
+		$data = mysql_query($sql);
+		$inf= mysql_fetch_array($data);
+		$video_url = $inf[0];
+
+		return $video_url;
 	}
 
 ?>
