@@ -4,6 +4,12 @@ html, body{
     font-family: "robotocondensedregular", sans-serif;
     font-size: 18px;    
 }
+#edit_form{
+    width: 100%;
+}
+textarea[name^='edit_text']{
+    display: none;
+}
 a:hover{
     opacity: 0.8;
     transition: all 0.3s;
@@ -148,6 +154,51 @@ button:hover{
     vertical-align: top;
     border-bottom: 1px solid #000;
     padding-bottom: 5px;
+}
+#video_del_form{
+    background-color: #cecece;
+}
+.video_name{
+    padding-left: 20px;
+    min-height: 50px;
+    height: 50px;
+    vertical-align: middle;
+    background-color: #C2C2C2;
+    padding: 13px 20px 5px 20px;
+    position: relative; 
+    color: #156D63;
+}
+
+.v_title{
+    position: absolute;
+    display: inline-block; 
+    top: 0;
+    left: 0;
+    padding: 0px 5px;
+    font-size: 14px;
+    background-color: #6F6F6F;
+    color: #fff;
+    margin-bottom: 10px;     
+}
+.video_delimiter{
+    background-color: #6F6F6F;
+    height: 3px;
+    margin-top: 50px;
+}
+.video_link_preview{
+    border-bottom: 1px solid #cecece;
+}
+.video_link_preview td{
+    padding: 10px 20px;
+}
+.v_link{
+    text-align: right;
+}
+.v_link a{
+    color: #28988B;
+}
+label[for^="video_id"] span{
+    color: #ff0000;
 }
 .delimiter{
     background-color: #6F6F6F;

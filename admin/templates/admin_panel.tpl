@@ -27,11 +27,15 @@
             <dt>Фотографии</dt>
             <dd><a href="/admin/action/add_photo.php">Добавить</a></dd>
             <dd><a href="/admin/action/del_photo.php">Удалить</a></dd>
+            <dd>&nbsp;</dd>
+            <dd><a href="/admin/action/del_video.php">Информация о странице (+SEO)</a></dd>
         </dl>
         <dl>
             <dt>Видео</dt>
             <dd><a href="/admin/action/add_video.php">Добавить</a></dd>
             <dd><a href="/admin/action/del_video.php">Удалить</a></dd>
+            <dd>&nbsp;</dd>
+            <dd><a href="/admin/action/del_video.php">Информация о странице (+SEO)</a></dd>
         </dl>
         <dl>
             <dt>Свадьба</dt>
@@ -50,12 +54,16 @@
             <dd><a href="/admin/action/add_post.php">Добавить пост</a></dd>
             <dd><a href="/admin/action/edit_posts.php">Редактировать пост(ы)</a></dd>
             <dd><a href="/admin/action/del_posts.php">Удалить пост(ы)</a></dd>
+            <dd>&nbsp;</dd>
+            <dd><a href="/admin/action/del_video.php">Информация о странице (+SEO)</a></dd>
         </dl>
         <dl>
             <dt>Отзывы</dt>
             <dd><a href="/admin/action/edit_reviews.php">Редактировать</a></dd>
             <dd><a href="/admin/action/new_reviews.php">Новые отзывы ({NEW_REVIWES_COUNT})</a></dd>
             <dd><a href="/admin/action/del_reviews.php">Удалить отзыв(ы)</a></dd>
+            <dd>&nbsp;</dd>
+            <dd><a href="/admin/action/del_video.php">Информация о странице (+SEO)</a></dd>
         </dl>
         <dl>
             <dt>Контакты</dt>
@@ -64,11 +72,12 @@
     </div>
     
     <div class="right">
-        <table id="edit_form">
-            <form method="post" action="" enctype="multipart/form-data">
+
+        <form method="post" action="" enctype="multipart/form-data">
+            <table id="edit_form">
                 {INFO}
-            </form>
-        </table>
+            </table>
+        </form>
     </div>
 </div>
 

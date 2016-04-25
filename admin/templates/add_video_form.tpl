@@ -3,7 +3,7 @@
 <tr><td colspan="2">&nbsp;</td></tr>
 <tr><td colspan="2">&nbsp;</td></tr>
 <tr  align="left">
-    <td width="25%"><label for="v_descr">Заголовок видео:</label></td>
+    <td width="25%"><label for="v_descr">Название видео:</label></td>
     <td><input type="text" name="v_descr" id="v_descr" required maxlength="120" title="Поле обязательно для заполнения. Максимальное количество символов для ввода - 120!"></td>
 </tr>
 <tr><td colspan="2">&nbsp;</td></tr>

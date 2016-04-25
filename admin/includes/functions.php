@@ -12,6 +12,12 @@
 			}else if( $par == 2 ){
 				$message_tpl = file_get_contents(PATH_TEMPLATE . "message_error.tpl");
 				return $message_tpl;
+			}else if( $par == 3 ){
+				$message_tpl = "Не выбраны файлы для удаления&nbsp;&nbsp;";
+				return $message_tpl;
+			}else if( $par == 4 ){
+				$message_tpl = "Нет данных!&nbsp;&nbsp;";
+				return $message_tpl;
 			}else{
 
 			return '<a href="/" target="_blank">Перейти на сайт</a>&nbsp;&nbsp;/&nbsp;&nbsp;';			}
@@ -304,7 +310,7 @@
 	}
 
 
-function add_video(){
+	function add_video(){
 
 		if( isset($_POST['enter_video']) ){
 
@@ -332,6 +338,62 @@ function add_video(){
 		$shablon = file_get_contents(PATH_TEMPLATE . 'add_video_form.tpl');
 
 		return $shablon;
+	}
+
+	function del_video(){
+
+		if( isset($_POST['enter_del_video']) && isset($_POST['video_chbx'])){
+
+			$id_array = array();
+
+			$list = $_POST['video_chbx'];
+
+			foreach($list as $id){
+
+				if( (int)$id ){
+					$id_array[] = $id;
+				}
+
+			}
+
+			$results = implode(',', $id_array);
+
+			$sql = "DELETE FROM `bd_shimansky`.`video` WHERE `id` IN (" . $results .")";
+			
+			if(mysql_query($sql)){
+				$_GET['type_message'] = 1;
+			}
+
+		}else if(isset($_POST['enter_del_video']) && !isset($_POST['video_chbx'])){
+			$_GET['type_message'] = 3;
+		}
+	}
+
+	function get_del_video_form(){
+
+		$sql = "SELECT `id`, `description`, `video_src` FROM `bd_shimansky`.`video` ORDER BY `id` DESC";
+		$data = mysql_query( $sql );
+		$count = mysql_affected_rows();
+
+		$shablon = file_get_contents(PATH_TEMPLATE . 'del_video_form.tpl');
+		$shablon_child = file_get_contents(PATH_TEMPLATE . 'del_video_item_form.tpl');
+		$marker = array('{VIDEO_ITEM_FOR_DEL}');
+		$marker_child = array( '{ID_VIDEO}', '{VIDEO_NAME}', '{VIDEO_URL}' );
+		$str = '';
+		if($count == 0){
+			$_GET['type_message'] = 4;
+		}
+		for( $i=0; $i<$count; $i++ ){
+
+			$inf = mysql_fetch_array( $data );
+			$marker_info = array( $inf[0], $inf[1], $inf[2]);
+			$str .= str_replace($marker_child, $marker_info, $shablon_child);
+			
+			
+		}
+
+		$str = str_replace($marker, $str, $shablon);
+		return  $str;
 	}
 
 ?>
