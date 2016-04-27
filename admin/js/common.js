@@ -34,7 +34,37 @@ $(document).ready(function() {
             });
         }
 
-    })
+    });
+
+    $('#add_photo_input').bind('change', function() {
+        
+        var f = this.files[0],
+            size = f.size || f.fileSize,
+            type = ((f.type).substr(6)).toString(),
+            ext = ['jpg', 'jpeg', 'png', 'gif'];
+        found = false;
+        if (size > 2000000) {
+
+            $(this).val('');
+            $(this).remove();
+            alert("Размер файла превышает 2Мб!");
+            $("#file_container").append('<input type="file" name="add_photo_input" id="add_photo_input">');
+            return false;
+        }
+
+        ext.forEach(function(extention) {
+            if (type == extention) found = true;
+        });
+
+        if (!found) {
+            $(this).val('');
+            $(this).remove();
+            alert("Недопустимый формат изображения!\n\n Доступные форматы для загрузки:  jpg, jpeg, png, gif");
+
+            $("#file_container").append('<input type="file" name="add_photo_input" id="add_photo_input">');
+        }
+    });
+
 
 
 });

@@ -3,7 +3,7 @@
 <tr><td colspan="2">&nbsp;</td></tr>
 <tr><td colspan="2">&nbsp;</td></tr>
 <tr  align="left">
-    <td width="22%"><label for="home_title">Заголовок страницы (title):</label></td>
+    <td width="22%"><label for="home_title">Заголовок страницы: (title)</label></td>
     <td><input type="text" name="home_title" id="home_title" value="{TITLE_VALUE}"></td>
 </tr>
 <tr><td colspan="2">&nbsp;</td></tr>

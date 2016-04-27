@@ -380,62 +380,82 @@
 		
 		//upload image path
 		$upload_image = $target_path.basename($fileName);
-		
-		//upload image
-		if(move_uploaded_file($_FILES[$field_name]['tmp_name'], $upload_image))
-		{
-			//thumbnail creation
-			if($thumb == TRUE)
-			{
-				$thumbnail = $thumb_path.$fileName;
-				list($width,$height) = getimagesize($upload_image);
 
-				$image_size_prop = getProportions($width, $height, $thumb_width, $thumb_height);
+		$acces_ext = array('jpg', 'jpeg', 'png', 'gif');
 
+		foreach($acces_ext as $ext){
 
-				$thumb_create = imagecreatetruecolor($image_size_prop['width'], $image_size_prop['height']);
-				switch($file_ext){
-					case 'jpg':
-						$source = imagecreatefromjpeg($upload_image);
-						break;
-					case 'jpeg':
-						$source = imagecreatefromjpeg($upload_image);
-						break;
-
-					case 'png':
-						$source = imagecreatefrompng($upload_image);
-						break;
-					case 'gif':
-						$source = imagecreatefromgif($upload_image);
-						break;
-					default:
-						$source = imagecreatefromjpeg($upload_image);
-				}
-
-				imagecopyresized($thumb_create,$source,0,0,0,0,$image_size_prop['width'], $image_size_prop['height'], $width,$height);
-				switch($file_ext){
-					case 'jpg' || 'jpeg':
-						imagejpeg($thumb_create,$thumbnail,80);
-						break;
-					case 'png':
-						imagepng($thumb_create,$thumbnail,80);
-						break;
-
-					case 'gif':
-						imagegif($thumb_create,$thumbnail,80);
-						break;
-					default:
-						imagejpeg($thumb_create,$thumbnail,80);
-				}
-
+			if( $file_ext != $ext){
+				$fileName = '';
+				echo "bheberb";
+				return false;
 			}
 
-			return $fileName;
 		}
-		else
-		{
+		
+				//upload image
+		if( ($_FILES[$field_name]['size'] < 2000000) ){
+
+				//upload image
+			if(move_uploaded_file($_FILES[$field_name]['tmp_name'], $upload_image)){
+				//thumbnail creation
+				if($thumb == TRUE){
+
+					$thumbnail = $thumb_path.$fileName;
+					list($width,$height) = getimagesize($upload_image);
+
+					$image_size_prop = getProportions($width, $height, $thumb_width, $thumb_height);
+
+
+					$thumb_create = imagecreatetruecolor($image_size_prop['width'], $image_size_prop['height']);
+					switch($file_ext){
+						case 'jpg':
+							$source = imagecreatefromjpeg($upload_image);
+							break;
+						case 'jpeg':
+							$source = imagecreatefromjpeg($upload_image);
+							break;
+
+						case 'png':
+							$source = imagecreatefrompng($upload_image);
+							break;
+						case 'gif':
+							$source = imagecreatefromgif($upload_image);
+							break;
+						default:
+							$source = imagecreatefromjpeg($upload_image);
+					}
+
+					imagecopyresized($thumb_create,$source,0,0,0,0,$image_size_prop['width'], $image_size_prop['height'], $width,$height);
+					switch($file_ext){
+						case 'jpg' || 'jpeg':
+							imagejpeg($thumb_create,$thumbnail,80);
+							break;
+						case 'png':
+							imagepng($thumb_create,$thumbnail,80);
+							break;
+
+						case 'gif':
+							imagegif($thumb_create,$thumbnail,80);
+							break;
+						default:
+							imagejpeg($thumb_create,$thumbnail,80);
+					}
+
+				}
+
+				return $fileName;
+			}
+			else{
+				return false;
+			}
+
+		}else{
 			return false;
 		}
+
+		
+		
 	}
 
 

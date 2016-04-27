@@ -13,6 +13,22 @@ if( isset($_POST['your_name']) or isset($_POST['your_email']) or isset($_POST['y
 	$img_full_name = ($img_name == '') ? $img_name : $img_name .'.'. substr( $_FILES['add_img']['type'], 6 );
 	$sql = "";
 
+
+	$filename_err = explode(".",$_FILES['add_img']['name']);
+	$filename_err_count = count($filename_err);
+	$file_ext = $filename_err[$filename_err_count-1];
+	
+
+	$acces_ext = array('jpg', 'jpeg', 'png', 'gif');
+
+	foreach($acces_ext as $ext){
+
+		if( $file_ext != $ext){
+			$img_full_name = '';
+		}
+
+	}
+
 	if( isset($_FILES['add_img']['name']) ){
 
 		$sql = "INSERT INTO `reviews` (`id`, `review_img`, `review_name`, `review_text`, `review_date`, `review_email`, `visible`) VALUES 

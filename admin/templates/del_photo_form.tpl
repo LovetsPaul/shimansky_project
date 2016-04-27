@@ -1,5 +1,5 @@
 
-<tr><td class="edit_title" colspan="3">Портфолио / Фотографии</td></tr>
+<tr><td class="edit_title" colspan="3">Портфолио / Фотографии <span>(удаление)</span></td></tr>
 <tr><td colspan="2">&nbsp;</td></tr>
 <tr><td colspan="2">&nbsp;</td></tr>
 <tr>

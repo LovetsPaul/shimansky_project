@@ -7,7 +7,7 @@
 
 
     <td class="img_for_del"> 
-        <img src="{PATH_UPLOADS_IMG}{PHOTO_SRC}" alt="photo_{ID_PHOTO}" width="150">
+        <label for="photo_id_{ID_PHOTO}"><img src="{PATH_UPLOADS_IMG}{PHOTO_SRC}" alt="photo_{ID_PHOTO}" width="150"></label>
     </td>
     <td>
         <label for="photo_id_{ID_PHOTO}"><span> &lt;-</span> Выбрать для удаления</label>

@@ -1,4 +1,57 @@
 <?php
+
+	function img_upload($field_name = '', $target_folder = '', $file_name = ''){
+
+		//folder path setup
+		$target_path = $target_folder;
+		
+		//file name setup
+		$filename_err = explode(".",$_FILES[$field_name]['name']);
+		$filename_err_count = count($filename_err);
+		$file_ext = substr($_FILES[$field_name]['type'], 6);
+		if($file_name != ''){
+			$fileName = $file_name;
+		}else{
+			$fileName = md5(time());
+			$fileName = $fileName .".". $file_ext;
+		}
+		//upload image path
+		$upload_image = $target_path.basename($fileName);
+
+		$acces_ext = array('jpg', 'jpeg', 'png', 'gif');
+		$is_ok_ext = false;
+
+		foreach($acces_ext as $ext=>$val){
+			($file_ext != $val) ? $is_ok_ext = false : $is_ok_ext = true;
+			if($is_ok_ext)
+				break;
+		}
+
+		
+		if($is_ok_ext){
+
+			//upload image
+			if( ($_FILES[$field_name]['size'] < 2000000) ){
+
+				if(move_uploaded_file($_FILES[$field_name]['tmp_name'], $upload_image) ){
+					return $fileName;
+				}else{
+					return false;
+				}
+
+			}else{
+				$_GET['type_message'] = 7;
+				return false;
+			}
+
+		}else{
+			$_GET['type_message'] = 8;
+			return false;
+		}
+		
+	}
+
+
 	function get_info_message($par){
 		
 		$par = (int)$par;
@@ -18,6 +71,18 @@
 			}else if( $par == 4 ){
 				$message_tpl = "Нет данных!&nbsp;&nbsp;";
 				return $message_tpl;
+			}else if( $par == 5 ){
+				$message_tpl = "Файл не загружен!!!&nbsp;&nbsp;";
+				return $message_tpl;
+			}else if( $par == 6 ){
+				$message_tpl = "Файл успешно загружен!&nbsp;&nbsp;";
+				return $message_tpl;
+			}else if( $par == 7 ){
+				$message_tpl = "Файл не должен превышать 2Мб!!!&nbsp;&nbsp;";
+				return $message_tpl;
+			}else if( $par == 8 ){
+				$message_tpl = "Недопустимый формат изображения!!!&nbsp;&nbsp;";
+				return $message_tpl;
 			}else{
 
 			return '<a href="/" target="_blank">Перейти на сайт</a>&nbsp;&nbsp;/&nbsp;&nbsp;';			}
@@ -34,7 +99,7 @@
 		FROM `pages` WHERE pages.`id_page` = 1";
 
 		$marker      = array('{TITLE_VALUE}', '{TEXT_VALUE}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}');
-		$data        = mysql_query($sql) or die(mysql_error());
+		$data        = mysql_query($sql);
 		$inf         = mysql_fetch_array($data);
 		$shablon     = file_get_contents(PATH_TEMPLATE . 'home_edit_form.tpl');
 		$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] );
@@ -80,7 +145,7 @@
 		FROM `pages` WHERE pages.`id_page` = 2";
 
 		$marker      = array('{TITLE_VALUE}', '{TEXT_VALUE}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}');
-		$data        = mysql_query($sql) or die(mysql_error());
+		$data        = mysql_query($sql);
 		$inf         = mysql_fetch_array($data);
 		$shablon     = file_get_contents(PATH_TEMPLATE . 'about_edit_form.tpl');
 		$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] );
@@ -126,7 +191,7 @@
 		FROM `pages` WHERE pages.`id_page` = 7";
 
 		$marker      = array('{TITLE_VALUE}', '{TEXT_VALUE}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}');
-		$data        = mysql_query($sql) or die(mysql_error());
+		$data        = mysql_query($sql);
 		$inf         = mysql_fetch_array($data);
 		$shablon     = file_get_contents(PATH_TEMPLATE . 'wedding_edit_form.tpl');
 		$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] );
@@ -380,23 +445,23 @@
 
 	function get_del_video_form(){
 
-		$sql = "SELECT `id`, `description`, `video_src` FROM `bd_shimansky`.`video` ORDER BY `id` DESC";
-		$data = mysql_query( $sql );
+		$sql   = "SELECT `id`, `description`, `video_src` FROM `bd_shimansky`.`video` ORDER BY `id` DESC";
+		$data  = mysql_query( $sql );
 		$count = mysql_affected_rows();
 
-		$shablon = file_get_contents(PATH_TEMPLATE . 'del_video_form.tpl');
+		$shablon       = file_get_contents(PATH_TEMPLATE . 'del_video_form.tpl');
 		$shablon_child = file_get_contents(PATH_TEMPLATE . 'del_video_item_form.tpl');
-		$marker = array('{VIDEO_ITEM_FOR_DEL}');
-		$marker_child = array( '{ID_VIDEO}', '{VIDEO_NAME}', '{VIDEO_URL}' );
+		$marker        = array('{VIDEO_ITEM_FOR_DEL}');
+		$marker_child  = array( '{ID_VIDEO}', '{VIDEO_NAME}', '{VIDEO_URL}' );
 		$str = '';
 		if($count == 0){
 			$_GET['type_message'] = 4;
 		}
 		for( $i=0; $i<$count; $i++ ){
 
-			$inf = mysql_fetch_array( $data );
+			$inf         = mysql_fetch_array( $data );
 			$marker_info = array( $inf[0], $inf[1], $inf[2]);
-			$str .= str_replace($marker_child, $marker_info, $shablon_child);
+			$str        .= str_replace($marker_child, $marker_info, $shablon_child);
 			
 		}
 
@@ -408,9 +473,9 @@
 
 		$id = $_GET['id_del_video'];
 
-		$sql = "SELECT `video_src` FROM `bd_shimansky`.`video` WHERE `id` = '$id'";
-		$data = mysql_query($sql);
-		$inf= mysql_fetch_array($data);
+		$sql       = "SELECT `video_src` FROM `bd_shimansky`.`video` WHERE `id` = '$id'";
+		$data      = mysql_query($sql);
+		$inf       = mysql_fetch_array($data);
 		$video_url = $inf[0];
 
 		return $video_url;
@@ -436,7 +501,22 @@
 
 			$sql = "DELETE FROM `bd_shimansky`.`photo` WHERE `id` IN (" . $results .")";
 
+			//delete_file_data///
+			$sql_del   = "SELECT `photo_img` FROM `bd_shimansky`.`photo` WHERE `id` IN (" . $results .")";
+			$data_del  = mysql_query($sql_del);
+			$count_del = mysql_affected_rows();
+		
 			if(mysql_query($sql)){
+				//delete_file//
+				for($i=0; $i<$count_del; $i++){
+					$inf_del   = mysql_fetch_array($data_del);
+					$file_name = PATH_UPLOADS . basename($inf_del[0]);
+			        if(file_exists($file_name)) {
+			            unlink($file_name);
+
+			        }
+				}
+		       
 				$_GET['type_message'] = 1; //it`s OK//
 			}
 
@@ -470,6 +550,40 @@
 
 		$str = str_replace($marker, $str, $shablon);
 		return  $str;
+	}
+
+
+
+	function add_photo(){
+
+		if( isset($_POST['enter_add_photo']) && !empty($_FILES['add_photo_input']) ){
+
+			if( $photo_name = img_upload('add_photo_input', PATH_UPLOADS) ){
+				$alt = isset($_POST['photo_alt']) ? $_POST['photo_alt'] : 'shimansky.by';
+
+				$sql = "INSERT INTO `bd_shimansky`.`photo` (`photo`.`id`, `photo`.`photo_img`, `photo`.`photo_alt`, `photo`.`photo_add_time`) 
+				VALUES (NULL, '$photo_name', '$alt', NULL)";
+				
+				mysql_query($sql) or die(mysql_error());
+
+				$_GET['type_message'] = 6; //it`s OK//
+
+			}else if( isset($_GET['type_message']) && !empty( $_GET['type_message']) ){
+				 $_GET['type_message'];
+			}else{
+				$_GET['type_message'] = 5;
+			}
+			
+
+		}
+
+	}
+
+	function get_add_photo_form(){
+
+		$shablon = file_get_contents(PATH_TEMPLATE . 'add_photo_form.tpl');
+
+		return $shablon;
 	}
 
 ?>
