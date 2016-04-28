@@ -28,14 +28,14 @@
             <dd><a href="/admin/action/add_photo.php">Добавить</a></dd>
             <dd><a href="/admin/action/del_photo.php">Удалить</a></dd>
             <dd>&nbsp;</dd>
-            <dd><a href="/admin/action/del_video.php">Информация о странице (+SEO)</a></dd>
+            <dd><a href="/admin/action/get_page_info.php?i_page=p_photo">Информация о странице (+SEO)</a></dd>
         </dl>
         <dl>
             <dt>Видео</dt>
             <dd><a href="/admin/action/add_video.php">Добавить</a></dd>
             <dd><a href="/admin/action/del_video.php">Удалить</a></dd>
             <dd>&nbsp;</dd>
-            <dd><a href="/admin/action/del_video.php">Информация о странице (+SEO)</a></dd>
+            <dd><a href="/admin/action/get_page_info.php?i_page=p_video">Информация о странице (+SEO)</a></dd>
         </dl>
         <dl>
             <dt>Свадьба</dt>
@@ -55,7 +55,7 @@
             <dd><a href="/admin/action/edit_posts.php">Редактировать пост(ы)</a></dd>
             <dd><a href="/admin/action/del_posts.php">Удалить пост(ы)</a></dd>
             <dd>&nbsp;</dd>
-            <dd><a href="/admin/action/del_video.php">Информация о странице (+SEO)</a></dd>
+            <dd><a href="/admin/action/get_page_info.php?i_page=p_blog">Информация о странице (+SEO)</a></dd>
         </dl>
         <dl>
             <dt>Отзывы</dt>
@@ -63,7 +63,7 @@
             <dd><a href="/admin/action/new_reviews.php">Новые отзывы ({NEW_REVIWES_COUNT})</a></dd>
             <dd><a href="/admin/action/del_reviews.php">Удалить отзыв(ы)</a></dd>
             <dd>&nbsp;</dd>
-            <dd><a href="/admin/action/del_video.php">Информация о странице (+SEO)</a></dd>
+            <dd><a href="/admin/action/get_page_info.php?i_page=p_reviews">Информация о странице (+SEO)</a></dd>
         </dl>
         <dl>
             <dt>Контакты</dt>
@@ -73,7 +73,7 @@
     
     <div class="right">
 
-        <form method="post" action="" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data">
             <table id="edit_form">
                 {INFO}
             </table>

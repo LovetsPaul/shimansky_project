@@ -1,4 +1,15 @@
 <?php
+	
+	function my_string($str1){
+
+		$str = $str1;
+		$str = trim($str);
+		$str = stripslashes($str);
+		$str = htmlspecialchars($str, ENT_QUOTES);
+		$str = nl2br($str);
+
+		return $str;
+	}
 
 	function img_upload($field_name = '', $target_folder = '', $file_name = ''){
 
@@ -9,6 +20,7 @@
 		$filename_err = explode(".",$_FILES[$field_name]['name']);
 		$filename_err_count = count($filename_err);
 		$file_ext = substr($_FILES[$field_name]['type'], 6);
+
 		if($file_name != ''){
 			$fileName = $file_name;
 		}else{
@@ -528,15 +540,16 @@
 
 	function get_del_photo_form(){
 
-		$sql = "SELECT `id`, `photo_img` FROM `bd_shimansky`.`photo` ORDER BY `photo_add_time` DESC";
-		$data = mysql_query( $sql );
+		$sql   = "SELECT `id`, `photo_img` FROM `bd_shimansky`.`photo` ORDER BY `photo_add_time` DESC";
+		$data  = mysql_query( $sql );
 		$count = mysql_affected_rows();
 
-		$shablon = file_get_contents(PATH_TEMPLATE . 'del_photo_form.tpl');
+		$shablon       = file_get_contents(PATH_TEMPLATE . 'del_photo_form.tpl');
 		$shablon_child = file_get_contents(PATH_TEMPLATE . 'del_photo_item_form.tpl');
-		$marker = array('{PHOTO_ITEM_FOR_DELETE}');
-		$marker_child = array( '{PATH_UPLOADS_IMG}', '{ID_PHOTO}', '{PHOTO_SRC}' );
+		$marker        = array('{PHOTO_ITEM_FOR_DELETE}');
+		$marker_child  = array( '{PATH_UPLOADS_IMG}', '{ID_PHOTO}', '{PHOTO_SRC}' );
 		$str = '';
+
 		if($count == 0){
 			$_GET['type_message'] = 4;
 		}
@@ -559,12 +572,12 @@
 		if( isset($_POST['enter_add_photo']) && !empty($_FILES['add_photo_input']) ){
 
 			if( $photo_name = img_upload('add_photo_input', PATH_UPLOADS) ){
-				$alt = isset($_POST['photo_alt']) ? $_POST['photo_alt'] : 'shimansky.by';
+				$alt = !empty($_POST['photo_alt']) ? $_POST['photo_alt'] : 'shimansky.by';
 
 				$sql = "INSERT INTO `bd_shimansky`.`photo` (`photo`.`id`, `photo`.`photo_img`, `photo`.`photo_alt`, `photo`.`photo_add_time`) 
 				VALUES (NULL, '$photo_name', '$alt', NULL)";
 				
-				mysql_query($sql) or die(mysql_error());
+				mysql_query($sql);
 
 				$_GET['type_message'] = 6; //it`s OK//
 
@@ -584,6 +597,84 @@
 		$shablon = file_get_contents(PATH_TEMPLATE . 'add_photo_form.tpl');
 
 		return $shablon;
+	}
+
+
+	function edit_page_info(){
+	
+		if( isset($_POST['enter']) ){
+
+			$p_id     = isset($_POST["p_id"]) ? $_POST["p_id"] : 0 ;
+		
+			$title_id = "title_id=" . $p_id;
+			$descr_id = "descr_id=" . $p_id;
+			$keywords_id = "keywords_id=" . $p_id;
+
+			$title    = isset($_POST[$title_id]) ? $_POST[$title_id] : '' ;
+			$descr    = isset($_POST[$descr_id]) ? $_POST[$descr_id] :  '' ;
+			$keywords = isset($_POST[$keywords_id]) ? $_POST[$keywords_id] :  '' ;
+
+			$title    = mysql_escape_string($title);
+			$descr    = mysql_escape_string($descr);
+			$keywords = mysql_escape_string($keywords);
+
+			if(strlen($title)>=0){
+
+				$sql = "UPDATE  `bd_shimansky`.`pages` SET `page_title`='$title', `description`='$descr', `keywords`='$keywords'
+				WHERE  `pages`.`id_page` = '$p_id'";
+
+				mysql_query($sql);
+
+				$_GET['type_message'] = 1;
+
+			}else{
+				$_GET['type_message'] = 2;
+			}
+		}
+
+
+	}
+
+	function get_page_info_form(){
+
+		$id = 0;
+		$page_name = '';
+
+		$page = isset($_GET['i_page']) ? $_GET['i_page'] : '';
+		$page = my_string($page);
+
+		switch($page){
+			case 'p_photo':
+				$id = 5;
+				$page_name = "Портфолио / Фотографии";
+				break;
+			case 'p_video':
+				$id = 10;
+				$page_name = "Портфолио / Видео";
+				break;
+
+			case 'p_blog':
+				$id = 3;
+				$page_name = "Блог";
+				break;
+
+			case 'p_reviews':
+				$id = 4;
+				$page_name = "Отзывы";
+				break;
+		}
+
+		$sql = "SELECT `pages`.`id_page`, `pages`.`page_title`, `pages`.`page_content`, `pages`.`keywords`, `pages`.`description` 
+		FROM `pages` WHERE pages.`id_page` = '$id'";
+
+		$marker      = array('{ID}', '{TITLE_VALUE}', '{TEXT_VALUE}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}', '{HEAD_NAME}');
+		$data        = mysql_query($sql);
+		$inf         = mysql_fetch_array($data);
+		$shablon     = file_get_contents(PATH_TEMPLATE . 'page_info_form.tpl');
+		$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] , $inf[4], $page_name);
+		$str         = str_replace( $marker, $marker_info, $shablon );
+
+		return $str;
 	}
 
 ?>
