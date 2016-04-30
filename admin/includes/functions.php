@@ -276,9 +276,9 @@
 		FROM `pages` WHERE pages.`id_page` = 8";
 
 		$marker      = array('{TITLE_VALUE}', '{TEXT_VALUE}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}');
-		$data        = mysql_query($sql) or die(mysql_error());
+		$data        = mysql_query($sql);
 		$inf         = mysql_fetch_array($data);
-		$template     = file_get_contents(PATH_TEMPLATE . 'corporate_edit_form.tpl');
+		$template    = file_get_contents(PATH_TEMPLATE . 'corporate_edit_form.tpl');
 		$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] );
 		$str         = str_replace( $marker, $marker_info, $template );
 
@@ -322,9 +322,9 @@
 		FROM `pages` WHERE pages.`id_page` = 9";
 
 		$marker      = array('{TITLE_VALUE}', '{TEXT_VALUE}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}');
-		$data        = mysql_query($sql) or die(mysql_error());
+		$data        = mysql_query($sql);
 		$inf         = mysql_fetch_array($data);
-		$template     = file_get_contents(PATH_TEMPLATE . 'vipusknoi_edit_form.tpl');
+		$template    = file_get_contents(PATH_TEMPLATE . 'vipusknoi_edit_form.tpl');
 		$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] );
 		$str         = str_replace( $marker, $marker_info, $template );
 
@@ -406,7 +406,7 @@
 		$marker      = array('{TITLE_VALUE}', '{PHONE}', '{EMAIL}', '{VKONTAKTE}', '{FACEBOOK}', '{INSTAGRAM}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}');
 		$data        = mysql_query($sql);
 		$inf         = mysql_fetch_array($data);
-		$template     = file_get_contents(PATH_TEMPLATE . 'contacts_edit_form.tpl');
+		$template    = file_get_contents(PATH_TEMPLATE . 'contacts_edit_form.tpl');
 		$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] , $inf[4] , $inf[5] , $inf[6], $inf[7] );
 		$str         = str_replace( $marker, $marker_info, $template );
 
@@ -490,8 +490,8 @@
 
 		$template       = file_get_contents(PATH_TEMPLATE . 'del_video_form.tpl');
 		$template_child = file_get_contents(PATH_TEMPLATE . 'del_video_item_form.tpl');
-		$marker        = array('{VIDEO_ITEM_FOR_DEL}');
-		$marker_child  = array( '{ID_VIDEO}', '{VIDEO_NAME}', '{VIDEO_URL}' );
+		$marker         = array('{VIDEO_ITEM_FOR_DEL}');
+		$marker_child   = array( '{ID_VIDEO}', '{VIDEO_NAME}', '{VIDEO_URL}' );
 		$str = '';
 		if($count == 0){
 			$_GET['type_message'] = 4;
@@ -573,8 +573,8 @@
 
 		$template       = file_get_contents(PATH_TEMPLATE . 'del_photo_form.tpl');
 		$template_child = file_get_contents(PATH_TEMPLATE . 'del_photo_item_form.tpl');
-		$marker        = array('{PHOTO_ITEM_FOR_DELETE}');
-		$marker_child  = array( '{PATH_UPLOADS_IMG}', '{ID_PHOTO}', '{PHOTO_SRC}' );
+		$marker         = array('{PHOTO_ITEM_FOR_DELETE}');
+		$marker_child   = array( '{PATH_UPLOADS_IMG}', '{ID_PHOTO}', '{PHOTO_SRC}' );
 		$str = '';
 
 		if($count == 0){
@@ -697,7 +697,7 @@
 		$marker      = array('{ID}', '{TITLE_VALUE}', '{TEXT_VALUE}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}', '{HEAD_NAME}');
 		$data        = mysql_query($sql);
 		$inf         = mysql_fetch_array($data);
-		$template     = file_get_contents(PATH_TEMPLATE . 'page_info_form.tpl');
+		$template    = file_get_contents(PATH_TEMPLATE . 'page_info_form.tpl');
 		$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] , $inf[4], $page_name);
 		$str         = str_replace( $marker, $marker_info, $template );
 
@@ -707,7 +707,7 @@
 	function get_new_reviews_form(){
 
 		$sql   = "SELECT  `review_img`, `review_name`, `review_text`, `review_date`, `review_email`, `id` FROM `bd_shimansky`.`reviews` WHERE `visible` = 0 ORDER BY `review_date` DESC";
-		$data  = mysql_query( $sql ) or die(mysql_error());
+		$data  = mysql_query( $sql );
 		$count = mysql_affected_rows();
 
 		$template = file_get_contents(PATH_TEMPLATE . 'new_reviews_form.tpl');
@@ -810,10 +810,10 @@
 			$r_id = $_GET['edit_review'];
 			$sql = "SELECT `reviews`.`id`, `reviews`.`review_name`, `reviews`.`review_text`, `reviews`.`review_img` FROM `bd_shimansky`.`reviews` WHERE `reviews`.`id` = '$r_id'";
 
-			$marker      = array('{PATH_UPLOADS_IMG}','{ID}', '{NAME}', '{TEXT}', '{IMG}');
-			$data        = mysql_query($sql);
-			$inf         = mysql_fetch_array($data);
-			$template    = '';
+			$marker       = array('{PATH_UPLOADS_IMG}','{ID}', '{NAME}', '{TEXT}', '{IMG}');
+			$data         = mysql_query($sql);
+			$inf          = mysql_fetch_array($data);
+			$template     = '';
 
 			if( (strlen($inf[3])>30) && is_file( ROOT . '/img/uploads/thumb/' . $inf[3] ) ){
 				$template = file_get_contents(PATH_TEMPLATE . 'edit_review_form.tpl');
@@ -821,8 +821,8 @@
 				$template = file_get_contents(PATH_TEMPLATE . 'edit_review_form_wo_img.tpl');
 			}
 
-			$marker_info = array( PATH_THUMB_IMG, $inf[0], $inf[1], $inf[2], $inf[3] );
-			$str         = str_replace( $marker, $marker_info, $template );
+			$marker_info  = array( PATH_THUMB_IMG, $inf[0], $inf[1], $inf[2], $inf[3] );
+			$str          = str_replace( $marker, $marker_info, $template );
 
 			return $str;
 		
@@ -837,7 +837,7 @@
 
 		if(isset($_POST['enter_edit_review'])){
 
-			$name    = isset($_POST['review_name']) ? $_POST['review_name'] : '' ;
+			$name     = isset($_POST['review_name']) ? $_POST['review_name'] : '' ;
 			$text     = isset($_POST['review_edit_text']) ? $_POST['review_edit_text'] :  '' ;
 
 			$text     = isset($_POST['review_edit_text']) ? $_POST['review_edit_text'] :  '' ;
@@ -866,12 +866,31 @@
 
 		if(!empty($_GET['del_review_img'])){
 
-			$id = $_GET['del_review_img'];
+			$id      = $_GET['del_review_img'];
+			$sql_img = "SELECT `reviews`.`review_img` FROM `bd_shimansky`.`reviews` WHERE `id` = '$id'";
+			$sql_upd = "UPDATE `bd_shimansky`.`reviews` SET `reviews`.`review_img` = '' WHERE `id` = '$id'";
 
-			$sql = "UPDATE `bd_shimansky`.`reviews` SET `reviews`.`review_img` = '' WHERE `id` = '$id'";
+			if( $data = @mysql_query($sql_img) ){
 
-			if(mysql_query($sql)){
-				$_GET['type_message'] = 10;
+				$inf_img         = mysql_fetch_array($data);
+				$file_name       = PATH_UPLOADS . basename($inf_img[0]);
+
+				$file_name_thumb = PATH_UPLOADS .'thumb/' . basename($inf_img[0]);
+
+		        if(file_exists($file_name)) {
+
+		            unlink($file_name);
+					$_GET['type_message'] = 10;
+		        }
+
+		        if(file_exists($file_name_thumb)) {
+
+		            unlink($file_name_thumb);
+					$_GET['type_message'] = 10;
+		        }
+
+		        mysql_query($sql_upd);
+
 			}else{
 				$_GET['type_message'] = 2;
 			}
