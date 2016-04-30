@@ -63,7 +63,6 @@
 		
 	}
 
-
 	function get_info_message($par){
 		
 		$par = (int)$par;
@@ -95,6 +94,12 @@
 			}else if( $par == 8 ){
 				$message_tpl = "Недопустимый формат изображения!!!&nbsp;&nbsp;";
 				return $message_tpl;
+			}else if( $par == 9 ){
+				$message_tpl = "Отзыв успешно удалён!&nbsp;&nbsp;";
+				return $message_tpl;
+			}else if( $par == 10 ){
+				$message_tpl = "Изображение удалено!&nbsp;&nbsp;";
+				return $message_tpl;
 			}else{
 
 			return '<a href="/" target="_blank">Перейти на сайт</a>&nbsp;&nbsp;/&nbsp;&nbsp;';			}
@@ -113,12 +118,32 @@
 		$marker      = array('{TITLE_VALUE}', '{TEXT_VALUE}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}');
 		$data        = mysql_query($sql);
 		$inf         = mysql_fetch_array($data);
-		$shablon     = file_get_contents(PATH_TEMPLATE . 'home_edit_form.tpl');
+		$template     = file_get_contents(PATH_TEMPLATE . 'home_edit_form.tpl');
 		$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] );
 
-		$str = str_replace( $marker, $marker_info, $shablon );
+		$str = str_replace( $marker, $marker_info, $template );
 
 		return $str;
+	}
+
+	function get_new_reviews_count(){
+
+		$sql     = "SELECT `id` FROM `bd_shimansky`.`reviews` WHERE `viewed` = 0";
+		$data    = mysql_query($sql);
+		$r_count = mysql_affected_rows();
+
+		if($r_count != 0){
+			$r_count = '(<span id="r_count">+' . $r_count . '</span>)';
+		}else{
+			$r_count = '<strong style="font-size: 12px; ">(нет новых)</strong>';
+		}
+
+		return $r_count;
+	}
+
+	function reset_new_reviews_count(){
+		$sql = "UPDATE  `bd_shimansky`.`reviews` SET `viewed` = 1 WHERE `viewed` = 0";
+		@mysql_query($sql);
 	}
 
 	
@@ -147,6 +172,7 @@
 
 			}else{
 				$_GET['type_message'] = 2;
+				return false;
 			}
 		}
 	}
@@ -159,9 +185,9 @@
 		$marker      = array('{TITLE_VALUE}', '{TEXT_VALUE}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}');
 		$data        = mysql_query($sql);
 		$inf         = mysql_fetch_array($data);
-		$shablon     = file_get_contents(PATH_TEMPLATE . 'about_edit_form.tpl');
+		$template     = file_get_contents(PATH_TEMPLATE . 'about_edit_form.tpl');
 		$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] );
-		$str         = str_replace( $marker, $marker_info, $shablon );
+		$str         = str_replace( $marker, $marker_info, $template );
 
 		return $str;
 	}
@@ -205,9 +231,9 @@
 		$marker      = array('{TITLE_VALUE}', '{TEXT_VALUE}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}');
 		$data        = mysql_query($sql);
 		$inf         = mysql_fetch_array($data);
-		$shablon     = file_get_contents(PATH_TEMPLATE . 'wedding_edit_form.tpl');
+		$template     = file_get_contents(PATH_TEMPLATE . 'wedding_edit_form.tpl');
 		$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] );
-		$str         = str_replace( $marker, $marker_info, $shablon );
+		$str         = str_replace( $marker, $marker_info, $template );
 
 		return $str;
 	}
@@ -237,6 +263,7 @@
 
 			}else{
 				$_GET['type_message'] = 2;
+				return false;
 			}
 		}
 
@@ -251,9 +278,9 @@
 		$marker      = array('{TITLE_VALUE}', '{TEXT_VALUE}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}');
 		$data        = mysql_query($sql) or die(mysql_error());
 		$inf         = mysql_fetch_array($data);
-		$shablon     = file_get_contents(PATH_TEMPLATE . 'corporate_edit_form.tpl');
+		$template     = file_get_contents(PATH_TEMPLATE . 'corporate_edit_form.tpl');
 		$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] );
-		$str         = str_replace( $marker, $marker_info, $shablon );
+		$str         = str_replace( $marker, $marker_info, $template );
 
 		return $str;
 	}
@@ -297,9 +324,9 @@
 		$marker      = array('{TITLE_VALUE}', '{TEXT_VALUE}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}');
 		$data        = mysql_query($sql) or die(mysql_error());
 		$inf         = mysql_fetch_array($data);
-		$shablon     = file_get_contents(PATH_TEMPLATE . 'vipusknoi_edit_form.tpl');
+		$template     = file_get_contents(PATH_TEMPLATE . 'vipusknoi_edit_form.tpl');
 		$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] );
-		$str         = str_replace( $marker, $marker_info, $shablon );
+		$str         = str_replace( $marker, $marker_info, $template );
 
 		return $str;
 	}
@@ -379,9 +406,9 @@
 		$marker      = array('{TITLE_VALUE}', '{PHONE}', '{EMAIL}', '{VKONTAKTE}', '{FACEBOOK}', '{INSTAGRAM}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}');
 		$data        = mysql_query($sql);
 		$inf         = mysql_fetch_array($data);
-		$shablon     = file_get_contents(PATH_TEMPLATE . 'contacts_edit_form.tpl');
+		$template     = file_get_contents(PATH_TEMPLATE . 'contacts_edit_form.tpl');
 		$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] , $inf[4] , $inf[5] , $inf[6], $inf[7] );
-		$str         = str_replace( $marker, $marker_info, $shablon );
+		$str         = str_replace( $marker, $marker_info, $template );
 
 		return $str;
 	}
@@ -412,9 +439,9 @@
 
 	function get_add_video_form(){
 
-		$shablon = file_get_contents(PATH_TEMPLATE . 'add_video_form.tpl');
+		$template = file_get_contents(PATH_TEMPLATE . 'add_video_form.tpl');
 
-		return $shablon;
+		return $template;
 	}
 
 	function del_video(){
@@ -461,8 +488,8 @@
 		$data  = mysql_query( $sql );
 		$count = mysql_affected_rows();
 
-		$shablon       = file_get_contents(PATH_TEMPLATE . 'del_video_form.tpl');
-		$shablon_child = file_get_contents(PATH_TEMPLATE . 'del_video_item_form.tpl');
+		$template       = file_get_contents(PATH_TEMPLATE . 'del_video_form.tpl');
+		$template_child = file_get_contents(PATH_TEMPLATE . 'del_video_item_form.tpl');
 		$marker        = array('{VIDEO_ITEM_FOR_DEL}');
 		$marker_child  = array( '{ID_VIDEO}', '{VIDEO_NAME}', '{VIDEO_URL}' );
 		$str = '';
@@ -473,11 +500,11 @@
 
 			$inf         = mysql_fetch_array( $data );
 			$marker_info = array( $inf[0], $inf[1], $inf[2]);
-			$str        .= str_replace($marker_child, $marker_info, $shablon_child);
+			$str        .= str_replace($marker_child, $marker_info, $template_child);
 			
 		}
 
-		$str = str_replace($marker, $str, $shablon);
+		$str = str_replace($marker, $str, $template);
 		return  $str;
 	}
 
@@ -544,8 +571,8 @@
 		$data  = mysql_query( $sql );
 		$count = mysql_affected_rows();
 
-		$shablon       = file_get_contents(PATH_TEMPLATE . 'del_photo_form.tpl');
-		$shablon_child = file_get_contents(PATH_TEMPLATE . 'del_photo_item_form.tpl');
+		$template       = file_get_contents(PATH_TEMPLATE . 'del_photo_form.tpl');
+		$template_child = file_get_contents(PATH_TEMPLATE . 'del_photo_item_form.tpl');
 		$marker        = array('{PHOTO_ITEM_FOR_DELETE}');
 		$marker_child  = array( '{PATH_UPLOADS_IMG}', '{ID_PHOTO}', '{PHOTO_SRC}' );
 		$str = '';
@@ -557,11 +584,11 @@
 
 			$inf = mysql_fetch_array( $data );
 			$marker_info = array( PATH_UPLOADS_IMG, $inf[0], $inf[1]);
-			$str .= str_replace($marker_child, $marker_info, $shablon_child);
+			$str .= str_replace($marker_child, $marker_info, $template_child);
 			
 		}
 
-		$str = str_replace($marker, $str, $shablon);
+		$str = str_replace($marker, $str, $template);
 		return  $str;
 	}
 
@@ -594,9 +621,9 @@
 
 	function get_add_photo_form(){
 
-		$shablon = file_get_contents(PATH_TEMPLATE . 'add_photo_form.tpl');
+		$template = file_get_contents(PATH_TEMPLATE . 'add_photo_form.tpl');
 
-		return $shablon;
+		return $template;
 	}
 
 
@@ -670,11 +697,185 @@
 		$marker      = array('{ID}', '{TITLE_VALUE}', '{TEXT_VALUE}', '{KEYWORDS_VALUE}', '{DESCR_VALUE}', '{HEAD_NAME}');
 		$data        = mysql_query($sql);
 		$inf         = mysql_fetch_array($data);
-		$shablon     = file_get_contents(PATH_TEMPLATE . 'page_info_form.tpl');
+		$template     = file_get_contents(PATH_TEMPLATE . 'page_info_form.tpl');
 		$marker_info = array( $inf[0], $inf[1], $inf[2], $inf[3] , $inf[4], $page_name);
-		$str         = str_replace( $marker, $marker_info, $shablon );
+		$str         = str_replace( $marker, $marker_info, $template );
 
 		return $str;
 	}
 
+	function get_new_reviews_form(){
+
+		$sql   = "SELECT  `review_img`, `review_name`, `review_text`, `review_date`, `review_email`, `id` FROM `bd_shimansky`.`reviews` WHERE `visible` = 0 ORDER BY `review_date` DESC";
+		$data  = mysql_query( $sql ) or die(mysql_error());
+		$count = mysql_affected_rows();
+
+		$template = file_get_contents(PATH_TEMPLATE . 'new_reviews_form.tpl');
+		
+		$marker        = array('{REVIEWS_ITEM}');
+		$marker_child  = array( '{PATH_UPLOADS_IMG}', '{IMG}', '{NAME}', '{TEXT}', '{DATE}', '{EMAIL}', '{ID}' );
+		$str = '';
+
+		if($count == 0){
+			$_GET['type_message'] = 4;
+		}
+		for( $i=0; $i<$count; $i++ ){
+
+			$inf = mysql_fetch_array( $data );
+			if( is_file( ROOT . '/img/uploads/thumb/' . $inf[0] ) ){
+				$template_child = file_get_contents(PATH_TEMPLATE . 'new_reviews_item_form.tpl');
+			}else{
+				$template_child = file_get_contents(PATH_TEMPLATE . 'new_reviews_item_wo_img_form.tpl');
+			}
+			$marker_info = array( PATH_THUMB_IMG, $inf[0], $inf[1], $inf[2], $inf[3], $inf[4], $inf[5]);
+			$str .= str_replace($marker_child, $marker_info, $template_child);
+			
+		}
+
+		$str = str_replace($marker, $str, $template);
+		return  $str;
+
+	}
+
+	function publish_reviews(){
+
+		if( !empty($_POST['enter_publish_review']) && !isset($_POST['enter_publish_all_reviews']) ){
+
+			$r_id = $_POST['enter_publish_review'];
+
+			$sql = "UPDATE  `bd_shimansky`.`reviews` SET `visible` = 1 WHERE  `reviews`.`id` = '$r_id'";
+			mysql_query($sql);
+
+		}else if(isset($_POST['enter_publish_all_reviews'])){
+			$sql = "UPDATE  `bd_shimansky`.`reviews` SET `visible` = 1 WHERE  `reviews`.`visible` = 0";
+			mysql_query($sql);
+		}
+
+
+	}
+
+	function del_reviews(){
+
+		if( !empty($_GET['del_review']) ){
+
+			$id = $_GET['del_review'];
+			$sql = "DELETE FROM `bd_shimansky`.`reviews` WHERE `ID` = '$id'";
+
+			if(mysql_query($sql)){
+				$_GET['type_message'] = 9;
+			}else{
+				$_GET['type_message'] = 2;
+			}
+
+
+		}
+	}
+
+	function get_all_reviews_form(){
+
+		$sql   = "SELECT  `review_img`, `review_name`, `review_text`, `review_date`, `review_email`, `id` FROM `bd_shimansky`.`reviews` ORDER BY `review_date` DESC";
+		$data  = mysql_query( $sql );
+		$count = mysql_affected_rows();
+
+		$template = file_get_contents(PATH_TEMPLATE . 'all_reviews_form.tpl');
+		
+		$marker        = array('{REVIEWS_ITEM}');
+		$marker_child  = array( '{PATH_UPLOADS_IMG}', '{IMG}', '{NAME}', '{TEXT}', '{DATE}', '{EMAIL}', '{ID}' );
+		$str = '';
+
+		if($count == 0){
+			$_GET['type_message'] = 4;
+		}
+		for( $i=0; $i<$count; $i++ ){
+
+			$inf = mysql_fetch_array( $data );
+			if( is_file( ROOT . '/img/uploads/thumb/' . $inf[0] ) ){
+				$template_child = file_get_contents(PATH_TEMPLATE . 'reviews_item_form.tpl');
+			}else{
+				$template_child = file_get_contents(PATH_TEMPLATE . 'reviews_item_form_wo_img.tpl');
+			}
+			$marker_info = array( PATH_THUMB_IMG, $inf[0], $inf[1], $inf[2], $inf[3], $inf[4], $inf[5]);
+			$str .= str_replace($marker_child, $marker_info, $template_child);
+			
+		}
+
+		$str = str_replace($marker, $str, $template);
+		return  $str;
+
+	}
+
+	function get_edit_reviews_form(){
+
+		if(!empty($_GET['edit_review'])){
+			$r_id = $_GET['edit_review'];
+			$sql = "SELECT `reviews`.`id`, `reviews`.`review_name`, `reviews`.`review_text`, `reviews`.`review_img` FROM `bd_shimansky`.`reviews` WHERE `reviews`.`id` = '$r_id'";
+
+			$marker      = array('{PATH_UPLOADS_IMG}','{ID}', '{NAME}', '{TEXT}', '{IMG}');
+			$data        = mysql_query($sql);
+			$inf         = mysql_fetch_array($data);
+			$template    = '';
+
+			if( (strlen($inf[3])>30) && is_file( ROOT . '/img/uploads/thumb/' . $inf[3] ) ){
+				$template = file_get_contents(PATH_TEMPLATE . 'edit_review_form.tpl');
+			}else{
+				$template = file_get_contents(PATH_TEMPLATE . 'edit_review_form_wo_img.tpl');
+			}
+
+			$marker_info = array( PATH_THUMB_IMG, $inf[0], $inf[1], $inf[2], $inf[3] );
+			$str         = str_replace( $marker, $marker_info, $template );
+
+			return $str;
+		
+		}else{
+			$_GET['type_message'] = 2;
+			return false;
+		}
+
+	}
+
+	function edit_review(){
+
+		if(isset($_POST['enter_edit_review'])){
+
+			$name    = isset($_POST['review_name']) ? $_POST['review_name'] : '' ;
+			$text     = isset($_POST['review_edit_text']) ? $_POST['review_edit_text'] :  '' ;
+
+			$text     = isset($_POST['review_edit_text']) ? $_POST['review_edit_text'] :  '' ;
+
+			$title    = mysql_escape_string($title);
+			$descr    = mysql_escape_string($descr);
+			$text     = mysql_escape_string($text);
+			$keywords = mysql_escape_string($keywords);
+
+			if(strlen($text)>0 && strlen($title)>0){
+
+				$sql = "UPDATE  `bd_shimansky`.`pages` SET `page_title`='$title', `description`='$descr', `page_content`='$text', `keywords`='$keywords'
+				WHERE  `pages`.`id_page` = 1";
+				mysql_query($sql);
+
+				$_GET['type_message'] = 1;
+
+			}else{
+				$_GET['type_message'] = 2;
+				return false;
+			}
+		}
+	}
+
+	function del_review_img(){
+
+		if(!empty($_GET['del_review_img'])){
+
+			$id = $_GET['del_review_img'];
+
+			$sql = "UPDATE `bd_shimansky`.`reviews` SET `reviews`.`review_img` = '' WHERE `id` = '$id'";
+
+			if(mysql_query($sql)){
+				$_GET['type_message'] = 10;
+			}else{
+				$_GET['type_message'] = 2;
+			}
+
+		}
+	}
 ?>

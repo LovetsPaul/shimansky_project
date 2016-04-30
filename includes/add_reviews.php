@@ -10,26 +10,29 @@ if( isset($_POST['your_name']) or isset($_POST['your_email']) or isset($_POST['y
 	$email = my_string( $_POST['your_email'] );
 	$text = my_string( $_POST['your_text'] );
 	$img_name = (isset( $_FILES['add_img']['name'] ) && $_FILES['add_img']['name']!='') ? $_FILES['add_img']['name'] = md5(time()) : '';
-	$img_full_name = ($img_name == '') ? $img_name : $img_name .'.'. substr( $_FILES['add_img']['type'], 6 );
+	$img_full_name = ($img_name != '') ?  $img_name .'.'. substr( $_FILES['add_img']['type'], 6 ) : '';
 	$sql = "";
 
-
-	$filename_err = explode(".",$_FILES['add_img']['name']);
-	$filename_err_count = count($filename_err);
-	$file_ext = $filename_err[$filename_err_count-1];
+	$file_ext = substr( $_FILES['add_img']['type'], 6 );
 	
 
 	$acces_ext = array('jpg', 'jpeg', 'png', 'gif');
 
+	$is_ok_ext = false;
 	foreach($acces_ext as $ext){
 
 		if( $file_ext != $ext){
-			$img_full_name = '';
+			$is_ok_ext = $is_ok_ext;
+		}else{
+			$is_ok_ext = true;
 		}
 
 	}
+	if(!$is_ok_ext){
+		$img_full_name = '';
+	}
 
-	if( isset($_FILES['add_img']['name']) ){
+	if( !empty($_FILES['add_img']['name']) ){
 
 		$sql = "INSERT INTO `reviews` (`id`, `review_img`, `review_name`, `review_text`, `review_date`, `review_email`, `visible`) VALUES 
 

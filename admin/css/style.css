@@ -242,6 +242,65 @@ button:hover{
 label[for^="video_id"] span{
     color: #ff0000;
 }
+#r_count{
+    color: #ff0000;
+}
+#new_reviews_form tr.item,
+#all_reviews_form tr.item{
+    background-color: #cecece;
+}
+
+#new_reviews_form tr.item .r_name,
+#all_reviews_form tr.item .r_name{
+    background-color: #B3B3B3;
+    height: 40px;
+    line-height: 40px;
+}
+#new_reviews_form .r_text,
+#all_reviews_form .r_text{
+    padding: 20px;
+}
+#new_reviews_form .r_name,
+#new_reviews_form .r_info td,
+#all_reviews_form .r_name,
+#all_reviews_form .r_info td{
+    padding: 0 20px;
+
+}
+#new_reviews_form .td_button,
+#all_reviews_form .td_button{
+    padding: 20px;
+}
+#new_reviews_form .r_info,
+#all_reviews_form .r_info{
+    height: 40px;
+    line-height: 40px;
+}
+#new_reviews_form a.r_del,
+#all_reviews_form a.r_del{
+    color: #000;
+    display: inline-block;
+    margin-top: 20px;
+}
+#new_reviews_form .r_image,
+#all_reviews_form .r_image{
+    padding: 20px;
+}
+.item > td{
+    border-left: 3px solid #28988B; 
+}/*
+.r_delim{
+    border-top: 2px solid #28988B;  
+}*/
+#new_reviews_form .r_info td,
+#all_reviews_form .r_info td{
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+
+}
+#new_reviews_form .inner_table td,
+#all_reviews_form .inner_table td{
+    border: 0;
+}
 .delimiter{
     background-color: #6F6F6F;
 }

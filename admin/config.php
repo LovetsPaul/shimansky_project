@@ -8,6 +8,7 @@ define(PATH_ACTION, '/home/shimansky.by/www/admin/action/');
 define(PATH_UPLOADS, '/home/shimansky.by/www/img/uploads/');
 define(PATH_THUMB, '/home/shimansky.by/www/admin/img/uploads/thumb/');
 
+define(ROOT, $_SERVER['DOCUMENT_ROOT']);
 define(PATH_UPLOADS_IMG, 'http://shimansky.by/img/uploads/');
 define(PATH_THUMB_IMG, 'http://shimansky.by/img/uploads/thumb/');
 
