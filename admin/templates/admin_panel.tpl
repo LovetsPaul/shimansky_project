@@ -52,7 +52,7 @@
         <dl>
             <dt>Блог</dt>
             <dd><a href="/admin/action/add_post.php">Добавить пост</a></dd>
-            <dd><a href="/admin/action/edit_posts.php">Редактировать пост(ы)</a></dd>
+            <dd><a href="/admin/action/all_posts.php">Редактировать пост(ы)</a></dd>
             <dd><a href="/admin/action/del_posts.php">Удалить пост(ы)</a></dd>
             <dd>&nbsp;</dd>
             <dd><a href="/admin/action/get_page_info.php?i_page=p_blog">Информация о странице (+SEO)</a></dd>

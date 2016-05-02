@@ -103,6 +103,9 @@
 			}else if( $par == 11 ){
 				$message_tpl = "Новость успешно добавлена!&nbsp;&nbsp;";
 				return $message_tpl;
+			}else if( $par == 12 ){
+				$message_tpl = "Новость успешно удалена!&nbsp;&nbsp;";
+				return $message_tpl;
 			}else{
 
 			return '<a href="/" target="_blank">Перейти на сайт</a>&nbsp;&nbsp;/&nbsp;&nbsp;';			}
@@ -836,35 +839,6 @@
 
 	}
 
-	function edit_review(){
-
-		if(isset($_POST['enter_edit_review'])){
-
-			$name     = isset($_POST['review_name']) ? $_POST['review_name'] : '' ;
-			$text     = isset($_POST['review_edit_text']) ? $_POST['review_edit_text'] :  '' ;
-
-			$text     = isset($_POST['review_edit_text']) ? $_POST['review_edit_text'] :  '' ;
-
-			$title    = mysql_escape_string($title);
-			$descr    = mysql_escape_string($descr);
-			$text     = mysql_escape_string($text);
-			$keywords = mysql_escape_string($keywords);
-
-			if(strlen($text)>0 && strlen($title)>0){
-
-				$sql = "UPDATE  `bd_shimansky`.`pages` SET `page_title`='$title', `description`='$descr', `page_content`='$text', `keywords`='$keywords'
-				WHERE  `pages`.`id_page` = 1";
-				mysql_query($sql);
-
-				$_GET['type_message'] = 1;
-
-			}else{
-				$_GET['type_message'] = 2;
-				return false;
-			}
-		}
-	}
-
 	function del_review_img(){
 
 		$id       = $_GET['del_review_img'];
@@ -997,7 +971,140 @@
 
 	}
 
+	function del_posts(){
+
+		if( !empty($_GET['del_post']) ){
+
+			$id = $_GET['del_post'];
+			$sql = "DELETE FROM `bd_shimansky`.`posts` WHERE `id` = '$id'";
+
+			if(mysql_query($sql)){
+				$_GET['type_message'] = 9;
+			}else{
+				$_GET['type_message'] = 2;
+			}
 
 
+		}
+
+	}
+
+	function get_all_posts_form(){
+
+		$sql   = "SELECT  `post_thumbnail`, `post_title`, `post_description`, `post_date`, `id` FROM `bd_shimansky`.`posts` ORDER BY `post_date` DESC";
+		$data  = mysql_query( $sql ) or die(mysql_error());
+		$count = mysql_affected_rows();
+
+		$template = file_get_contents(PATH_TEMPLATE . 'all_posts_form.tpl');
+		
+		$marker        = array('{POSTS}', '{COUNT}');
+		$marker_child  = array( '{PATH_UPLOADS_IMG}', '{IMG}', '{TITLE}', '{DESCR}', '{DATE}', '{ID}' );
+		$str = '';
+
+		if($count == 0){
+			$_GET['type_message'] = 4;
+		}
+		for( $i=0; $i<$count; $i++ ){
+
+			$inf = mysql_fetch_array( $data );
+			if( is_file( ROOT . '/img/uploads/' . $inf[0] ) ){
+				$template_child = file_get_contents(PATH_TEMPLATE . 'post_item_form.tpl');
+			}else{
+				$template_child = file_get_contents(PATH_TEMPLATE . 'post_item_form_wo_img.tpl');
+			}
+			$marker_info = array( PATH_UPLOADS_IMG, $inf[0], $inf[1], $inf[2], $inf[3], $inf[4]);
+			$str .= str_replace($marker_child, $marker_info, $template_child);
+			
+		}
+		$marker_parent = array($str, $count);
+
+		$str = str_replace($marker, $marker_parent, $template);
+		return  $str;
+	}
+
+	function get_edit_post_form(){
+
+		if(!empty($_GET['edit_post'])){
+
+			$p_id = $_GET['edit_post'];
+			$sql = "SELECT `posts`.`id`, `posts`.`post_title`, `posts`.`post_description`, `posts`.`post_content`, `posts`.`post_thumbnail` FROM `bd_shimansky`.`posts` WHERE `posts`.`id` = '$p_id'";
+
+			$marker       = array('{PATH_UPLOADS_IMG}','{ID}', '{TITLE}', '{DESCR}', '{TEXT}', '{IMG}');
+			$data         = mysql_query($sql);
+			$inf          = mysql_fetch_array($data);
+			$template     = '';
+
+			if( (strlen($inf[4])>30) && is_file( ROOT . '/img/uploads/' . $inf[4] ) ){
+				$template = file_get_contents(PATH_TEMPLATE . 'edit_post_form.tpl');
+			}else{
+				$template = file_get_contents(PATH_TEMPLATE . 'edit_post_form_wo_img.tpl');
+			}
+
+			$marker_info  = array( PATH_UPLOADS_IMG, $inf[0], $inf[1], $inf[2], $inf[3], $inf[4] );
+			$str          = str_replace( $marker, $marker_info, $template );
+
+			return $str;
+		
+		}else{
+			$_GET['type_message'] = 2;
+			return false;
+		}
+
+	}
+
+	function edit_post(){
+		
+		if(isset($_POST['enter_edit_post'])){
+
+			$p_title   = isset($_POST['post_title']) ? $_POST['post_title'] : '' ;
+			$p_descr   = isset($_POST['post_descr']) ? $_POST['post_descr'] :  '' ;
+			$p_text    = isset($_POST['post_edit_text']) ? $_POST['post_edit_text'] :  '' ;
+			$p_id      = isset($_POST['post_item']) ? $_POST['post_item'] : 0;
+
+			$p_title   = mysql_escape_string($p_title);
+			$p_descr   = mysql_escape_string($p_descr);
+			$p_text    = mysql_escape_string($p_text);
+
+			$sql_upd   = "UPDATE `bd_shimansky`.`posts` SET `posts`.`post_title` = '$p_title', `posts`.`post_description`='$p_descr', `posts`.`post_content`='$p_text' WHERE `posts`.`id` = '$p_id'";
+			
+			if(mysql_query($sql_upd)){
+				$_GET['type_message'] = 1;
+			}else{
+				$_GET['type_message'] = 2;
+			}
+		}
+	}
+
+	function del_post_img(){
+
+		$id       = $_GET['del_post_img'];
+		$sql_img  = "SELECT `posts`.`post_thumbnail` FROM `bd_shimansky`.`posts` WHERE `id` = '$id'";
+		$data_img = mysql_query($sql_img);
+		$inf_img  = mysql_fetch_array($data_img);
+
+		if(!empty($_GET['del_post_img']) && (strlen($inf_img[0])>30)){
+
+			$sql_upd = "UPDATE `bd_shimansky`.`posts` SET `posts`.`post_thumbnail` = '' WHERE `id` = '$id'";
+
+			if( $data = @mysql_query($sql_img) ){
+
+				$inf_img   = mysql_fetch_array($data);
+				$file_name = PATH_UPLOADS . basename($inf_img[0]);
+
+		        if(file_exists($file_name)) {
+
+		            unlink($file_name);
+					$_GET['type_message'] = 10;
+		        }
+
+		        mysql_query($sql_upd);
+
+			}else{
+				$_GET['type_message'] = 2;
+			}
+
+		}
+
+	}
 
 ?>
