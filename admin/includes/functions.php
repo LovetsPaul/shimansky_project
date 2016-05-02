@@ -100,6 +100,9 @@
 			}else if( $par == 10 ){
 				$message_tpl = "Изображение удалено!&nbsp;&nbsp;";
 				return $message_tpl;
+			}else if( $par == 11 ){
+				$message_tpl = "Новость успешно добавлена!&nbsp;&nbsp;";
+				return $message_tpl;
 			}else{
 
 			return '<a href="/" target="_blank">Перейти на сайт</a>&nbsp;&nbsp;/&nbsp;&nbsp;';			}
@@ -427,7 +430,7 @@
 			if(strlen($url)>0 && strlen($v_descr)>0){
 
 				$sql = "INSERT INTO `bd_shimansky`.`video` (`video`.`id`, `video`.`video_src`, `video`.`description`) VALUES (NULL, '$url', '$v_descr')";
-				mysql_query($sql) or die(mysql_error());
+				mysql_query($sql);
 
 				$_GET['type_message'] = 1;
 
@@ -922,6 +925,78 @@
 		}
 
 	}
+
+	function get_add_post_form(){
+
+		$template = file_get_contents(PATH_TEMPLATE . 'add_post_form.tpl');
+		$marker = array('{TITLE}', '{TEXT}', '{DESCR}');
+
+		if(!empty($_POST['post_descr']) && !empty($_POST['post_title'])){
+
+			$title = $_POST['post_title'];
+			$text = isset($_POST['full_text_post']) ? $_POST['full_text_post'] : '';
+			$descr = $_POST['post_descr'];
+			$marker_info = array($title, $text, $descr);
+			
+		}else{
+			$marker_info = array('', '', '');
+		}
+
+		$template = str_replace($marker, $marker_info, $template);
+
+		return $template;
+	}
+
+	function add_img_post(){
+		
+		if(!empty($_FILES['add_photo_post'])){
+
+			$img_name = '';
+
+			if($_FILES['add_photo_post']['size'] > 600000){
+				$_GET['type_message'] = 7;
+				return '';
+			}
+
+			
+
+			if($img_name = img_upload('add_photo_post', PATH_UPLOADS)){
+				return $img_name;
+			}
+			
+		}else{
+			return '';
+		}
+
+	}
+
+	function add_post(){
+
+		if(isset($_POST['post_title']) && isset($_POST['post_descr']) && isset($_POST['enter_add_post'])){
+
+			$descr = !empty($_POST['post_descr']) ? $_POST['post_descr'] : '';
+			$title = !empty($_POST['post_title']) ? $_POST['post_title'] : '';
+			$text  = isset($_POST['full_text_post']) ? $_POST['full_text_post'] : '';
+
+			$img_name = add_img_post();
+
+			$sql = "INSERT INTO `bd_shimansky`.`posts` (`post_title`, `post_description`, `post_content`, `post_thumbnail`) VALUES ('$title', '$descr', '$text', '$img_name')";
+		
+			if(($_GET['type_message'] != 7) && mysql_query($sql)){
+					$_POST['post_descr'] = '';
+					$_POST['post_title'] = '';
+					$_POST['full_text_post'] = '';
+
+					$_GET['type_message'] = 11;	
+				
+			}else if($_GET['type_message'] != 7){
+				$_GET['type_message'] = 2;
+			}
+
+		}
+
+	}
+
 
 
 
