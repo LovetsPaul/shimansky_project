@@ -9,7 +9,7 @@
 <tr><td colspan="2">&nbsp;</td></tr>
 <tr><td colspan="2"><label for="review_edit_text">Текст отзыва:</label></td></tr>
 <tr>
-    <td colspan="2"><textarea name="review_edit_text" id="review_edit_text">{TEXT}</textarea></td>
+    <td colspan="2"><textarea name="review_edit_text" id="review_edit_text" rows="10">{TEXT}</textarea></td>
 </tr>
 
 <tr><td colspan="2">&nbsp;</td></tr>
@@ -25,4 +25,5 @@
 <tr><td colspan="2">&nbsp;</td></tr>
 <tr>
     <td><button name="enter_edit_review" value="1">Изменить</button></td>
+    <td><input type="hidden" name="review_item" value="{ID}"></td>
 </tr>

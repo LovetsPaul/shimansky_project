@@ -301,6 +301,9 @@ label[for^="video_id"] span{
 #all_reviews_form .inner_table td{
     border: 0;
 }
+#review_edit_text{
+    width: 100%;    
+}
 .delimiter{
     background-color: #6F6F6F;
 }

@@ -864,10 +864,13 @@
 
 	function del_review_img(){
 
-		if(!empty($_GET['del_review_img'])){
+		$id       = $_GET['del_review_img'];
+		$sql_img  = "SELECT `reviews`.`review_img` FROM `bd_shimansky`.`reviews` WHERE `id` = '$id'";
+		$data_img = mysql_query($sql_img);
+		$inf_img  = mysql_fetch_array($data_img);
 
-			$id      = $_GET['del_review_img'];
-			$sql_img = "SELECT `reviews`.`review_img` FROM `bd_shimansky`.`reviews` WHERE `id` = '$id'";
+		if(!empty($_GET['del_review_img']) && (strlen($inf_img[0])>30)  ){
+
 			$sql_upd = "UPDATE `bd_shimansky`.`reviews` SET `reviews`.`review_img` = '' WHERE `id` = '$id'";
 
 			if( $data = @mysql_query($sql_img) ){
@@ -897,4 +900,29 @@
 
 		}
 	}
+
+	function edit_reviews(){
+
+		if(isset($_POST['enter_edit_review'])){
+
+			$r_name    = isset($_POST['review_name']) ? $_POST['review_name'] : '' ;
+			$r_text    = isset($_POST['review_edit_text']) ? $_POST['review_edit_text'] :  '' ;
+			$r_id = isset($_POST['review_item']) ? $_POST['review_item'] : 0;
+
+			$r_name    = mysql_escape_string($r_name);
+			$r_text    = mysql_escape_string($r_text);
+
+			$sql_upd = "UPDATE `bd_shimansky`.`reviews` SET `reviews`.`review_name` = '$r_name', `reviews`.`review_text`='$r_text' WHERE `reviews`.`id` = '$r_id'";
+			
+			if(mysql_query($sql_upd)){
+				$_GET['type_message'] = 1;
+			}else{
+				$_GET['type_message'] = 2;
+			}
+		}
+
+	}
+
+
+
 ?>

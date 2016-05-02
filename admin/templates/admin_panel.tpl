@@ -59,9 +59,8 @@
         </dl>
         <dl>
             <dt>Отзывы</dt>
-            <dd><a href="/admin/action/all_reviews.php">Редактировать</a></dd>
             <dd><a href="/admin/action/new_reviews.php">Новые отзывы {NEW_REVIEWS_COUNT}</a></dd>
-            <dd><a href="/admin/action/del_reviews.php">Удалить отзыв(ы)</a></dd>
+            <dd><a href="/admin/action/all_reviews.php">Редактировать (удалить)</a></dd>
             <dd>&nbsp;</dd>
             <dd><a href="/admin/action/get_page_info.php?i_page=p_reviews">Информация о странице (+SEO)</a></dd>
         </dl>

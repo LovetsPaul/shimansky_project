@@ -7,6 +7,7 @@ include(PATH_INCLUDES . 'functions.php');
 del_reviews();
 edit_review();
 del_review_img();
+edit_reviews();
 
 $page = file_get_contents(PATH_TEMPLATE . 'admin_panel.tpl');
 $marker = array('{INFO}', '{NEW_REVIEWS_COUNT}', '{PATH_CSS}', '{PATH_JS}', '{INFO_MESSAGE}');
