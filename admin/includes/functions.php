@@ -1065,7 +1065,9 @@
 			$p_descr   = mysql_escape_string($p_descr);
 			$p_text    = mysql_escape_string($p_text);
 
-			$sql_upd   = "UPDATE `bd_shimansky`.`posts` SET `posts`.`post_title` = '$p_title', `posts`.`post_description`='$p_descr', `posts`.`post_content`='$p_text' WHERE `posts`.`id` = '$p_id'";
+			$img_name = add_img_post();
+
+			$sql_upd   = "UPDATE `bd_shimansky`.`posts` SET `posts`.`post_title` = '$p_title', `posts`.`post_description`='$p_descr', `posts`.`post_content`='$p_text', `posts`.`post_thumbnail` = '$img_name' WHERE `posts`.`id` = '$p_id'";
 			
 			if(mysql_query($sql_upd)){
 				$_GET['type_message'] = 1;
