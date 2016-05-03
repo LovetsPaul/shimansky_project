@@ -155,13 +155,13 @@
 
 		$shablon = file_get_contents(PATH_TEMPLATE . 'slider.tpl');
 		$shablon_item = file_get_contents(PATH_TEMPLATE . 'slider_img.tpl');
-		$marker = array( '{SLIDER_IMG_SRC}', '{SLIDER_IMG_ALT}' );
+		$marker = array('{PATH_IMG}', '{SLIDER_IMG_SRC}', '{SLIDER_IMG_ALT}' );
 		$str = '';
 
 		for( $i=0; $i<$count; $i++ ){
 
 			$inf = mysql_fetch_array( $data );
-			$marker_info = array( $inf[0], $inf[1] );
+			$marker_info = array( PATH_IMG, $inf[0], $inf[1] );
 			$str .= str_replace( $marker, $marker_info, $shablon_item );
 
 		}

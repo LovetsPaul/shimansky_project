@@ -134,7 +134,7 @@
 
 	function get_new_reviews_count(){
 
-		$sql     = "SELECT `id` FROM `bd_shimansky`.`reviews` WHERE `viewed` = 0";
+		$sql     = "SELECT `id` FROM `reviews` WHERE `viewed` = 0";
 		$data    = mysql_query($sql);
 		$r_count = mysql_affected_rows();
 
@@ -148,7 +148,7 @@
 	}
 
 	function reset_new_reviews_count(){
-		$sql = "UPDATE  `bd_shimansky`.`reviews` SET `viewed` = 1 WHERE `viewed` = 0";
+		$sql = "UPDATE  `reviews` SET `viewed` = 1 WHERE `viewed` = 0";
 		@mysql_query($sql);
 	}
 
@@ -170,7 +170,7 @@
 
 			if(strlen($text)>0 && strlen($title)>0){
 
-				$sql = "UPDATE  `bd_shimansky`.`pages` SET `page_title`='$title', `description`='$descr', `page_content`='$text', `keywords`='$keywords'
+				$sql = "UPDATE  `pages` SET `page_title`='$title', `description`='$descr', `page_content`='$text', `keywords`='$keywords'
 				WHERE  `pages`.`id_page` = 1";
 				mysql_query($sql);
 
@@ -214,7 +214,7 @@
 
 			if(strlen($text)>0 && strlen($title)>0){
 
-				$sql = "UPDATE  `bd_shimansky`.`pages` SET `page_title`='$title', `description`='$descr', `page_content`='$text', `keywords`='$keywords'
+				$sql = "UPDATE  `pages` SET `page_title`='$title', `description`='$descr', `page_content`='$text', `keywords`='$keywords'
 				WHERE  `pages`.`id_page` = 2";
 				mysql_query($sql);
 
@@ -260,7 +260,7 @@
 
 			if(strlen($text)>0 && strlen($title)>0){
 
-				$sql = "UPDATE  `bd_shimansky`.`pages` SET `page_title`='$title', `description`='$descr', `page_content`='$text', `keywords`='$keywords'
+				$sql = "UPDATE  `pages` SET `page_title`='$title', `description`='$descr', `page_content`='$text', `keywords`='$keywords'
 				WHERE  `pages`.`id_page` = 7";
 				mysql_query($sql);
 
@@ -307,7 +307,7 @@
 
 			if(strlen($text)>0 && strlen($title)>0){
 
-				$sql = "UPDATE  `bd_shimansky`.`pages` SET `page_title`='$title', `description`='$descr', `page_content`='$text', `keywords`='$keywords'
+				$sql = "UPDATE  `pages` SET `page_title`='$title', `description`='$descr', `page_content`='$text', `keywords`='$keywords'
 				WHERE  `pages`.`id_page` = 8";
 				mysql_query($sql);
 
@@ -353,7 +353,7 @@
 
 			if(strlen($text)>0 && strlen($title)>0){
 
-				$sql = "UPDATE  `bd_shimansky`.`pages` SET `page_title`='$title', `description`='$descr', `page_content`='$text', `keywords`='$keywords'
+				$sql = "UPDATE  `pages` SET `page_title`='$title', `description`='$descr', `page_content`='$text', `keywords`='$keywords'
 				WHERE  `pages`.`id_page` = 9";
 				mysql_query($sql);
 
@@ -391,7 +391,7 @@
 
 			if(strlen($title)>0 && strlen($email)>0 && strlen($phone)>0){
 
-				$sql = "UPDATE  `bd_shimansky`.`social`, `bd_shimansky`.`pages` SET `pages`.`page_title`='$title', `pages`.`description`='$descr', `pages`.`keywords`='$keywords', 
+				$sql = "UPDATE  `social`, `pages` SET `pages`.`page_title`='$title', `pages`.`description`='$descr', `pages`.`keywords`='$keywords', 
 				`social`.`e-mail`='$email', `social`.`phone`='$phone', `social`.`vkontakte`='$vk', `social`.`facebook`='$fb', `social`.`instagramm`='$inst' 
 				WHERE  `pages`.`id_page` = 6";
 				mysql_query($sql);
@@ -432,7 +432,7 @@
 
 			if(strlen($url)>0 && strlen($v_descr)>0){
 
-				$sql = "INSERT INTO `bd_shimansky`.`video` (`video`.`id`, `video`.`video_src`, `video`.`description`) VALUES (NULL, '$url', '$v_descr')";
+				$sql = "INSERT INTO `video` (`video`.`id`, `video`.`video_src`, `video`.`description`) VALUES (NULL, '$url', '$v_descr')";
 				mysql_query($sql);
 
 				$_GET['type_message'] = 1;
@@ -468,7 +468,7 @@
 
 			$results = implode(',', $id_array);
 
-			$sql = "DELETE FROM `bd_shimansky`.`video` WHERE `id` IN (" . $results .")";
+			$sql = "DELETE FROM `video` WHERE `id` IN (" . $results .")";
 
 			if(mysql_query($sql)){
 				$_GET['type_message'] = 1;
@@ -479,7 +479,7 @@
 		}else if(isset($_POST['enter_del_video']) && !empty($_GET['id_del_video'])){
 
 			$id = (int) $_GET['id_del_video'];
-			$sql = "DELETE FROM `bd_shimansky`.`video` WHERE `id` = '$id'";
+			$sql = "DELETE FROM `video` WHERE `id` = '$id'";
 
 			if(mysql_query($sql)){
 				$_GET['type_message'] = 1;
@@ -490,7 +490,7 @@
 
 	function get_del_video_form(){
 
-		$sql   = "SELECT `id`, `description`, `video_src` FROM `bd_shimansky`.`video` ORDER BY `id` DESC";
+		$sql   = "SELECT `id`, `description`, `video_src` FROM `video` ORDER BY `id` DESC";
 		$data  = mysql_query( $sql );
 		$count = mysql_affected_rows();
 
@@ -518,7 +518,7 @@
 
 		$id = $_GET['id_del_video'];
 
-		$sql       = "SELECT `video_src` FROM `bd_shimansky`.`video` WHERE `id` = '$id'";
+		$sql       = "SELECT `video_src` FROM `video` WHERE `id` = '$id'";
 		$data      = mysql_query($sql);
 		$inf       = mysql_fetch_array($data);
 		$video_url = $inf[0];
@@ -544,10 +544,10 @@
 
 			$results = implode(',', $id_array);
 
-			$sql = "DELETE FROM `bd_shimansky`.`photo` WHERE `id` IN (" . $results .")";
+			$sql = "DELETE FROM `photo` WHERE `id` IN (" . $results .")";
 
 			//delete_file_data///
-			$sql_del   = "SELECT `photo_img` FROM `bd_shimansky`.`photo` WHERE `id` IN (" . $results .")";
+			$sql_del   = "SELECT `photo_img` FROM `photo` WHERE `id` IN (" . $results .")";
 			$data_del  = mysql_query($sql_del);
 			$count_del = mysql_affected_rows();
 		
@@ -573,7 +573,7 @@
 
 	function get_del_photo_form(){
 
-		$sql   = "SELECT `id`, `photo_img` FROM `bd_shimansky`.`photo` ORDER BY `photo_add_time` DESC";
+		$sql   = "SELECT `id`, `photo_img` FROM `photo` ORDER BY `photo_add_time` DESC";
 		$data  = mysql_query( $sql );
 		$count = mysql_affected_rows();
 
@@ -607,7 +607,7 @@
 			if( $photo_name = img_upload('add_photo_input', PATH_UPLOADS) ){
 				$alt = !empty($_POST['photo_alt']) ? $_POST['photo_alt'] : 'shimansky.by';
 
-				$sql = "INSERT INTO `bd_shimansky`.`photo` (`photo`.`id`, `photo`.`photo_img`, `photo`.`photo_alt`, `photo`.`photo_add_time`) 
+				$sql = "INSERT INTO `photo` (`photo`.`id`, `photo`.`photo_img`, `photo`.`photo_alt`, `photo`.`photo_add_time`) 
 				VALUES (NULL, '$photo_name', '$alt', NULL)";
 				
 				mysql_query($sql);
@@ -653,7 +653,7 @@
 
 			if(strlen($title)>=0){
 
-				$sql = "UPDATE  `bd_shimansky`.`pages` SET `page_title`='$title', `description`='$descr', `keywords`='$keywords'
+				$sql = "UPDATE  `pages` SET `page_title`='$title', `description`='$descr', `keywords`='$keywords'
 				WHERE  `pages`.`id_page` = '$p_id'";
 
 				mysql_query($sql);
@@ -712,7 +712,7 @@
 
 	function get_new_reviews_form(){
 
-		$sql   = "SELECT  `review_img`, `review_name`, `review_text`, `review_date`, `review_email`, `id` FROM `bd_shimansky`.`reviews` WHERE `visible` = 0 ORDER BY `review_date` DESC";
+		$sql   = "SELECT  `review_img`, `review_name`, `review_text`, `review_date`, `review_email`, `id` FROM `reviews` WHERE `visible` = 0 ORDER BY `review_date` DESC";
 		$data  = mysql_query( $sql );
 		$count = mysql_affected_rows();
 
@@ -749,11 +749,11 @@
 
 			$r_id = $_POST['enter_publish_review'];
 
-			$sql = "UPDATE  `bd_shimansky`.`reviews` SET `visible` = 1 WHERE  `reviews`.`id` = '$r_id'";
+			$sql = "UPDATE  `reviews` SET `visible` = 1 WHERE  `reviews`.`id` = '$r_id'";
 			mysql_query($sql);
 
 		}else if(isset($_POST['enter_publish_all_reviews'])){
-			$sql = "UPDATE  `bd_shimansky`.`reviews` SET `visible` = 1 WHERE  `reviews`.`visible` = 0";
+			$sql = "UPDATE  `reviews` SET `visible` = 1 WHERE  `reviews`.`visible` = 0";
 			mysql_query($sql);
 		}
 
@@ -765,7 +765,7 @@
 		if( !empty($_GET['del_review']) ){
 
 			$id = $_GET['del_review'];
-			$sql = "DELETE FROM `bd_shimansky`.`reviews` WHERE `ID` = '$id'";
+			$sql = "DELETE FROM `reviews` WHERE `ID` = '$id'";
 
 			if(mysql_query($sql)){
 				$_GET['type_message'] = 9;
@@ -779,7 +779,7 @@
 
 	function get_all_reviews_form(){
 
-		$sql   = "SELECT  `review_img`, `review_name`, `review_text`, `review_date`, `review_email`, `id` FROM `bd_shimansky`.`reviews` ORDER BY `review_date` DESC";
+		$sql   = "SELECT  `review_img`, `review_name`, `review_text`, `review_date`, `review_email`, `id` FROM `reviews` ORDER BY `review_date` DESC";
 		$data  = mysql_query( $sql );
 		$count = mysql_affected_rows();
 
@@ -814,7 +814,7 @@
 
 		if(!empty($_GET['edit_review'])){
 			$r_id = $_GET['edit_review'];
-			$sql = "SELECT `reviews`.`id`, `reviews`.`review_name`, `reviews`.`review_text`, `reviews`.`review_img` FROM `bd_shimansky`.`reviews` WHERE `reviews`.`id` = '$r_id'";
+			$sql = "SELECT `reviews`.`id`, `reviews`.`review_name`, `reviews`.`review_text`, `reviews`.`review_img` FROM `reviews` WHERE `reviews`.`id` = '$r_id'";
 
 			$marker       = array('{PATH_UPLOADS_IMG}','{ID}', '{NAME}', '{TEXT}', '{IMG}');
 			$data         = mysql_query($sql);
@@ -842,13 +842,13 @@
 	function del_review_img(){
 
 		$id       = $_GET['del_review_img'];
-		$sql_img  = "SELECT `reviews`.`review_img` FROM `bd_shimansky`.`reviews` WHERE `id` = '$id'";
+		$sql_img  = "SELECT `reviews`.`review_img` FROM `reviews` WHERE `id` = '$id'";
 		$data_img = mysql_query($sql_img);
 		$inf_img  = mysql_fetch_array($data_img);
 
 		if(!empty($_GET['del_review_img']) && (strlen($inf_img[0])>30)  ){
 
-			$sql_upd = "UPDATE `bd_shimansky`.`reviews` SET `reviews`.`review_img` = '' WHERE `id` = '$id'";
+			$sql_upd = "UPDATE `reviews` SET `reviews`.`review_img` = '' WHERE `id` = '$id'";
 
 			if( $data = @mysql_query($sql_img) ){
 
@@ -889,7 +889,7 @@
 			$r_name    = mysql_escape_string($r_name);
 			$r_text    = mysql_escape_string($r_text);
 
-			$sql_upd = "UPDATE `bd_shimansky`.`reviews` SET `reviews`.`review_name` = '$r_name', `reviews`.`review_text`='$r_text' WHERE `reviews`.`id` = '$r_id'";
+			$sql_upd = "UPDATE `reviews` SET `reviews`.`review_name` = '$r_name', `reviews`.`review_text`='$r_text' WHERE `reviews`.`id` = '$r_id'";
 			
 			if(mysql_query($sql_upd)){
 				$_GET['type_message'] = 1;
@@ -954,7 +954,7 @@
 
 			$img_name = add_img_post();
 
-			$sql = "INSERT INTO `bd_shimansky`.`posts` (`post_title`, `post_description`, `post_content`, `post_thumbnail`) VALUES ('$title', '$descr', '$text', '$img_name')";
+			$sql = "INSERT INTO `posts` (`post_title`, `post_description`, `post_content`, `post_thumbnail`) VALUES ('$title', '$descr', '$text', '$img_name')";
 		
 			if(($_GET['type_message'] != 7) && mysql_query($sql)){
 					$_POST['post_descr'] = '';
@@ -976,7 +976,7 @@
 		if( !empty($_GET['del_post']) ){
 
 			$id = $_GET['del_post'];
-			$sql = "DELETE FROM `bd_shimansky`.`posts` WHERE `id` = '$id'";
+			$sql = "DELETE FROM `posts` WHERE `id` = '$id'";
 
 			if(mysql_query($sql)){
 				$_GET['type_message'] = 9;
@@ -991,7 +991,7 @@
 
 	function get_all_posts_form(){
 
-		$sql   = "SELECT  `post_thumbnail`, `post_title`, `post_description`, `post_date`, `id` FROM `bd_shimansky`.`posts` ORDER BY `post_date` DESC";
+		$sql   = "SELECT  `post_thumbnail`, `post_title`, `post_description`, `post_date`, `id` FROM `posts` ORDER BY `post_date` DESC";
 		$data  = mysql_query( $sql ) or die(mysql_error());
 		$count = mysql_affected_rows();
 
@@ -1027,7 +1027,7 @@
 		if(!empty($_GET['edit_post'])){
 
 			$p_id = $_GET['edit_post'];
-			$sql = "SELECT `posts`.`id`, `posts`.`post_title`, `posts`.`post_description`, `posts`.`post_content`, `posts`.`post_thumbnail` FROM `bd_shimansky`.`posts` WHERE `posts`.`id` = '$p_id'";
+			$sql = "SELECT `posts`.`id`, `posts`.`post_title`, `posts`.`post_description`, `posts`.`post_content`, `posts`.`post_thumbnail` FROM `posts` WHERE `posts`.`id` = '$p_id'";
 
 			$marker       = array('{PATH_UPLOADS_IMG}','{ID}', '{TITLE}', '{DESCR}', '{TEXT}', '{IMG}');
 			$data         = mysql_query($sql);
@@ -1067,7 +1067,7 @@
 
 			$img_name = add_img_post();
 
-			$sql_upd   = "UPDATE `bd_shimansky`.`posts` SET `posts`.`post_title` = '$p_title', `posts`.`post_description`='$p_descr', `posts`.`post_content`='$p_text', `posts`.`post_thumbnail` = '$img_name' WHERE `posts`.`id` = '$p_id'";
+			$sql_upd   = "UPDATE `posts` SET `posts`.`post_title` = '$p_title', `posts`.`post_description`='$p_descr', `posts`.`post_content`='$p_text', `posts`.`post_thumbnail` = '$img_name' WHERE `posts`.`id` = '$p_id'";
 			
 			if(mysql_query($sql_upd)){
 				$_GET['type_message'] = 1;
@@ -1080,13 +1080,13 @@
 	function del_post_img(){
 
 		$id       = $_GET['del_post_img'];
-		$sql_img  = "SELECT `posts`.`post_thumbnail` FROM `bd_shimansky`.`posts` WHERE `id` = '$id'";
+		$sql_img  = "SELECT `posts`.`post_thumbnail` FROM `posts` WHERE `id` = '$id'";
 		$data_img = mysql_query($sql_img);
 		$inf_img  = mysql_fetch_array($data_img);
 
 		if(!empty($_GET['del_post_img']) && (strlen($inf_img[0])>30)){
 
-			$sql_upd = "UPDATE `bd_shimansky`.`posts` SET `posts`.`post_thumbnail` = '' WHERE `id` = '$id'";
+			$sql_upd = "UPDATE `posts` SET `posts`.`post_thumbnail` = '' WHERE `id` = '$id'";
 
 			if( $data = @mysql_query($sql_img) ){
 

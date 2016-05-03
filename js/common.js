@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 	//Menu active link
 	var url = document.location.href,
-		modul = url.substr(19),
+		modul = url.substr(20);
 		link = "li a[href="+"'"+modul+"'"+"]",
 		lngth = modul.substr(16).length;
 

@@ -14,9 +14,9 @@
 	<meta property="og:title" content="{PAGE_NAME}"/> 
 	<meta property="og:description" content="{PAGE_DESCRIPTION}"/>
 	<meta property="og:image" content="https://website.com/image250X250.png"/> 
-	<meta property="og:url" content="http://www.shimansky.by"/> 
+	<meta property="og:url" content="http://www.shimanskiy.by"/> 
 	<meta property="og:site_name" content="Ведущий праздничных мероприятий Павел Шиманский"/> 
-	<meta property="og:see_also" content="http://www.shimansky.by"/> 
+	<meta property="og:see_also" content="http://www.shimanskiy.by"/> 
 	<meta property="fb:admins" content="Facebook_ID"/>
 
 
