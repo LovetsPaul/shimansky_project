@@ -14,6 +14,4 @@ define(BD_LOGIN, 'shimansk_pavel');
 define(BD_PASSWORD, '13011991pavlik');
 define(BD_BASE, 'shimansk_bd_shimansky');
 
-
-
 ?>
