@@ -24,7 +24,7 @@
 
 	function set_is_home_class(){
 
-		if( $_SERVER[ REQUEST_URI ] == '/' or $_SERVER[ REQUEST_URI ] == '/portfolio/video' ){
+		if( $_SERVER[ REQUEST_URI ] == '/' or $_SERVER[ REQUEST_URI ] == '/portfolio/video' or $_SERVER[ REQUEST_URI ] == '/portfolio/photo' ){
 			return "is_home";
 		}
 
@@ -111,41 +111,55 @@
 		$sql = "SELECT `menu_name`, `link`, `is_parent`, `parent_id`, `id` FROM menu WHERE parent_id = 0 AND `visible` = 1 ORDER BY `position` ASC";
 		$data = mysql_query( $sql );
 		$count = mysql_affected_rows();
-
 		$shablon = file_get_contents(PATH_TEMPLATE . 'menu.tpl');
 		$shablon_child = file_get_contents(PATH_TEMPLATE . 'inner_menu_item.tpl');
-		$marker = array( '{MENU_NAME}', '{MENU_LINK}', '{CLASS_ACTIVE}' );
-		$marker_child = array( '{PARENT_MENU_NAME}', '{CHILD_MENU_ITEM}', '{CLASS_ACTIVE}', '{CLASS_ACTIVE_PARENT}' );
-
+		$marker = array( '{MENU_NAME}', '{MENU_LINK}', '{CLASS_ACTIVE}');
+		$marker_child = array( '{PARENT_MENU_NAME}', '{CHILD_MENU_ITEM}', '{CLASS_ACTIVE}', '{CLASS_ACTIVE_PARENT}', '{PARENT}' );
 		$str = '';
+		$marker_info = array();
+		$marker_child_info = array();
 
 		for( $i=0; $i<$count; $i++ ){
 
-			$inf = mysql_fetch_array( $data );		
+			$inf = mysql_fetch_array( $data );	
 
 			if( $url == $inf[1] ){
-				
-				$marker_info = array( $inf[0], $inf[1], 'active' );
 
+				if ($inf[2] == 1){
+					
+				$marker_child_info = array( $inf[0], get_child_menu($inf[4]), 'active', 'parent' );
+				}else{
+
+					
 				$marker_child_info = array( $inf[0], get_child_menu($inf[4]), 'active', '' );
+				$marker_info = array( $inf[0], $inf[1], '', '' );
+				}
+
 				
 			}else{
-				$marker_info = array( $inf[0], $inf[1], '' );
+
+				if ($inf[2] == 1){
+					$marker_info = array( $inf[0], $inf[1], '', '' );
+				}else{
+
+					$marker_info = array( $inf[0], $inf[1], '', '' );
+				}
 				$marker_child_info = array( $inf[0], get_child_menu($inf[4]), '', '');
 			}
 
 			if($inf[2] == 1){//if parent
+				$marker_info = array( $inf[0], $inf[1], 'active' );
+				$marker_child_info = array( $inf[0], get_child_menu($inf[4]), '', 'parent');
 				$str .= str_replace( $marker_child, $marker_child_info, $shablon_child );
 			
 			}else{
 				$str .= str_replace( $marker, $marker_info, $shablon );	
 			}
-
 		}
-
+		
 		return  $str;
-
 	}
+
 
 	function get_slider(){
 

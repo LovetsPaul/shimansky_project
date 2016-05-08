@@ -1,0 +1,5 @@
+[08-May-2016 01:08:19 Europe/Minsk] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/shimansk/public_html/admin/includes/exit.php on line 13
+[08-May-2016 01:08:19 Europe/Minsk] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/shimansk/public_html/admin/includes/exit.php:13) in /home/shimansk/public_html/admin/includes/exit.php on line 14
+[08-May-2016 01:11:44 Europe/Minsk] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/shimansk/public_html/admin/includes/exit.php:5) in /home/shimansk/public_html/admin/includes/exit.php on line 8
+[08-May-2016 01:15:58 Europe/Minsk] PHP Fatal error:  Call to undefined function setcookies() in /home/shimansk/public_html/admin/includes/exit.php on line 5
+[08-May-2016 01:18:15 Europe/Minsk] PHP Parse error:  syntax error, unexpected ',' in /home/shimansk/public_html/admin/includes/exit.php on line 5

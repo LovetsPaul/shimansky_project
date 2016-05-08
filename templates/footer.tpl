@@ -8,7 +8,7 @@
 						<div class="s_coffee">
 							<div class="h_coffee">
 								<i class="fa fa-coffee"></i>
-								<h2>Записаться на чашечку кофе со мной:</h2>
+								<h2>Записаться на встречу со мной:</h2>
 							</div>
 							<form method="POST" action="mail.php" id="coffee_form">
 
@@ -22,7 +22,7 @@
 									<input type="text" name="Телефон" pattern="[()0-9+-]+" title="" required aria-required="true" maxLength="19" id="coffe_phone" placeholder="+375-(**)-***-**-**">
 								</div>
 								<input type="hidden" name="admin_email" value="{EMAIL}">
-								<input type="hidden" name="project_name" value="Записаться на чашечку кофе">
+								<input type="hidden" name="project_name" value="Записаться на встречу со мной!">
 								<input type="hidden" value="Сообщение с нижней части сайта (footer)!" name="form_subject">
 
 								<button class="button_dark">
@@ -96,9 +96,9 @@
 <div class="preloader"></div>
 
 		<!--[if lt IE 9]>
-		<script src="libs/html5shiv/es5-shim.min.js"></script>
-		<script src="libs/html5shiv/html5shiv.min.js"></script>
-		<script src="libs/html5shiv/html5shiv-printshiv.min.js"></script>
+		<script src="/libs/html5shiv/es5-shim.min.js"></script>
+		<script src="/libs/html5shiv/html5shiv.min.js"></script>
+		<script src="/libs/html5shiv/html5shiv-printshiv.min.js"></script>
 		<![endif]-->
 
 		<!-- Load Scripts Start -->
@@ -107,6 +107,10 @@
 			{"src" : "{PATH_JS}common.js", "async" : false}
 			]};!function(t,n,r){"use strict";var c=function(t){if("[object Array]"!==Object.prototype.toString.call(t))return!1;for(var r=0;r<t.length;r++){var c=n.createElement("script"),e=t[r];c.src=e.src,c.async=e.async,n.body.appendChild(c)}return!0};t.addEventListener?t.addEventListener("load",function(){c(r.scripts);},!1):t.attachEvent?t.attachEvent("onload",function(){c(r.scripts)}):t.onload=function(){c(r.scripts)}}(window,document,scr);
 		</script>
+		<!-- Google Analytics -->
+		<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', 'UA-77348697-1', 'auto');ga('send', 'pageview');
+		</script><!-- /Google Analytics -->
+		<!-- Yandex.Metrika counter --> <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter37226255 = new Ya.Metrika({ id:37226255, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/37226255" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
 		<!-- Load Scripts End -->
 </body>
 </html>

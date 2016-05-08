@@ -1,0 +1,1 @@
+<span class="info error">Не выбраны файлы для удаления!&nbsp;&nbsp;&nbsp;&nbsp;</span>

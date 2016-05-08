@@ -1,0 +1,1 @@
+<span class="info error">Файл не должен превышать 500kb!!!&nbsp;&nbsp;&nbsp;&nbsp;</span>

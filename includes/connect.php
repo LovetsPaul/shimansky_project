@@ -1,7 +1,7 @@
 <?php
-
-
-$DB = mysql_connect('127.0.0.1', BD_LOGIN, BD_PASSWORD) or die('no connect MYSQL');
+// echo "Ремонт!!!";
+// exit;
+$DB = mysql_connect('localhost', BD_LOGIN, BD_PASSWORD) or die('no connect MYSQL');
 mysql_select_db(BD_BASE, $DB) or die('no select Base');
 
 mysql_query("SET NAMES 'utf8'");

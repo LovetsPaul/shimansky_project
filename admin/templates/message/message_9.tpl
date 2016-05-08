@@ -1,0 +1,1 @@
+<span class="info error">Отзыв успешно удалён!&nbsp;&nbsp;&nbsp;&nbsp;</span>

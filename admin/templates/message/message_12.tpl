@@ -1,0 +1,1 @@
+<span class="info error">Новость успешно удалена!&nbsp;&nbsp;&nbsp;&nbsp;</span>

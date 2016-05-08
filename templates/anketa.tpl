@@ -60,7 +60,7 @@
 								<textarea name="ФИО родителей невесты" id="parent_w_name" maxlength="80"  title="Не более 80 символов!" rows="1" placeholder="ФИО родителей невесты..." required></textarea>
 							</div>
 							<div class="col-md-12">
-								<h4 class="title_input_group">Возраст:</h3>
+								<h4 class="title_input_group">Возраст:</h4>
 								<label for="m_age">Жениха:</label>
 								<input type="text" name="Возраст жениха" id="m_age" maxlength="2" title="Используйте для ввода цифры 0-9. Длина не должна привышать 3 символов!" pattern="[0-9]+" placeholder="Возраст жениха..." required>
 							</div>
@@ -141,26 +141,26 @@
 							</div>
 
 							<div class="col-md-12">
-								<table collpadding="0" collspacing="0" border="0" width="100%">
+								<table>
 									<tr>
 										<td><label for="w_present">Подарки от невесты родственникам жениха:</label></td>
-										<td class="text-right" valign="bottom"><input type="checkbox" name="Подарки от невесты родственникам жениха" value="Да" id="w_present"></td>
+										<td class="text-right valign_bottom"><input type="checkbox" name="Подарки от невесты родственникам жениха" value="Да" id="w_present"></td>
 									</tr>
 									<tr>
 										<td><label for="fata">Снятие фаты:</label></td>
-										<td class="text-right" valign="bottom"><input type="checkbox" name="Снятие фаты" value="Да" id="fata"></td>
+										<td class="text-right valign_bottom"><input type="checkbox" name="Снятие фаты" value="Да" id="fata"></td>
 									</tr>
 									<tr>
 										<td><label for="family_fire">Передача семейного очага:</label></td>
-										<td class="text-right" valign="bottom"><input type="checkbox" name="Передача семейного очага" value="Да" id="family_fire"></td>
+										<td class="text-right valign_bottom"><input type="checkbox" name="Передача семейного очага" value="Да" id="family_fire"></td>
 									</tr>
 									<tr>
 										<td><label for="dance_wth_father">Танец невесты с отцом:</label></td>
-										<td class="text-right" valign="bottom"><input type="checkbox" name="Танец невесты с отцом" value="Да" id="dance_wth_father"></td>
+										<td class="text-right valign_bottom"><input type="checkbox" name="Танец невесты с отцом" value="Да" id="dance_wth_father"></td>
 									</tr>
 									<tr>
 										<td><label for="sweet_table">Сладкий стол в конце вечера (вынос торта):</label></td>
-										<td class="text-right" valign="bottom"><input type="checkbox" name="Сладкий стол в конце вечера (вынос торта)" value="Да" id="sweet_table"></td>
+										<td class="text-right valign_bottom"><input type="checkbox" name="Сладкий стол в конце вечера (вынос торта)" value="Да" id="sweet_table"></td>
 									</tr>
 								</table>
 							</div>

@@ -71,44 +71,45 @@
 		if( isset($_GET['type_message']) ){
 
 			if( $par ==	1 ){
-				$message_tpl = file_get_contents(PATH_TEMPLATE . "message_ok.tpl");
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_ok.tpl");
 				return $message_tpl;
 			}else if( $par == 2 ){
-				$message_tpl = file_get_contents(PATH_TEMPLATE . "message_error.tpl");
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_error.tpl");
 				return $message_tpl;
 			}else if( $par == 3 ){
-				$message_tpl = "Не выбраны файлы для удаления&nbsp;&nbsp;";
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_3.tpl"); //Не выбраны файлы для удаления
 				return $message_tpl;
 			}else if( $par == 4 ){
-				$message_tpl = "Нет данных!&nbsp;&nbsp;";
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_4.tpl"); //Нет данных!
 				return $message_tpl;
 			}else if( $par == 5 ){
-				$message_tpl = "Файл не загружен!!!&nbsp;&nbsp;";
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_5.tpl"); //"Файл не загружен!!!
 				return $message_tpl;
 			}else if( $par == 6 ){
-				$message_tpl = "Файл успешно загружен!&nbsp;&nbsp;";
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_6.tpl"); //Файл успешно загружен!
 				return $message_tpl;
 			}else if( $par == 7 ){
-				$message_tpl = "Файл не должен превышать 2Мб!!!&nbsp;&nbsp;";
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_7.tpl"); //Файл не должен превышать 500kb!!!
 				return $message_tpl;
 			}else if( $par == 8 ){
-				$message_tpl = "Недопустимый формат изображения!!!&nbsp;&nbsp;";
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_8.tpl"); //Недопустимый формат изображения!!!
 				return $message_tpl;
 			}else if( $par == 9 ){
-				$message_tpl = "Отзыв успешно удалён!&nbsp;&nbsp;";
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_9.tpl"); //Отзыв успешно удалён!
 				return $message_tpl;
 			}else if( $par == 10 ){
-				$message_tpl = "Изображение удалено!&nbsp;&nbsp;";
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_10.tpl"); //Изображение удалено!
 				return $message_tpl;
 			}else if( $par == 11 ){
-				$message_tpl = "Новость успешно добавлена!&nbsp;&nbsp;";
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_11.tpl"); //Новость успешно добавлена!
 				return $message_tpl;
 			}else if( $par == 12 ){
-				$message_tpl = "Новость успешно удалена!&nbsp;&nbsp;";
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_12.tpl"); //Новость успешно удалена!
 				return $message_tpl;
 			}else{
 
-			return '<a href="/" target="_blank">Перейти на сайт</a>&nbsp;&nbsp;/&nbsp;&nbsp;';			}
+				return '<a href="/" target="_blank">Перейти на сайт</a>&nbsp;&nbsp;/&nbsp;&nbsp;';
+			}
 
 		}else{
 			return '<a href="/" target="_blank">Перейти на сайт</a>&nbsp;&nbsp;/&nbsp;&nbsp;';
@@ -695,6 +696,11 @@
 				$id = 4;
 				$page_name = "Отзывы";
 				break;
+
+			case 'p_anketa':
+				$id = 11;
+				$page_name = "Анкета для молодожёнов";
+				break;
 		}
 
 		$sql = "SELECT `pages`.`id_page`, `pages`.`page_title`, `pages`.`page_content`, `pages`.`keywords`, `pages`.`description` 
@@ -1106,6 +1112,44 @@
 			}
 
 		}
+
+	}
+
+	function get_metrika_form($par=0){
+
+		$today=date("Ymd");
+		$date=date ('Ymd', time()-86400);
+		$month=date ('Ymd', time()-604800);
+		$metrika_url = '';
+		if($par == 0) $metrika_url = "http://api-metrika.yandex.ru/stat/traffic/summary.json?id=37226255&pretty=1&date1=$date&date2=$date&oauth_token=ARbbDK4AAyDH4u1d3Rk2Rv6J8j1jquwYWg";
+		if($par == 1) $metrika_url = "http://api-metrika.yandex.ru/stat/traffic/summary.json?id=37226255&pretty=1&date1=$today&date2=$today&oauth_token=ARbbDK4AAyDH4u1d3Rk2Rv6J8j1jquwYWg";
+		if($par == 2) $metrika_url = "http://api-metrika.yandex.ru/stat/traffic/summary.json?id=37226255&pretty=1&date1=$month&date2=$today&oauth_token=ARbbDK4AAyDH4u1d3Rk2Rv6J8j1jquwYWg";
+		$ch = curl_init();
+		curl_setopt ($ch, CURLOPT_URL,$metrika_url);
+		curl_setopt ($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6");
+		curl_setopt ($ch, CURLOPT_TIMEOUT, 60);
+		curl_setopt ($ch, CURLOPT_FOLLOWLOCATION, 1);
+		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+		$metrika = curl_exec ($ch);
+		curl_close($ch);
+		 
+		$metrika_o = json_decode($metrika);
+
+		$users = $metrika_o->totals->visits;
+		$new_users = $metrika_o->totals->new_visitors;
+		$views = $metrika_o->totals->page_views;
+
+
+		$marker      = array('{USERS}', '{NEW_USERS}', '{VIEWS}');
+		$template = '';
+		if($par == 0) $template    = file_get_contents(PATH_TEMPLATE . 'metrika_form_0.tpl');
+		if($par == 1) $template    = file_get_contents(PATH_TEMPLATE . 'metrika_form_1.tpl');
+		if($par == 2) $template    = file_get_contents(PATH_TEMPLATE . 'metrika_form_2.tpl');
+		
+		$marker_info = array( $users, $new_users, $views );
+		$str         = str_replace( $marker, $marker_info, $template );
+
+		return $str;
 
 	}
 

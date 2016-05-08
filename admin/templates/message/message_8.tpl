@@ -1,0 +1,1 @@
+<span class="info error">Недопустимый формат изображения!!!&nbsp;&nbsp;&nbsp;&nbsp;</span>

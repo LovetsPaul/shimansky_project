@@ -1,0 +1,1 @@
+<span class="info error">Новость успешно добавлена!&nbsp;&nbsp;&nbsp;&nbsp;</span>

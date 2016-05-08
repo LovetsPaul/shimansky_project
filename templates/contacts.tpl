@@ -53,7 +53,7 @@
 							</div>
 							<div class="col-md-12">
 								<label for="your_text">Текст сообщения:</label>
-								<textarea name="Сообщение" id="your_text" width="100%" max-length="2000" rows="10" placeholder="Введите текст сообщения..." required></textarea>
+								<textarea name="Сообщение" id="your_text" maxlength="2000" rows="10" placeholder="Введите текст сообщения..." required></textarea>
 							</div>
 							<div class="col-md-12 text-left button_wrapp">
 								<input type="hidden" value="{EMAIL}" name="admin_email">

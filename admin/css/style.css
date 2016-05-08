@@ -82,7 +82,7 @@ button:hover{
     width: 300px;
 }
 .left dt{
-    background-color: #28988B;
+    background-color: #0d7574;
     line-height: 25px;
     padding: 0 15px;
     margin-bottom: 7px;
@@ -110,7 +110,7 @@ button:hover{
     background-color: #E9E9E9;
 }
 .top_line{
-    background-color: #019A88;
+    background-color: #0d7574;
     overflow: hidden;
     color: #fff;
     height: 50px;
@@ -125,7 +125,10 @@ button:hover{
     font-size: 18px;
 }
 .top_line .ok{
-    color: #A02525;
+    color: #FF5C5C;
+}
+.error{
+     color: #FF5C5C;
 }
 .page_name{
     text-transform: uppercase;
@@ -237,7 +240,7 @@ button:hover{
     text-align: right;
 }
 .v_link a{
-    color: #28988B;
+    color: #0d7574;
 }
 label[for^="video_id"] span{
     color: #ff0000;
@@ -299,10 +302,10 @@ label[for^="video_id"] span{
     padding: 20px;
 }
 .item > td{
-    border-left: 3px solid #28988B; 
+    border-left: 3px solid #0d7574; 
 }/*
 .r_delim{
-    border-top: 2px solid #28988B;  
+    border-top: 2px solid #0d7574;  
 }*/
 #new_reviews_form .r_info td,
 #all_reviews_form .r_info td,

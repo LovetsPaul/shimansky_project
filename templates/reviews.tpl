@@ -34,7 +34,7 @@
 							</div>
 							<div class="col-md-12 col-sm-12">
 								<label for="your_text">Текст отзыва:</label>
-								<textarea name="your_text" id="your_text" width="100%" max-length="300" rows="10" placeholder="Напишите текст отзыва..." required></textarea>
+								<textarea name="your_text" id="your_text"  maxlength="300" rows="10" placeholder="Напишите текст отзыва..." required></textarea>
 							</div>
 							<div class="col-md-12 col-sm-12">
 								<label for="add_img">Загрузить изображение</label>

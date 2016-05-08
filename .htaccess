@@ -10,6 +10,21 @@ RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteRule   ^(.*) index.php?%{QUERY_STRING}
 
+RewriteCond %{HTTP_HOST}   !^$
+RewriteCond %{HTTP_HOST}   !^www\.          [NC]
+RewriteCond %{HTTP_HOST}   (.+)$
+RewriteRule ^(.*)          http://www.%1/$1 [L,R=301]
+
+#защита изображений
+RewriteCond %{HTTP_REFERER} .
+RewriteCond %{HTTP_REFERER} !^http://([^.]+\.)?site\. [NC]
+RewriteCond %{HTTP_REFERER} !google\. [NC]
+RewriteCond %{HTTP_REFERER} !search\?q=cache [NC]
+RewriteCond %{HTTP_REFERER} !msn\. [NC]
+RewriteCond %{HTTP_REFERER} !yahoo\. [NC]
+RewriteCond %{REQUEST_URI} !^/hotlinker\.gif$
+RewriteRule \.(gif|jpg|png)$ /hotlinker.gif [NC,L]
+
 <ifModule mod_expires.c>
 
 # Add correct content-type for fonts
@@ -49,3 +64,25 @@ ExpiresByType text/html "access plus 600 seconds"
 ExpiresByType application/xhtml+xml "access plus 600 seconds"
 
 </ifModule>
+AddType image/svg+xml svg svgz
+AddEncoding gzip svgz
+<IfModule mod_rewrite.c>
+        RewriteEngine On
+        RewriteCond %{HTTP:Accept-encoding} !gzip [OR]
+        RewriteCond %{HTTP_USER_AGENT} Konqueror
+        RewriteRule ^(.*)\.(css|js|svg)$ $1.nogzip.$2 [QSA,L]
+</IfModule>
+<IfModule mod_headers.c>
+        Header append Vary User-Agent
+        <FilesMatch .*\.(js|css|svg)$>
+               Header set Content-Encoding: gzip
+               Header set Cache-control: private
+        </FilesMatch>
+        <FilesMatch .*\.nogzip\.(js|css|svg)$>
+               Header unset Content-Encoding
+        </FilesMatch>
+</IfModule>
+
+AddHandler application/x-httpd-php .html
+
+ErrorDocument 404 http://www.shimanskiy.by/404.php
