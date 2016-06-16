@@ -6,9 +6,9 @@ include(PATH_INCLUDES . 'functions.php');
 
 if( isset($_POST['your_name']) or isset($_POST['your_email']) or isset($_POST['your_text']) ){
 
-	$name = my_string( $_POST['your_name'] );
-	$email = my_string( $_POST['your_email'] );
-	$text = my_string( $_POST['your_text'] );
+	$name = mysql_escape_string( my_string( $_POST['your_name'] ) );
+	$email = mysql_escape_string( my_string( $_POST['your_email'] ) );
+	$text = mysql_escape_string( my_string( $_POST['your_text'] ) );
 	$img_name = (isset( $_FILES['add_img']['name'] ) && $_FILES['add_img']['name']!='') ? $_FILES['add_img']['name'] = md5(time()) : '';
 	$img_full_name = ($img_name != '') ?  $img_name .'.'. substr( $_FILES['add_img']['type'], 6 ) : '';
 	$sql = "";

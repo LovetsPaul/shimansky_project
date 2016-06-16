@@ -26,15 +26,15 @@
 						<form method="POST" id="add_reviews_form" name="add_reviews_form" enctype="multipart/form-data">
 							<div class="col-md-6 col-sm-12">
 								<label for="your_name">Ваше имя:</label>
-								<input type="text" name="your_name" id="your_name" pattern="[A-Za-zА-Яа-я0-9]+" placeholder="Введите ваше имя..." required>
+								<input type="text" name="your_name" id="your_name" maxlength="80" placeholder="Введите ваше имя..." required>
 							</div>
 							<div class="col-md-6 col-sm-12">
-								<label for="your_email">Ваше e-mail:</label>
+								<label for="your_email">Ваш e-mail:</label>
 								<input type="email" name="your_email" id="your_email" placeholder="Введите e-mail..." required>
 							</div>
 							<div class="col-md-12 col-sm-12">
 								<label for="your_text">Текст отзыва:</label>
-								<textarea name="your_text" id="your_text" width="100%" max-length="300" rows="10" placeholder="Напишите текст отзыва..." required></textarea>
+								<textarea name="your_text" id="your_text"  maxlength="3000" rows="10" placeholder="Напишите текст отзыва..." required></textarea>
 							</div>
 							<div class="col-md-12 col-sm-12">
 								<label for="add_img">Загрузить изображение</label>

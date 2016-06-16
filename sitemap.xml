@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<url>
+  <loc>http://shimanskiy.by/</loc>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://shimanskiy.by/anketa</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://shimanskiy.by/about</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://shimanskiy.by/portfolio/photo</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://shimanskiy.by/portfolio/video</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://shimanskiy.by/svadba</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://shimanskiy.by/korporativ</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://shimanskiy.by/vipusknoi</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://shimanskiy.by/blog</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://shimanskiy.by/reviews</loc>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://shimanskiy.by/contacts</loc>
+  <priority>0.90</priority>
+</url>
+</urlset>

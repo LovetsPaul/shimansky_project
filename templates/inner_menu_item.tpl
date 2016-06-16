@@ -1,4 +1,4 @@
-<li class="{CLASS_ACTIVE_PARENT}">
+<li class="{CLASS_ACTIVE_PARENT}  {PARENT}">
     <a href="#">{PARENT_MENU_NAME}</a>
     <ul class="text-left">
         {CHILD_MENU_ITEM}

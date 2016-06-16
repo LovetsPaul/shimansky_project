@@ -67,6 +67,19 @@
             <dt>Контакты</dt>
             <dd><a href="/admin/action/edit_contacts.php">Редактировать</a></dd>
         </dl>
+        <dl>
+            <dt>Анкета</dt>
+            <dd><a href="/admin/action/get_page_info.php?i_page=p_anketa">Информация о странице (+SEO)</a></dd>
+        </dl>
+
+        <dl>
+            <dt>Статистика</dt>
+            <dd><a href="/admin/action/metrika_0.php">За вчерашний день</a></dd>
+
+            <dd><a href="/admin/action/metrika_1.php">За сегодня</a></dd>
+
+            <dd><a href="/admin/action/metrika_2.php">За месяц</a></dd>
+        </dl>
     </div>
     
     <div class="right">

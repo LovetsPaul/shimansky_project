@@ -1,1 +1,0 @@
-$page_info = new ArrayObject;

@@ -22,7 +22,7 @@ return array(
 // GENERAL SETTINGS
 
     'disabled' => false,
-    'uploadURL' => "http://shimansky.by/img/uploads",
+    'uploadURL' => "http://shimanskiy.by/img/uploads",
     'uploadDir' => "",
     'theme' => "default",
 

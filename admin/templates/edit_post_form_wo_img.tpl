@@ -46,7 +46,7 @@
     <td colspan="2" class="add_photo_info">
         <span>- доступные расширения: <span>.jpg, .jpeg, .png, .gif</span></span><br>
         <span>- размер не более <span>500 кб</span>!!!</span><br>
-        <span>- разрешение <span>1440px</span> x <span>500px</span>!!!</span></td>
+        <span>- разрешение <span>1140px</span> x <span>500px</span>!!!</span></td>
 </tr>
 
 <tr><td colspan="2">&nbsp;</td></tr>

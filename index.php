@@ -1,8 +1,11 @@
 <?php
+
 include('config.php');
 include(PATH_INCLUDES . 'connect.php');
 include(PATH_INCLUDES . 'functions.php');
 include(PATH_INCLUDES . 'social_object.php');
+
+session_start();
 
 	$url = strtolower( $_SERVER[ REQUEST_URI ] );
    
@@ -40,63 +43,81 @@ include(PATH_INCLUDES . 'social_object.php');
 	    $page = str_replace($marker, $marker_info, $page);
 
 	    echo $page;
-	}else if($Page == "blog" && empty($Module)){
+	}elseif($Page == "blog" && empty($Module)){
 
 	    $pages = file_get_contents(PATH_TEMPLATE . 'blog.tpl');
 	    $pages = str_replace($marker, $marker_info, $pages);
 
 	    echo $pages;
-	}else if($Page == "blog" && $Module == "full_post" && $Params[0]){
+	}elseif($Page == "blog" && $Module == "full_post" && $Params[0]){
 
 	    $pages = file_get_contents(PATH_TEMPLATE . 'blog_full_post.tpl');
 	    $pages = str_replace($marker, $marker_info, $pages);
 	    echo $pages;
-	}else if($Page == "reviews"){
+	}elseif($Page != "blog" && $Params[0] != '' ){
+        header('Location: /');
+    }elseif($Page == "reviews"){
 
 	    $pages = file_get_contents(PATH_TEMPLATE . 'reviews.tpl');
 	    $pages = str_replace($marker, $marker_info, $pages);
 
 	    echo $pages;
 
-	}else if($Page == "portfolio" && $Module == "photo"){
+	}elseif($Page == "portfolio" && $Module == "photo"){
 
 	    $pages = file_get_contents(PATH_TEMPLATE . 'portfolio_photo.tpl');
 	    $pages = str_replace($marker, $marker_info, $pages);
 
 	    echo $pages;
-	}else if($Page == "portfolio" && $Module == "video"){
+	}elseif($Page == "portfolio" && $Module == "video"){
 
 	    $pages = file_get_contents(PATH_TEMPLATE . 'portfolio_video.tpl');
 	    $pages = str_replace($marker, $marker_info, $pages);
 
 	    echo $pages;
-	}else if($Page == "contacts"){
+	}elseif($Page == "contacts"){
 
 	    $pages = file_get_contents(PATH_TEMPLATE . 'contacts.tpl');
 	    $pages = str_replace($marker, $marker_info, $pages);
 
 	    echo $pages;
-	}else if($Page == "about"){
+	}elseif($Page == "about"){
 
 	    $pages = file_get_contents(PATH_TEMPLATE . 'about.tpl');
 	    $pages = str_replace($marker, $marker_info, $pages);
 
 	    echo $pages;
-	}else if($Page == "svadba" or $Page == "korporativ" or $Page == "vipusknoi"){
+	}elseif($Page == "svadba" or $Page == "korporativ" or $Page == "vipusknoi"){
 
 	    $pages = file_get_contents(PATH_TEMPLATE . 'user_page.tpl');
 	    $pages = str_replace($marker, $marker_info, $pages);
 
 	    echo $pages;
-	}else if($Page == "anketa"){
+	}elseif($Page == "anketa"){
 
         $pages = file_get_contents(PATH_TEMPLATE . 'anketa.tpl');
         $pages = str_replace($marker, $marker_info, $pages);
 
         echo $pages;
-    }else{
-		echo '404';
-	}
 
+    }elseif($Page == "index.php"){
+        header('Location: /');
+    }elseif($Page == "err404"){
+        $pages = file_get_contents(PATH_TEMPLATE . 'err404.tpl');
+        $pages = str_replace($marker, $marker_info, $pages);
 
+        header("HTTP/1.0 404 Not Found");
+        header("HTTP/1.1 404 Not Found");
+        header("Status: 404 Not Found");
+
+        echo $pages;
+
+	}elseif($Page == ADMIN_URL){
+        $_SESSION['access'] = true;
+        header('Location: /admin/');
+    }elseif( ($Page == 'admin') && (empty($_SESSION['access'])) ){
+        header('Location: /err404');
+    }elseif($Page != 'admin'){
+        header('Location: /err404');
+    }
 ?>

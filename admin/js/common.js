@@ -8,10 +8,19 @@ $(document).ready(function() {
     if ($("textarea[name='full_text_post']").length) { CKEDITOR.replace("full_text_post"); }
     if ($("textarea[name='post_edit_text']").length) { CKEDITOR.replace("post_edit_text"); }
 
-    setTimeout(function() {
-        $(".top_line .info").remove();
-    }, 3000);
 
+    if (typeof($(".top_line .info").html()) != 'undefined') {
+
+        setTimeout(function() {
+            $(".top_line .info").remove()
+        }, 3000);
+
+
+        setTimeout(function() {
+            $(".exit").prepend('<a href="/" target="_blank">Перейти на сайт</a>&nbsp;&nbsp;/&nbsp;&nbsp;');
+            $(".exit").children('a[href="/"]').hide().delay(300).show();
+        }, 3000);
+    }
 
     $("input[type='checkbox']").change(function() {
 
@@ -39,17 +48,17 @@ $(document).ready(function() {
     });
 
     $('#add_photo_input').bind('change', function() {
-        
+
         var f = this.files[0],
             size = f.size || f.fileSize,
             type = ((f.type).substr(6)).toString(),
             ext = ['jpg', 'jpeg', 'png', 'gif'];
         found = false;
-        if (size > 2000000) {
+        if (size > 300000) {
 
             $(this).val('');
             $(this).remove();
-            alert("Размер файла превышает 2Мб!");
+            alert("Размер файла превышает 200kb!");
             $("#file_container").append('<input type="file" name="add_photo_input" id="add_photo_input">');
             return false;
         }
@@ -68,17 +77,17 @@ $(document).ready(function() {
     });
 
     $('#add_photo_post').bind('change', function() {
-        
+
         var f = this.files[0],
             size = f.size || f.fileSize,
             type = ((f.type).substr(6)).toString(),
             ext = ['jpg', 'jpeg', 'png', 'gif'];
         found = false;
-        if (size > 600000) {
+        if (size > 300000) {
 
             $(this).val('');
             $(this).remove();
-            alert("Размер файла превышает 500 кБ!");
+            alert("Размер файла превышает 200 кБ!");
             $("#file_container").append('<input type="file" name="add_photo_post" id="add_photo_post">');
             return false;
         }

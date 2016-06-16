@@ -13,10 +13,7 @@
 
 	function img_upload($field_name = '', $target_folder = '', $file_name = ''){
 
-		//folder path setup
 		$target_path = $target_folder;
-		
-		//file name setup
 		$filename_err = explode(".",$_FILES[$field_name]['name']);
 		$filename_err_count = count($filename_err);
 		$file_ext = substr($_FILES[$field_name]['type'], 6);
@@ -27,7 +24,6 @@
 			$fileName = md5(time());
 			$fileName = $fileName .".". $file_ext;
 		}
-		//upload image path
 		$upload_image = $target_path.basename($fileName);
 
 		$acces_ext = array('jpg', 'jpeg', 'png', 'gif');
@@ -38,12 +34,10 @@
 			if($is_ok_ext)
 				break;
 		}
-
 		
 		if($is_ok_ext){
 
-			//upload image
-			if( ($_FILES[$field_name]['size'] < 2000000) ){
+			if( ($_FILES[$field_name]['size'] < 300000) ){
 
 				if(move_uploaded_file($_FILES[$field_name]['tmp_name'], $upload_image) ){
 					return $fileName;
@@ -71,44 +65,45 @@
 		if( isset($_GET['type_message']) ){
 
 			if( $par ==	1 ){
-				$message_tpl = file_get_contents(PATH_TEMPLATE . "message_ok.tpl");
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_ok.tpl");
 				return $message_tpl;
 			}else if( $par == 2 ){
-				$message_tpl = file_get_contents(PATH_TEMPLATE . "message_error.tpl");
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_error.tpl");
 				return $message_tpl;
 			}else if( $par == 3 ){
-				$message_tpl = "Не выбраны файлы для удаления&nbsp;&nbsp;";
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_3.tpl"); //Не выбраны файлы для удаления
 				return $message_tpl;
 			}else if( $par == 4 ){
-				$message_tpl = "Нет данных!&nbsp;&nbsp;";
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_4.tpl"); //Нет данных!
 				return $message_tpl;
 			}else if( $par == 5 ){
-				$message_tpl = "Файл не загружен!!!&nbsp;&nbsp;";
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_5.tpl"); //"Файл не загружен!!!
 				return $message_tpl;
 			}else if( $par == 6 ){
-				$message_tpl = "Файл успешно загружен!&nbsp;&nbsp;";
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_6.tpl"); //Файл успешно загружен!
 				return $message_tpl;
 			}else if( $par == 7 ){
-				$message_tpl = "Файл не должен превышать 2Мб!!!&nbsp;&nbsp;";
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_7.tpl"); //Файл не должен превышать 200kb!!!
 				return $message_tpl;
 			}else if( $par == 8 ){
-				$message_tpl = "Недопустимый формат изображения!!!&nbsp;&nbsp;";
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_8.tpl"); //Недопустимый формат изображения!!!
 				return $message_tpl;
 			}else if( $par == 9 ){
-				$message_tpl = "Отзыв успешно удалён!&nbsp;&nbsp;";
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_9.tpl"); //Отзыв успешно удалён!
 				return $message_tpl;
 			}else if( $par == 10 ){
-				$message_tpl = "Изображение удалено!&nbsp;&nbsp;";
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_10.tpl"); //Изображение удалено!
 				return $message_tpl;
 			}else if( $par == 11 ){
-				$message_tpl = "Новость успешно добавлена!&nbsp;&nbsp;";
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_11.tpl"); //Новость успешно добавлена!
 				return $message_tpl;
 			}else if( $par == 12 ){
-				$message_tpl = "Новость успешно удалена!&nbsp;&nbsp;";
+				$message_tpl = file_get_contents(PATH_TEMPLATE . "message/" . "message_12.tpl"); //Новость успешно удалена!
 				return $message_tpl;
 			}else{
 
-			return '<a href="/" target="_blank">Перейти на сайт</a>&nbsp;&nbsp;/&nbsp;&nbsp;';			}
+				return '<a href="/" target="_blank">Перейти на сайт</a>&nbsp;&nbsp;/&nbsp;&nbsp;';
+			}
 
 		}else{
 			return '<a href="/" target="_blank">Перейти на сайт</a>&nbsp;&nbsp;/&nbsp;&nbsp;';
@@ -562,11 +557,11 @@
 			        }
 				}
 		       
-				$_GET['type_message'] = 1; //it`s OK//
+				$_GET['type_message'] = 1;
 			}
 
 		}else if(isset($_POST['enter_del_photo']) && !isset($_POST['photo_chbx']) && !isset($_GET['id_del_photo']) ){
-			$_GET['type_message'] = 3; //empty data//
+			$_GET['type_message'] = 3;
 		}
 
 	}
@@ -605,14 +600,14 @@
 		if( isset($_POST['enter_add_photo']) && !empty($_FILES['add_photo_input']) ){
 
 			if( $photo_name = img_upload('add_photo_input', PATH_UPLOADS) ){
-				$alt = !empty($_POST['photo_alt']) ? $_POST['photo_alt'] : 'shimansky.by';
+				$alt = !empty($_POST['photo_alt']) ? $_POST['photo_alt'] : 'shimanskiy.by';
 
 				$sql = "INSERT INTO `photo` (`photo`.`id`, `photo`.`photo_img`, `photo`.`photo_alt`, `photo`.`photo_add_time`) 
 				VALUES (NULL, '$photo_name', '$alt', NULL)";
 				
 				mysql_query($sql);
 
-				$_GET['type_message'] = 6; //it`s OK//
+				$_GET['type_message'] = 6;
 
 			}else if( isset($_GET['type_message']) && !empty( $_GET['type_message']) ){
 				 $_GET['type_message'];
@@ -694,6 +689,11 @@
 			case 'p_reviews':
 				$id = 4;
 				$page_name = "Отзывы";
+				break;
+
+			case 'p_anketa':
+				$id = 11;
+				$page_name = "Анкета для молодожёнов";
 				break;
 		}
 
@@ -1064,13 +1064,22 @@
 			$p_title   = mysql_escape_string($p_title);
 			$p_descr   = mysql_escape_string($p_descr);
 			$p_text    = mysql_escape_string($p_text);
-
+			
+		if( !empty($_FILES['add_photo_post']) ){
 			$img_name = add_img_post();
 
 			$sql_upd   = "UPDATE `posts` SET `posts`.`post_title` = '$p_title', `posts`.`post_description`='$p_descr', `posts`.`post_content`='$p_text', `posts`.`post_thumbnail` = '$img_name' WHERE `posts`.`id` = '$p_id'";
 			
+
+		}	else{
+
+
+			$sql_upd   = "UPDATE `posts` SET `posts`.`post_title` = '$p_title', `posts`.`post_description`='$p_descr', `posts`.`post_content`='$p_text' WHERE `posts`.`id` = '$p_id'";
+		}
+
 			if(mysql_query($sql_upd)){
 				$_GET['type_message'] = 1;
+				header('Location: /admin/action/edit_post.php?edit_post=' .$p_id);
 			}else{
 				$_GET['type_message'] = 2;
 			}
@@ -1106,6 +1115,44 @@
 			}
 
 		}
+
+	}
+
+	function get_metrika_form($par=0){
+
+		$today=date("Ymd");
+		$date=date ('Ymd', time()-86400);
+		$month=date ('Ymd', time()-604800);
+		$metrika_url = '';
+		if($par == 0) $metrika_url = "http://api-metrika.yandex.ru/stat/traffic/summary.json?id=37226255&pretty=1&date1=$date&date2=$date&oauth_token=ARbbDK4AAyDH4u1d3Rk2Rv6J8j1jquwYWg";
+		if($par == 1) $metrika_url = "http://api-metrika.yandex.ru/stat/traffic/summary.json?id=37226255&pretty=1&date1=$today&date2=$today&oauth_token=ARbbDK4AAyDH4u1d3Rk2Rv6J8j1jquwYWg";
+		if($par == 2) $metrika_url = "http://api-metrika.yandex.ru/stat/traffic/summary.json?id=37226255&pretty=1&date1=$month&date2=$today&oauth_token=ARbbDK4AAyDH4u1d3Rk2Rv6J8j1jquwYWg";
+		$ch = curl_init();
+		curl_setopt ($ch, CURLOPT_URL,$metrika_url);
+		curl_setopt ($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6");
+		curl_setopt ($ch, CURLOPT_TIMEOUT, 60);
+		curl_setopt ($ch, CURLOPT_FOLLOWLOCATION, 1);
+		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+		$metrika = curl_exec ($ch);
+		curl_close($ch);
+		 
+		$metrika_o = json_decode($metrika);
+
+		$users = $metrika_o->totals->visits;
+		$new_users = $metrika_o->totals->new_visitors;
+		$views = $metrika_o->totals->page_views;
+
+
+		$marker      = array('{USERS}', '{NEW_USERS}', '{VIEWS}');
+		$template = '';
+		if($par == 0) $template    = file_get_contents(PATH_TEMPLATE . 'metrika_form_0.tpl');
+		if($par == 1) $template    = file_get_contents(PATH_TEMPLATE . 'metrika_form_1.tpl');
+		if($par == 2) $template    = file_get_contents(PATH_TEMPLATE . 'metrika_form_2.tpl');
+		
+		$marker_info = array( $users, $new_users, $views );
+		$str         = str_replace( $marker, $marker_info, $template );
+
+		return $str;
 
 	}
 

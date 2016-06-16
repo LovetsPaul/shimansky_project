@@ -3,12 +3,30 @@ AddDefaultCharset UTF-8
 RewriteEngine On
 RewriteBase /
 DirectoryIndex index.php
-Options All -Indexes
+#Options All -Indexes
 RewriteCond   %{REQUEST_FILENAME}       !-d
 RewriteCond   %{REQUEST_FILENAME}       !-f
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteRule   ^(.*) index.php?%{QUERY_STRING}
+
+#RewriteCond %{HTTP_HOST}   !^$
+#RewriteCond %{HTTP_HOST}   !^www\.          [NC]
+#RewriteCond %{HTTP_HOST}   (.+)$
+#RewriteRule ^(.*)          http://www.%1/$1 [L,R=301]
+
+#RewriteCond %{HTTP_HOST} ^www\. [NC]
+#RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+#RewriteCond %{HTTP_HOST} !^example-domain-please-change\.com [NC]
+#RewriteRule (.*) http://example-domain-please-change.com/$1 [R=301,L]
+
+#RewriteCond %{HTTP_HOST} ^www.shimanskiy.by$ [NC]
+#RewriteRule ^(.*)$ http://shimanskiy.by/$1 [R=301,L]
+
+
+RewriteCond %{HTTP_HOST} ^www\.(.*) [NC]
+RewriteRule ^/?(.*) http://%1/$1 [L,R=permanent]
 
 <ifModule mod_expires.c>
 
@@ -49,3 +67,30 @@ ExpiresByType text/html "access plus 600 seconds"
 ExpiresByType application/xhtml+xml "access plus 600 seconds"
 
 </ifModule>
+AddType image/svg+xml svg svgz
+AddEncoding gzip svgz
+<IfModule mod_rewrite.c>
+        RewriteEngine On
+        RewriteCond %{HTTP:Accept-encoding} !gzip [OR]
+        RewriteCond %{HTTP_USER_AGENT} Konqueror
+        RewriteRule ^(.*)\.(css|js|svg)$ $1.nogzip.$2 [QSA,L]
+</IfModule>
+<IfModule mod_headers.c>
+        Header append Vary User-Agent
+        <FilesMatch .*\.(js|css|svg)$>
+               Header set Content-Encoding: gzip
+               Header set Cache-control: private
+        </FilesMatch>
+        <FilesMatch .*\.nogzip\.(js|css|svg)$>
+               Header unset Content-Encoding
+        </FilesMatch>
+</IfModule>
+
+AddHandler application/x-httpd-php .html
+
+
+RewriteCond %{HTTP_REFERER} !^http://([^.]+\.)?site\./.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://([^.]+\.)?site\.$      [NC]
+RewriteRule .*\.(gif|jpg|png|tpl|svg)$ / [R,NC]
+
+ErrorDocument 404 http://shimanskiy.by/err404

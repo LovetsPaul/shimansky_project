@@ -1,0 +1,1 @@
+<span class="info error">Изображение удалено!&nbsp;&nbsp;&nbsp;&nbsp;</span>

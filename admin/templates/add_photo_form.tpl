@@ -11,7 +11,7 @@
 <tr>
     <td class="add_photo_info">Выберите файл для добавления:<br>
         <span>- доступные расширения: <span>.jpg, .jpeg, .png, .gif</span></span><br>
-        <span>- размер не более <span>2 Мб</span>!!!</span>
+        <span>- размер не более <span>200 kb</span>!!!</span>
     </td>
     <td class="input_file_photo" id="file_container"><input type="file" name="add_photo_input" id="add_photo_input"></td>
 </tr>

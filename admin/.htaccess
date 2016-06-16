@@ -1,0 +1,4 @@
+AuthName "admin/"
+AuthUserFile "/home/shimansk/.htpasswds/public_html/admin/passwd"
+AuthType Basic
+require valid-user

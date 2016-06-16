@@ -10,6 +10,10 @@ html, body{
 textarea[name^='edit_text']{
     display: none;
 }
+input, textarea{
+    font-size: 16px;
+    font-family: "robotocondensedregular";
+}
 a:hover{
     opacity: 0.8;
     transition: all 0.3s;
@@ -48,7 +52,7 @@ label.keywords span,
 }
 textarea{
     width: 300px;
-    padding: 0 7px;
+    padding: 5px 7px;
 }
 td{
     vertical-align: top;
@@ -82,7 +86,7 @@ button:hover{
     width: 300px;
 }
 .left dt{
-    background-color: #28988B;
+    background-color: #0d7574;
     line-height: 25px;
     padding: 0 15px;
     margin-bottom: 7px;
@@ -110,7 +114,7 @@ button:hover{
     background-color: #E9E9E9;
 }
 .top_line{
-    background-color: #019A88;
+    background-color: #0d7574;
     overflow: hidden;
     color: #fff;
     height: 50px;
@@ -125,7 +129,10 @@ button:hover{
     font-size: 18px;
 }
 .top_line .ok{
-    color: #A02525;
+    color: #8d0a0a;
+}
+.error{
+     color: #8d0a0a;
 }
 .page_name{
     text-transform: uppercase;
@@ -237,7 +244,7 @@ button:hover{
     text-align: right;
 }
 .v_link a{
-    color: #28988B;
+    color: #0d7574;
 }
 label[for^="video_id"] span{
     color: #ff0000;
@@ -299,10 +306,10 @@ label[for^="video_id"] span{
     padding: 20px;
 }
 .item > td{
-    border-left: 3px solid #28988B; 
+    border-left: 3px solid #0d7574; 
 }/*
 .r_delim{
-    border-top: 2px solid #28988B;  
+    border-top: 2px solid #0d7574;  
 }*/
 #new_reviews_form .r_info td,
 #all_reviews_form .r_info td,
@@ -342,4 +349,45 @@ label[for^="video_id"] span{
     padding-left: 25px;
     font-family: "robotocondensedbold", sans-serif;
     color: #fff;   
+}
+#edit_form input[type="text"]{
+    height: 35px;
+}
+#auth{
+    margin: 50px auto;
+    padding: 26px;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#0c535b+0,002e30+100 */
+    background: #0c535b; /* Old browsers */
+    background: -moz-linear-gradient(top,  #0c535b 0%, #002e30 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #0c535b 0%,#002e30 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #0c535b 0%,#002e30 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0c535b', endColorstr='#002e30',GradientType=0 ); /* IE6-9 */
+}
+#auth strong{
+    color: #FFF;
+    display: block;
+    background-color: #03393D;
+    padding: 5px;
+}
+input[name="loginDB"],
+input[name="passDB"]{
+    border: 2px solid #0d7574;
+    margin-bottom: 10px;
+    height: 30px;
+    padding: 2px 5px;
+    text-align: center;
+    font-size: 16px;
+}
+.b_auth{
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 100%;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#003937+0,19575e+100 */
+    background: #003937; /* Old browsers */
+    background: -moz-linear-gradient(top,  #003937 0%, #19575e 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #003937 0%,#19575e 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #003937 0%,#19575e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#003937', endColorstr='#19575e',GradientType=0 ); /* IE6-9 */
+
 }

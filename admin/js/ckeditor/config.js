@@ -1,6 +1,6 @@
 /**
  * @license Copyright (c) 2003-2015, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.md or http://ckeditor.com/license
+ * For licensing, see LICENSE.md or http://www.ckeditor.com/license
  */
 
 CKEDITOR.editorConfig = function( config ) {
@@ -19,6 +19,6 @@ CKEDITOR.editorConfig = function( config ) {
 	// Brazil colors only.
 
 
-config.colorButton_colors = '1a1a1a,008979,1b5b55,3d3d3d,fff,f00';
+config.colorButton_colors = '1a1a1a,0D7574,fff,f00';
 
 };

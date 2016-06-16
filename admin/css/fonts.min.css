@@ -2,35 +2,35 @@
     font-family: "robotocondensedlight";
     font-style: normal;
     font-weight: normal;
-    src: url("http://shimanskiy.by/fonts/RobotoCondensedLight/robotocondensedlight.woff") format("woff"), url("http://shimanskiy.by/fonts/RobotoCondensedLight/robotocondensedlight.ttf") format("truetype")
+    src: url("/fonts/RobotoCondensedLight/robotocondensedlight.woff") format("woff"), url("/fonts/RobotoCondensedLight/robotocondensedlight.ttf") format("truetype")
 }
 
 @font-face {
     font-family: "robotocondensedbold";
     font-style: normal;
     font-weight: normal;
-    src: url("http://shimanskiy.by/fonts/RobotoCondensedBold/robotocondensedbold.woff") format("woff"), url("http://shimanskiy.by/fonts/RobotoCondensedBold/robotocondensedbold.ttf") format("truetype")
+    src: url("/fonts/RobotoCondensedBold/robotocondensedbold.woff") format("woff"), url("/fonts/RobotoCondensedBold/robotocondensedbold.ttf") format("truetype")
 }
 
 @font-face {
     font-family: "robotocondensedlightitalic";
     font-style: normal;
     font-weight: normal;
-    src: url("http://shimanskiy.by/fonts/RobotoCondensedLightItalic/robotocondensedlightitalic.woff") format("woff"), url("http://shimanskiy.by/fonts/RobotoCondensedLightItalic/robotocondensedlightitalic.ttf") format("truetype")
+    src: url("/fonts/RobotoCondensedLightItalic/robotocondensedlightitalic.woff") format("woff"), url("/fonts/RobotoCondensedLightItalic/robotocondensedlightitalic.ttf") format("truetype")
 }
 
 @font-face {
     font-family: "robotocondensedregular";
     font-style: normal;
     font-weight: normal;
-    src: url("http://shimanskiy.by/fonts/RobotoCondensedRegular/robotocondensed.woff") format("woff"), url("http://shimanskiy.by/fonts/RobotoCondensedRegular/robotocondensed.ttf") format("truetype")
+    src: url("/fonts/RobotoCondensedRegular/robotocondensed.woff") format("woff"), url("/fonts/RobotoCondensedRegular/robotocondensed.ttf") format("truetype")
 }
 
 @font-face {
     font-family: "robotoregular";
     font-style: normal;
     font-weight: normal;
-    src: url("http://shimanskiy.by/fonts/RobotoRegular/robotocondensed.woff") format("woff"), url("http://shimanskiy.by/fonts/RobotoRegular/robotocondensed.ttf") format("truetype")
+    src: url("/fonts/RobotoRegular/robotocondensed.woff") format("woff"), url("/fonts/RobotoRegular/robotocondensed.ttf") format("truetype")
 }
 
 body{
